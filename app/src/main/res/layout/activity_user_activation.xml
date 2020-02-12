@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserActivationActivity"
+    android:background="@drawable/main_gradient"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_with_logo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set your profile"
+        android:textSize="37sp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/drawable_rounded_bkg_white"
+        android:layout_marginTop="16dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="72dp">
+
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name"
+            android:layout_marginTop="30dp"
+            />
+
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:inputType="textPassword"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/first_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:textColor="#006F6B"
+        android:background="@drawable/drawable_rounded_bkg_white"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

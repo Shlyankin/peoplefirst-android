@@ -1,0 +1,29 @@
+{
+    "UserAgent": "aws-amplify-cli/0.1.0",
+    "Version": "1.0",
+    "IdentityManager": {
+        "Default": {}
+    },
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "us-east-1:07106e25-6ae1-465b-a784-893d46c4dd33",
+                "Region": "us-east-1"
+            }
+        }
+    },
+    "CognitoUserPool": {
+        "Default": {
+            "PoolId": "us-east-1_7v1tUqSCm",
+            "AppClientId": "10epl5scktiud3suaohkvrtl0s",
+            "AppClientSecret": "1p0iennceoh8utrr1rta56ka6aouus8nqgic0g3dr2v4o80i6qi1",
+            "Region": "us-east-1"
+        }
+    },
+    "S3TransferUtility": {
+        "Default": {
+            "Bucket": "peoplefirst39e98b2b07e74588b1876aa094254c83-test",
+            "Region": "us-east-1"
+        }
+    }
+}

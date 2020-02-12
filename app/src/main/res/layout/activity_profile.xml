@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.ProfileActivity"
+    android:background="@drawable/main_gradient"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_with_logo"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="We need some additional information before you submit your report. This will help ensure your report is resolved. Please take a minute to complete your profile."
+                android:textColor="@android:color/white"
+                android:paddingLeft="72dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+                android:paddingLeft="72dp">
+
+
+
+                <TextView
+                    android:id="@+id/appVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    tools:text="v1.50"/>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/secondaryEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Secondary Email"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/dateOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date of birth"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/mailingAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mailing Address"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/aptUnitsuite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Apt/Unit/Suite"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+                    <EditText
+                        android:id="@+id/telephoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Telephone number"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:text="No files currently uploading"
+                    android:id="@+id/fileUploadInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    tools:text="2 of 5 files uploaded (34%)"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+                <TextView
+                    android:id="@+id/changePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Change password"
+                    android:textColor="#006F6B"
+                    android:background="@drawable/drawable_rounded_bkg_white"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    />
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Log out"
+                    android:textColor="#006F6B"
+                    android:background="@drawable/drawable_rounded_bkg_white"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit your report"
+                android:textColor="#006F6B"
+                android:background="@drawable/drawable_rounded_bkg_white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

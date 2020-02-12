@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IntroActivity"
+    android:background="@drawable/main_gradient">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="130dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Automated\nEscalation"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/text1"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="20dp"
+            android:text="{Company} has 60 days to respond to and resolve your report. If a resolution is not reached within this time, we will provide the steps you need to take to submit your report to city, state, and federal agencies for investigation."/>    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"/>
+        <TextView
+            android:id="@+id/getStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="PUBLISHING &gt;"
+            android:layout_gravity="right"
+            android:paddingRight="60dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

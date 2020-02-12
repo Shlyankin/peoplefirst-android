@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IntroActivity"
+    android:background="@drawable/main_gradient">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/texts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="130dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Info about\npeople first"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/white"/>
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="We're here to help you and {Company} report and resolve workplace harassment."/>
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Transparent Process\nEqual visibility for you and HR throughout the entire process."/>
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Automated Escalation\n{Company} has 60 days to respond to and resolve your report. View {Company}'s escalation path in the yourResources ."/>
+                <TextView
+                    android:id="@+id/text4"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Pubic Report Card\nWe will publish a report card on {Company}'s harassment statistics to public websites."/>
+                <TextView
+                    android:id="@+id/text5"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="Resources We can connect you with resources. We don't provide legal advice."/>
+                <TextView
+                    android:id="@+id/councelling"
+                    android:layout_marginTop="32dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Would you like counseling?"
+                    android:textColor="@android:color/white"
+                    android:textStyle=""
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/texts">
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="© 2018 people first"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="40dp"
+                    android:layout_above="@+id/footer"
+                    android:layout_below="@+id/texts"
+                    />
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"/>
+                <TextView
+                    android:id="@+id/getStarted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="GET STARTED   > "
+                    android:layout_gravity="right"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

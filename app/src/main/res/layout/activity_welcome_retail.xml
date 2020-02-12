@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeRetailActivity"
+    android:orientation="vertical"
+    android:background="@drawable/main_gradient">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="130dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="People First"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Welcome to people first"/>
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Providing a transparent path to reporting and resolving issues of harassment that have your interests at the center of the experience.\n\nTransparent Process\nYou have visibility of the entire process.\n\nAutomated Escalation\nYour report will be escalated to the ascending seniority at 20-day intervals.\n\nClosure\nYour report is considered resolved only when you agree with the resolution.\n\nResources for Humans."/>
+            <TextView
+                android:id="@+id/createAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                android:textColor="#006F6B"
+                android:background="@drawable/drawable_rounded_bkg_white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_margin="20dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="8dp"/>
+                <TextView
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log in"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="8dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmailCodeRetailActivity"
+    android:orientation="vertical"
+    android:background="@drawable/main_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="130dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="People First"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="We sent an email to {email} with 4 digit code. Please enter the code to proceed."
+            tools:text="We sent an email to peoplefirst@pf.com with 4 digit code. Please enter the code to proceed."/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="20dp">
+            <EditText
+                android:id="@+id/digit1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:theme="@style/WhiteEditText"
+                android:lines="1"
+                android:maxLength="1"/>
+            <EditText
+                android:id="@+id/digit2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:theme="@style/WhiteEditText"
+                android:lines="1"
+                android:maxLength="1"/>
+            <EditText
+                android:id="@+id/digit3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:theme="@style/WhiteEditText"
+                android:lines="1"
+                android:maxLength="1"/>
+            <EditText
+                android:id="@+id/digit4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:theme="@style/WhiteEditText"
+                android:lines="1"
+                android:maxLength="1"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/invalidCode"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Code must match. Check your email and try again"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/resendCode"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Didn't get code?"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textColor="#006F6B"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

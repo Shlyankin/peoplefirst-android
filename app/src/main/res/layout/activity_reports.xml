@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".list.ReportsActivity"
+    android:orientation="vertical"
+    android:background="@drawable/main_gradient">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolBarStyleTransaprent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="My reports"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="42dp">
+
+        <TextView
+            android:id="@+id/active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have 3 active reports"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listActive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/listitem_report"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/submitted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 report has been submitted"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listInactive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/listitem_report"
+            android:layout_weight="1"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/addReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сreate a new report"
+            android:textColor="#006F6B"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

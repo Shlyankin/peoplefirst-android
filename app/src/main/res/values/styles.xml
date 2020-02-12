@@ -1,0 +1,55 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+        <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background" tools:ignore="NewApi">@android:color/white</item>
+        <item name="background">@android:color/white</item>
+        <item name="titleTextColor">@android:color/black</item>
+        <item name="subtitleTextColor">@android:color/black</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <style name="ToolBarStyleTransaprent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background" tools:ignore="NewApi">@android:color/transparent</item>
+        <item name="background">@android:color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="subtitleTextColor">@android:color/white</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+        <item name="titleTextAppearance">@style/ActionBarLogoTitleAppearance</item>
+    </style>
+
+    <style name="WhiteEditText">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+
+    <style name="ActionBarLogoTitleAppearance" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CustomTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/ratio_regular</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

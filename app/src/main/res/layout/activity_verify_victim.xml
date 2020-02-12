@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerifyActivity"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_with_logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginRight="17dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Verify Report"
+            android:textSize="33sp"/>
+        <TextView
+            android:id="@+id/whereWhen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Sample text"
+            tools:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?"/>
+
+        <RadioGroup
+            android:id="@+id/whereWhenRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <RadioButton
+                android:id="@+id/whereWhenYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YES"/>
+            <RadioButton
+                android:id="@+id/whereWhenNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NO"
+                android:layout_marginLeft="20dp" />
+            <RadioButton
+                android:id="@+id/whereWhenSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SKIP"
+                android:layout_marginLeft="20dp" />
+        </RadioGroup>
+        <TextView
+            android:id="@+id/harrassement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="While you were there, did you experience  harassment?"
+            android:layout_marginTop="20dp"/>
+        <RadioGroup
+            android:id="@+id/harrassementRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <RadioButton
+                android:id="@+id/harrassementYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YES"/>
+            <RadioButton
+                android:id="@+id/harrassementNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NO"
+                android:layout_marginLeft="20dp" />
+            <RadioButton
+                android:id="@+id/harrassementSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SKIP"
+                android:layout_marginLeft="20dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/document"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Would you like to document what you experienced?"
+            android:layout_marginTop="20dp"/>
+        <RadioGroup
+            android:id="@+id/documentRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <RadioButton
+                android:id="@+id/documentYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YES"/>
+            <RadioButton
+                android:id="@+id/documentNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NO"
+                android:layout_marginLeft="20dp" />
+            <RadioButton
+                android:id="@+id/documentSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SKIP"
+                android:layout_marginLeft="20dp" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="51dp"
+        android:layout_marginBottom="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#006F6B"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#006F6B"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/reject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="&lt; REJECT"
+                android:gravity="center"
+                android:textColor="#006F6B"
+                android:layout_marginTop="33dp"/>
+            <TextView
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="VERIFY &gt;"
+                android:gravity="center"
+                android:textColor="#006F6B"
+                android:layout_marginTop="33dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

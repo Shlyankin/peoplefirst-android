@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_gradient"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="40dp"
+            android:paddingTop="130dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transparent\nProcess"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"/>
+            <TextView
+                android:id="@+id/text1"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="20dp"
+                android:text="Create your report confidentially. {Company} won't know about your report until it is submitted."/>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="20dp"
+                android:text="Witnesses will be notified first and given the opportunity to respond. Your report will be compiled and submitted to {Company} within 10 days."/>
+            <TextView
+                android:layout_marginTop="2000dp"
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="20dp"
+                android:text="We help you report safely, and help {Company} resolve your report in a timely manner. You have a voice in the resolution. We don't provide legal advice. "/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"/>
+        <TextView
+            android:id="@+id/getStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="ESCALATION PATH &gt;"
+            android:layout_gravity="right"
+            android:paddingRight="60dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmResolutionActivity"
+    android:background="@drawable/main_gradient"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_with_logo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resolution proposed"
+        android:textColor="@android:color/white"
+        android:textSize="37sp"
+        android:layout_marginLeft="72dp"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="{Company} has marked this report resolved. Do you agree?"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="72dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="72dp">
+        <include layout="@layout/listitem_report"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If you accept It will be closed and no further
+action is required."
+        android:textColor="#80ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="8dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="72dp"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/white"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="REJECT"
+                android:gravity="center"
+                android:layout_marginTop="33dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                android:id="@+id/yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ACCEPT"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

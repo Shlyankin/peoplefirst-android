@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/main_gradient">
+
+    <TextView
+        android:id="@+id/menu_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/ubuntu_medium"
+        android:text="people first"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/start_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="START BY SELECTING\nA QUESTION"
+            android:textSize="21sp"
+            android:layout_marginTop="44dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginBottom="60dp"/>
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_home"
+            android:layout_margin="16dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+        <TextView
+            android:id="@+id/mwhatHappened"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="What happened?"
+            android:textSize="24sp"
+
+            android:layout_marginLeft="72dp"/>
+        <LinearLayout
+            android:id="@+id/mwhatHappenedWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+            <TextView
+                android:id="@+id/mtypeOfHarassment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Type of harassment"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+            <TextView
+                android:id="@+id/mreasonOfHarassment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Basis of harassment"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+            <TextView
+                android:id="@+id/mhappenedBefore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Has this happened before?"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+            <TextView
+                android:id="@+id/mwhatHappenedDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Describe what happened"
+                android:layout_marginTop="29dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/mwhoWasInvolved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="72dp"
+            android:text="Who was involved?"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"/>
+        <LinearLayout
+            android:id="@+id/mwhoWasInvolvedWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+            <TextView
+                android:id="@+id/mwhoIsBeingHarassed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Who do you believe was harassed?"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+            <TextView
+                android:id="@+id/mwhoWasTheAgressor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Who do you believe the aggressor was?"
+                android:layout_marginTop="29dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+            <TextView
+                android:id="@+id/manyWitnesses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Were there any witnesses?"
+                android:layout_marginTop="29dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mwhereDidItHappen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Where did it happen?"
+            android:textSize="24sp"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="72dp"/>
+        <LinearLayout
+            android:id="@+id/mwhereDidItHappenWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+            <TextView
+                android:id="@+id/mwhereDidItHappenDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Address"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/mwhenDidItHappen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="When did it happen?"
+            android:textSize="24sp"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="72dp"/>
+        <LinearLayout
+            android:id="@+id/mwhenDidItHappenWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+            <TextView
+                android:id="@+id/mwhenDidItHappenDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Date\nTime"
+                android:layout_marginTop="22dp"
+                android:textSize="14sp"
+                android:drawableLeft="@drawable/rounded_unchecked"
+                android:drawablePadding="32dp"
+                android:layout_marginLeft="16dp"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/mhowResolved"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="How would you like this resolved?"
+            android:textSize="24sp"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="72dp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/done1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ submit your report"
+            android:textColor="#006F6B"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="72dp"
+            android:gravity="center"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/toSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Summary"
+            android:textColor="#006F6B"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="72dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

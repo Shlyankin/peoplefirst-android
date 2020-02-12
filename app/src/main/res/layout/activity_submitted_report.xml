@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/main_gradient"
+	tools:context=".SubmittedReportActivity">
+
+	<include layout="@layout/toolbar_with_logo"/>
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="28dp"
+		android:layout_marginTop="130dp"
+		android:layout_marginRight="28dp"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/caption"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:lineSpacingMultiplier="1.3"
+			android:textColor="@android:color/white"
+			android:textSize="33dp"
+			tools:text="Your report has been submitted"/>
+
+		<TextView
+			android:id="@id/text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="40dp"
+			android:layout_marginRight="16dp"
+			android:lineSpacingMultiplier="1.5"
+			android:textColor="@android:color/white"
+			android:textSize="15sp"
+			tools:text="[The organization] has 60 days to respond to and resolve your report. If a resolution is not reached within this time, we will provide the steps you need to take to submit your report to city, state, and federal agencies for investigation."/>
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/my_reports"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_margin="20dp"
+		android:background="@drawable/drawable_rounded_bkg_white"
+		android:gravity="center"
+		android:text="My Reports"
+		android:textColor="#006F6B"/>
+
+</RelativeLayout>

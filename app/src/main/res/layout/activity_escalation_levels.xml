@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".escalation.EscalationLevelsActivity"
+    android:background="@drawable/main_gradient"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_with_logo"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/drawable_rounded_bkg_white">
+
+        <TextView
+            android:id="@+id/caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="30dp"
+            android:text="Escalation"
+            android:textColor="@android:color/black"
+            android:textSize="37dp" />
+        <RelativeLayout
+            android:layout_marginTop="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#A4A4A4"
+                android:text="Escalation\nLevel"/>
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Days until report
+reaches level
+after submission"
+                android:textColor="#A4A4A4"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/captionCouncelling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="30dp"
+            android:text="Councelling"
+            android:textColor="@android:color/black"
+            android:textSize="37dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listCouncelling"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"/>
+
+
+        <TextView
+            android:id="@+id/privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy policy"/>
+        <TextView
+            android:id="@+id/terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/terms"
+            />
+
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

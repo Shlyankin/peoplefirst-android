@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "894390206351",
+    "firebase_url": "https://people-first-f2631.firebaseio.com",
+    "project_id": "people-first-f2631",
+    "storage_bucket": "people-first-f2631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894390206351:android:12ba6faefc31873e",
+        "android_client_info": {
+          "package_name": "rokolabs.com.peoplefirst"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxnAf33ocurES-Aljg3shSZAHveFI_Ikw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894390206351-lo51u29a336s2cie4t633r17pj1bet2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
