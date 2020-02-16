@@ -7,6 +7,10 @@
 	android:layout_height="wrap_content"
 	android:minHeight="?attr/actionBarSize">
 
+<!--	<androidx.appcompat.widget.AppCompatImageView-->
+<!--		android:layout_width="wrap_content"-->
+<!--		android:layout_height="match_parent"-->
+<!--		android:src="@drawable/navbar_mobile"/>-->
 	<TextView
 		android:id="@+id/toolbar_title"
 		android:layout_width="wrap_content"
@@ -16,12 +20,5 @@
 		android:text="people first"
 		android:textColor="@android:color/white"
 		android:textSize="20sp"/>
-	<ImageView
-		android:id="@+id/save"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="right"
-		android:visibility="gone"
-		android:layout_marginRight="16dp"
-		android:src="@drawable/ic_save_white_24dp"/>
+
 </androidx.appcompat.widget.Toolbar>

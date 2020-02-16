@@ -15,6 +15,7 @@ import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.databinding.ActivityLoginBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
+import rokolabs.com.peoplefirst.main.MainActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.Utils
 import javax.inject.Inject
@@ -70,9 +71,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun gotoReportList() {
-//        val intent = Intent(this, ReportsActivity::class.java)
-//        startActivity(intent)
-//        finish()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     fun gotoIntro() {
