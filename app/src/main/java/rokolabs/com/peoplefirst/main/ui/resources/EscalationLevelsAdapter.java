@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +26,7 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
     public PublishSubject<EscalationLevel> getLevelClick() {
         return mLevelClick;
     }
-
+    public PublishSubject<Boolean> editable = PublishSubject.create();
     private ArrayList<EscalationLevel> mItems;
 
     private Context mContext;
@@ -52,6 +53,12 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
         holder.mName.setText(mItems.get(position).name);
         holder.mContact.setText(mItems.get(position).contact);
         holder.mDays.setText(String.valueOf(mItems.get(position).days));
+        editable.subscribe(aBoolean ->{
+           holder.mContact.setActivated(aBoolean);
+           holder.mDays.setActivated(aBoolean);
+           holder.mName.setActivated(aBoolean);
+
+        });
         holder.itemView.setOnClickListener(buttonView -> {
             mLevelClick.onNext(mItems.get(position));
         });
@@ -64,9 +71,9 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mName;
-        public TextView mContact;
-        public TextView mDays;
+        public EditText mName;
+        public EditText mContact;
+        public EditText mDays;
         public ViewHolder(View v) {
             super(v);
         }

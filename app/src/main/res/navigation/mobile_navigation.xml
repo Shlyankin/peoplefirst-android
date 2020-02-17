@@ -3,24 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_reports">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/nav_reports"
-        android:name="rokolabs.com.peoplefirst.main.ui.reports.ReportsFragment"
-        android:label=""
-        tools:layout="@layout/fragment_reports" />
+        android:id="@+id/nav_home"
+        android:name="rokolabs.com.peoplefirst.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_profile"
-        android:name="rokolabs.com.peoplefirst.main.ui.profile.ProfileFragment"
-        android:label=""
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/nav_gallery"
+        android:name="rokolabs.com.peoplefirst.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_resources"
-        android:name="rokolabs.com.peoplefirst.main.ui.resources.ResourcesFragment"
-        android:label=""
-        tools:layout="@layout/fragment_resources" />
+        android:id="@+id/nav_slideshow"
+        android:name="rokolabs.com.peoplefirst.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
 
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="rokolabs.com.peoplefirst.ui.tools.ToolsFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="rokolabs.com.peoplefirst.ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="rokolabs.com.peoplefirst.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
 </navigation>

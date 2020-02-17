@@ -25,12 +25,13 @@ class ResourcesViewModel(
     mRepository: HarassmentRepository,
     mService: PeopleFirstService
 ) {
-    private lateinit var context:Context
-    private lateinit var mRepository:HarassmentRepository
+    private lateinit var context: Context
+    private lateinit var mRepository: HarassmentRepository
     private lateinit var mService: PeopleFirstService
     var toastSubject: Subject<String> = PublishSubject.create()
     var termsClick: Subject<View> = PublishSubject.create()
     var privacyClick: Subject<View> = PublishSubject.create()
+    var addClick: Subject<View> = PublishSubject.create()
     var mDisposable = CompositeDisposable()
     var mAdapter: EscalationLevelsAdapter = EscalationLevelsAdapter()
     var mCouncellingAdapter: CounsellingServicesAdapter = CounsellingServicesAdapter()
@@ -39,10 +40,12 @@ class ResourcesViewModel(
 
     init {
         this.context = context
-        this.mRepository=mRepository
-        this.mService=mService
+        this.mRepository = mRepository
+        this.mService = mService
     }
-    fun initDisposable(){
+
+    fun initDisposable() {
+//        mAdapter.editable.onNext(true)
         mDisposable.addAll(
             mService.escalationLevels
                 .subscribeOn(Schedulers.io())
@@ -61,24 +64,28 @@ class ResourcesViewModel(
                     }
                 }, { throwable -> showToast("Unable to get counseling services") }
                 ),
-            mRepository.me.subscribe { user -> showCompanyName(user.company.name) })
+            mRepository.me.subscribe { user ->
+                showCompanyName(user.company.name)
+                mAdapter.editable.onNext(user.is_retail)
+
+            }
+        )
     }
+
     fun showLevels(levels: ArrayList<EscalationLevel>) {
-        var array = ArrayList<EscalationLevel>()
-        for (i in 0..10) {
-            array.addAll(levels)
-        }
-        mAdapter?.setItems(context, array)
+        mAdapter?.setItems(context, levels)
         mAdapter?.notifyDataSetChanged()
     }
 
     fun showCounselling(levels: ArrayList<CounsellingService>) {
-        var array = ArrayList<CounsellingService>()
-        for (i in 0..10) {
-            array.add(CounsellingService(0, "name", "contack"))
-        }
         mCouncellingAdapter?.setItems(context, levels)
         mCouncellingAdapter?.notifyDataSetChanged()
+        if(levels.size==0){
+            councelling.set("")
+        }else if(mRepository.me.hasValue()){
+            var name=mRepository.me.value!!.company.name
+            councelling.set("$name Counseling Services")
+        }
     }
 
     fun showCompanyName(name: String) {
@@ -90,7 +97,8 @@ class ResourcesViewModel(
         toastSubject.onNext(string)
 //        Toast.makeText(context,string, Toast.LENGTH_LONG).show()
     }
-    fun dispose(){
+
+    fun dispose() {
         mDisposable.dispose()
     }
 }

@@ -211,7 +211,7 @@ public interface PeopleFirstApi {
     @POST("/users/retail-resend-activation-code")
     Single<BaseResponse> resendCode(@Body ResendCodeRequest request);
 
-    @POST("/companies/my/escalation-levels-with-users")
+    @POST("/companies/my/escalation-levels")
     Single<BaseResponse> addEscalationLevels(@Body List<RetailEscalationLevel> levels);
 
     @POST("/users/validate-email")
