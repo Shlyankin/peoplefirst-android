@@ -1,13 +1,13 @@
-package rokolabs.com.peoplefirst.ui.send
+package rokolabs.com.peoplefirst.report.ui.slideshow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SendViewModel : ViewModel() {
+class SlideshowViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is send Fragment"
+        value = "This is slideshow Fragment"
     }
     val text: LiveData<String> = _text
 }

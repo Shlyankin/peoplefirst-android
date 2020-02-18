@@ -214,12 +214,16 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
                 { baseResponse ->
                     val intent = Intent(context, LoginActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                    startActivity(intent)
+                    context.startActivity(intent)
                     Utils.savePermanentValue("x-access-token", "", context)
                     mRepository.me.onNext(User.EMPTY)
                 },
                 { throwable ->
-                    Toast.makeText(context, "Unable to login", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, LoginActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    context.startActivity(intent)
+                    Utils.savePermanentValue("x-access-token", "", context)
+                    mRepository.me.onNext(User.EMPTY)
                 })
     }
     fun saveUser() {

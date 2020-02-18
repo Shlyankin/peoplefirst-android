@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -84,15 +85,23 @@ class ResourcesFragment : Fragment() {
                     Uri.parse("https://www.peoplefirstrh.com/privacy-policy")
                 )
                 startActivity(browserIntent)
+            },
+            viewModel!!.saveButtonStatus.subscribe {
+                showhideSaveButton(it)
             }
-
-
         )
+        activity?.findViewById<ImageView>(R.id.save)?.setOnClickListener {
+            viewModel!!.saveResources()
+        }
     }
 
     override fun onPause() {
         super.onPause()
         mDisposable.dispose()
         viewModel.dispose()
+        showhideSaveButton(false)
+    }
+    fun showhideSaveButton(boolean: Boolean){
+        activity?.findViewById<ImageView>(R.id.save)?.visibility = if(boolean) View.VISIBLE else View.GONE
     }
 }

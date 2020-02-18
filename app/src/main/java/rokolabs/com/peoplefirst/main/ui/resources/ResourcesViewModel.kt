@@ -28,6 +28,7 @@ class ResourcesViewModel(
     private lateinit var context: Context
     private lateinit var mRepository: HarassmentRepository
     private lateinit var mService: PeopleFirstService
+    var saveButtonStatus:BehaviorSubject<Boolean> = BehaviorSubject.create()
     var toastSubject: Subject<String> = PublishSubject.create()
     var termsClick: Subject<View> = PublishSubject.create()
     var privacyClick: Subject<View> = PublishSubject.create()
@@ -67,6 +68,7 @@ class ResourcesViewModel(
             mRepository.me.subscribe { user ->
                 showCompanyName(user.company.name)
                 mAdapter.editable.onNext(user.is_retail)
+                saveButtonStatus.onNext(!user.is_retail)
 
             }
         )
@@ -97,7 +99,9 @@ class ResourcesViewModel(
         toastSubject.onNext(string)
 //        Toast.makeText(context,string, Toast.LENGTH_LONG).show()
     }
+    fun saveResources(){
 
+    }
     fun dispose() {
         mDisposable.dispose()
     }

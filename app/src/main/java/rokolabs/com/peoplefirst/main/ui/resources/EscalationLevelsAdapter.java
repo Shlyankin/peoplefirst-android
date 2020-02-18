@@ -1,6 +1,8 @@
 package rokolabs.com.peoplefirst.main.ui.resources;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 import rokolabs.com.peoplefirst.R;
 import rokolabs.com.peoplefirst.model.EscalationLevel;
@@ -26,7 +30,8 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
     public PublishSubject<EscalationLevel> getLevelClick() {
         return mLevelClick;
     }
-    public PublishSubject<Boolean> editable = PublishSubject.create();
+
+    public BehaviorSubject<Boolean> editable = BehaviorSubject.create();
     private ArrayList<EscalationLevel> mItems;
 
     private Context mContext;
@@ -48,16 +53,16 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(mItems.get(position).name);
         holder.mContact.setText(mItems.get(position).contact);
         holder.mDays.setText(String.valueOf(mItems.get(position).days));
-        editable.subscribe(aBoolean ->{
-           holder.mContact.setActivated(aBoolean);
-           holder.mDays.setActivated(aBoolean);
-           holder.mName.setActivated(aBoolean);
-
+        editable.observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
+                    holder.mContact.setEnabled(aBoolean);
+                    holder.mDays.setEnabled(aBoolean);
+                    holder.mName.setEnabled(aBoolean);
         });
         holder.itemView.setOnClickListener(buttonView -> {
             mLevelClick.onNext(mItems.get(position));
@@ -67,13 +72,14 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
 
     @Override
     public int getItemCount() {
-        return mItems == null? 0 : mItems.size();
+        return mItems == null ? 0 : mItems.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public EditText mName;
         public EditText mContact;
         public EditText mDays;
+
         public ViewHolder(View v) {
             super(v);
         }

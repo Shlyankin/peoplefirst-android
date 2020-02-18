@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".EditReportActivity"
+            android:name=".report.EditReportActivity"
             android:label="@string/title_activity_edit_report"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

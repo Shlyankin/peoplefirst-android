@@ -13,6 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
+import rokolabs.com.peoplefirst.auth.password.reset.send.request.ResetPasswordActivityKotlin
+import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailActivityKotlin
 import rokolabs.com.peoplefirst.databinding.ActivityLoginBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.main.MainActivity
@@ -67,6 +69,12 @@ class LoginActivity : AppCompatActivity() {
                     { throwable ->
                         Toast.makeText(this, "Unable to authroize", Toast.LENGTH_LONG).show()
                     })
+        }
+        viewModel.forgotClick.subscribe {
+            startActivity(Intent(this,ResetPasswordActivityKotlin::class.java))
+        }
+        viewModel.registerClick.subscribe {
+            startActivity(Intent(this,CreateAccountRetailActivityKotlin::class.java))
         }
     }
 

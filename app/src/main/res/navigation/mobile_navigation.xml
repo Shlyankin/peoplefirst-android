@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="rokolabs.com.peoplefirst.ui.home.HomeFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="rokolabs.com.peoplefirst.ui.gallery.GalleryFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="rokolabs.com.peoplefirst.ui.slideshow.SlideshowFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="rokolabs.com.peoplefirst.ui.tools.ToolsFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="rokolabs.com.peoplefirst.ui.share.ShareFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="rokolabs.com.peoplefirst.ui.send.SendFragment"
+        android:name="rokolabs.com.peoplefirst.report.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
 </navigation>
