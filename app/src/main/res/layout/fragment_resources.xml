@@ -125,6 +125,7 @@ after submission"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             reactiveClick="@{viewModel.addClick}"
+            android:visibility="@{viewModel.addButtonVisibility ? View.VISIBLE : View.GONE}"
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_input_add"
             android:tint="@android:color/white"/>

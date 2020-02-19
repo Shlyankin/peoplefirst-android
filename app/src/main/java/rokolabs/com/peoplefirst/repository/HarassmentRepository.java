@@ -1,5 +1,6 @@
 package rokolabs.com.peoplefirst.repository;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -185,10 +186,9 @@ public class HarassmentRepository {
                         getMyReports();
                         Intent intent = new Intent("REPORT_ADDED");
                         intent.putExtra("reportId", baseResponse.data.id);
-						intent.putExtra("type", "aggressor");
+                        intent.putExtra("type", "aggressor");
                         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-                    }
-                    else
+                    } else
                         Toast.makeText(mContext, baseResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
                     HttpException e = (HttpException) throwable;
@@ -218,8 +218,7 @@ public class HarassmentRepository {
                 .subscribe(baseResponse -> {
                     if (baseResponse.success) {
                         getMyReports();
-                    }
-                    else
+                    } else
                         Toast.makeText(mContext, baseResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
                     HttpException e = (HttpException) throwable;
@@ -233,7 +232,7 @@ public class HarassmentRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(reportsResponse -> {
                     if (reportsResponse.success)
-                        myOpenReports.onNext(reportsResponse.data);
+                        myOpenReports.onNext(reportsResponse.data.topList);
                     else
                         Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
@@ -241,30 +240,21 @@ public class HarassmentRepository {
                 });
     }
 
+    @SuppressLint("CheckResult")
     public void getMyReports() {
-        mService.getMyReports("active")
+        mService.getMyReports()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(reportsResponse -> {
-                    if (reportsResponse.success)
-                        myOpenReports.onNext(reportsResponse.data);
-                    else
+                    if (reportsResponse.success) {
+                        myOpenReports.onNext(reportsResponse.data.topList);
+                        myClosedResolvedReports.onNext(reportsResponse.data.bottomList);
+                    } else
                         Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
-                    Toast.makeText(mContext, "Could not get open reports", Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "Could not get reports", Toast.LENGTH_LONG).show();
                 });
 
-        mService.getMyReports("inactive")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(reportsResponse -> {
-                    if (reportsResponse.success)
-                        myClosedResolvedReports.onNext(reportsResponse.data);
-                    else
-                        Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
-                }, throwable -> {
-                    Toast.makeText(mContext, "Could not get inactive reports", Toast.LENGTH_LONG).show();
-                });
     }
 
     public void getReport(int id) {
@@ -286,7 +276,7 @@ public class HarassmentRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(baseResponse -> {
-                    if (baseResponse.body()!= null && baseResponse.body().success) {
+                    if (baseResponse.body() != null && baseResponse.body().success) {
                         getMyReports();
                         Toast.makeText(mContext, "Report updated", Toast.LENGTH_LONG).show();
                     } else if (baseResponse.errorBody() != null) {
@@ -323,13 +313,12 @@ public class HarassmentRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tr -> {
-                    if (tr.success ) {
+                    if (tr.success) {
                         if (tr.data.size() > 0 && tr.data.get(0).id >= 0)
                             currentTransgressorReport.onNext(tr.data.get(0));
                         else
                             currentTransgressorReport.onNext(new TransgressorReport());
-                    }
-                    else
+                    } else
                         Toast.makeText(mContext, tr.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
                     Toast.makeText(mContext, "Could not load user details", Toast.LENGTH_LONG).show();
@@ -393,7 +382,7 @@ public class HarassmentRepository {
         private int reportId = 0;
         private boolean isUploadFinished;
         private String url;
-		private String type = "";
+        private String type = "";
 
         public UrlSender(HarassmentRepository repository, File file, String bucketName, String folderName, String key, int id, String url) {
             this.repository = repository;
@@ -417,56 +406,56 @@ public class HarassmentRepository {
             isUploadFinished = true;
         }
 
-		public void setType(String type) {
-			this.type = type;
-		}
+        public void setType(String type) {
+            this.type = type;
+        }
 
         public void trySendingUrl() {
             if (reportId == 0) return;
             if (!isUploadFinished) return;
             if (url == null || url.isEmpty()) return;
 
-			ArrayList<FileUrl> fileUrls = new ArrayList<>();
-			fileUrls.add(new FileUrl(url));
-			switch (type) {
-				case "initial":
-					sendInitialReportFiles(fileUrls);
-					break;
-				case "witness":
-					sendWitnessFiles(fileUrls);
-					break;
-				case "aggressor":
-					sendAggressorFiles(fileUrls);
-					break;
-			}
+            ArrayList<FileUrl> fileUrls = new ArrayList<>();
+            fileUrls.add(new FileUrl(url));
+            switch (type) {
+                case "initial":
+                    sendInitialReportFiles(fileUrls);
+                    break;
+                case "witness":
+                    sendWitnessFiles(fileUrls);
+                    break;
+                case "aggressor":
+                    sendAggressorFiles(fileUrls);
+                    break;
+            }
 
-		}
+        }
 
-		private void sendInitialReportFiles(ArrayList<FileUrl> fileUrls) {
-			Disposable disposable = repository.mService.sendUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
-					.subscribeOn(Schedulers.io())
-					.subscribe(response -> {
-								Log.d("Sender", "url sent to report " + reportId);
-							},
-							e -> e.printStackTrace());
-		}
+        private void sendInitialReportFiles(ArrayList<FileUrl> fileUrls) {
+            Disposable disposable = repository.mService.sendUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(response -> {
+                                Log.d("Sender", "url sent to report " + reportId);
+                            },
+                            e -> e.printStackTrace());
+        }
 
-		private void sendWitnessFiles(ArrayList<FileUrl> fileUrls) {
-			Disposable disposable = repository.mService.sendWitnessUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
-					.subscribeOn(Schedulers.io())
-					.subscribe(response -> {
-								Log.d("Sender", "url sent to witness report " + reportId);
-							},
-							e -> e.printStackTrace());
-		}
+        private void sendWitnessFiles(ArrayList<FileUrl> fileUrls) {
+            Disposable disposable = repository.mService.sendWitnessUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(response -> {
+                                Log.d("Sender", "url sent to witness report " + reportId);
+                            },
+                            e -> e.printStackTrace());
+        }
 
-		private void sendAggressorFiles(ArrayList<FileUrl> fileUrls) {
-			Disposable disposable = repository.mService.sendAggressorUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
-					.subscribeOn(Schedulers.io())
-					.subscribe(response -> {
-								Log.d("Sender", "url sent to aggressor report " + reportId);
-							},
-							e -> e.printStackTrace());
-		}
-	}
+        private void sendAggressorFiles(ArrayList<FileUrl> fileUrls) {
+            Disposable disposable = repository.mService.sendAggressorUploadedFilesUrls(reportId, fileUrls).observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(response -> {
+                                Log.d("Sender", "url sent to aggressor report " + reportId);
+                            },
+                            e -> e.printStackTrace());
+        }
+    }
 }

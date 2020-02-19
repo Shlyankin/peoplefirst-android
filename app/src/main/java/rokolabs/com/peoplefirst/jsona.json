@@ -1,0 +1,1847 @@
+{
+  "success": true,
+  "data": {
+    "topList": [
+      {
+        "datetime": "2019-02-04 14:00:00",
+        "submitted_at": "2020-02-04 19:53:04",
+        "status_changed_at": "2020-02-04 19:53:04",
+        "created_at": "2020-02-04 19:53:04",
+        "updated_at": "2020-02-04 19:53:04",
+        "id": 3,
+        "parent_id": null,
+        "anonym": false,
+        "author_id": 12,
+        "victim_id": 12,
+        "counselling_service_id": null,
+        "location_state": null,
+        "location_city": null,
+        "location_street": null,
+        "location_zip": null,
+        "location_details": null,
+        "location_confirmation": false,
+        "document_confirmation": false,
+        "harassment_confirmation": false,
+        "happened_before": false,
+        "victim_proposed_solution": "",
+        "details": "Lorem ipsum dolor sit amet.",
+        "file": null,
+        "resolutions_offered": 0,
+        "status": "submitted",
+        "escalation_level_id": null,
+        "escalation_level": 1,
+        "victim_verified_status": "1",
+        "current_user_role": "aggressor",
+        "victim": {
+          "role": "user",
+          "birthday": null,
+          "created_at": "2020-02-04 19:31:23",
+          "updated_at": "2020-02-04 19:31:23",
+          "deleted_at": null,
+          "id": 12,
+          "company_id": 3,
+          "email": "victim1@mailinator.com",
+          "secondary_email": null,
+          "active": true,
+          "first_name": "victim1-name",
+          "last_name": "victim1-lastname",
+          "employer_name": null,
+          "employer_location": null,
+          "phone": null,
+          "address": null,
+          "manager": null,
+          "department": null,
+          "retail": 1,
+          "escalation_level": null,
+          "company": {
+            "processing_days": 60,
+            "created_at": "2020-01-13 15:54:39",
+            "updated_at": "2020-01-13 15:54:39",
+            "id": 3,
+            "name": "mailinator.com",
+            "city": "n/a",
+            "state": "n/a",
+            "street_1": "n/a",
+            "street_2": "n/a",
+            "zip": "n/a",
+            "phone": null,
+            "group_email": null,
+            "admin_email": "not-assigned@mailinator.com",
+            "user_limit": null,
+            "business_sector": null,
+            "status": true,
+            "aggressor_notification": true,
+            "company_url": "",
+            "storage_bucket": null
+          }
+        },
+        "ReportWitnesses": [
+          {
+            "created_at": "2020-02-04 19:53:04",
+            "updated_at": "2020-02-04 19:53:04",
+            "id": 3,
+            "report_id": 3,
+            "user_id": 14,
+            "anonym": false,
+            "status": "new"
+          },
+          {
+            "created_at": "2020-02-04 19:53:04",
+            "updated_at": "2020-02-04 19:53:04",
+            "id": 4,
+            "report_id": 3,
+            "user_id": 15,
+            "anonym": false,
+            "status": "new"
+          },
+          {
+            "created_at": "2020-02-04 19:53:04",
+            "updated_at": "2020-02-04 19:53:04",
+            "id": 5,
+            "report_id": 3,
+            "user_id": 16,
+            "anonym": false,
+            "status": "new"
+          }
+        ],
+        "ReportAggressors": [
+          {
+            "created_at": "2020-02-04 19:53:04",
+            "updated_at": "2020-02-04 19:53:04",
+            "id": 3,
+            "report_id": 3,
+            "user_id": 17,
+            "status": "new"
+          },
+          {
+            "created_at": "2020-02-04 19:53:04",
+            "updated_at": "2020-02-04 19:53:04",
+            "id": 4,
+            "report_id": 3,
+            "user_id": 18,
+            "status": "rejected"
+          }
+        ],
+        "HarassmentReasons": [
+          {
+            "id": 1,
+            "title": "reason-1",
+            "ReportHarassmentReason": {
+              "harassment_reason_id": 1,
+              "report_id": 3
+            }
+          }
+        ],
+        "HarassmentTypes": [
+          {
+            "id": 1,
+            "title": "type-1",
+            "ReportHarassmentType": {
+              "harassment_type_id": 1,
+              "report_id": 3
+            }
+          }
+        ]
+      },
+      {
+        "datetime": "2019-02-04 14:00:00",
+        "submitted_at": "2020-02-04 19:55:53",
+        "status_changed_at": "2020-02-04 19:55:53",
+        "created_at": "2020-02-04 19:55:53",
+        "updated_at": "2020-02-04 19:55:53",
+        "id": 4,
+        "parent_id": null,
+        "anonym": false,
+        "author_id": 14,
+        "victim_id": 12,
+        "counselling_service_id": null,
+        "location_state": null,
+        "location_city": null,
+        "location_street": null,
+        "location_zip": null,
+        "location_details": null,
+        "location_confirmation": false,
+        "document_confirmation": false,
+        "harassment_confirmation": false,
+        "happened_before": false,
+        "victim_proposed_solution": "",
+        "details": "Lorem ipsum dolor sit amet.",
+        "file": null,
+        "resolutions_offered": 0,
+        "status": "submitted",
+        "escalation_level_id": null,
+        "escalation_level": 1,
+        "victim_verified_status": "0",
+        "current_user_role": "aggressor",
+        "victim": {
+          "role": "user",
+          "birthday": null,
+          "created_at": "2020-02-04 19:31:23",
+          "updated_at": "2020-02-04 19:31:23",
+          "deleted_at": null,
+          "id": 12,
+          "company_id": 3,
+          "email": "victim1@mailinator.com",
+          "secondary_email": null,
+          "active": true,
+          "first_name": "victim1-name",
+          "last_name": "victim1-lastname",
+          "employer_name": null,
+          "employer_location": null,
+          "phone": null,
+          "address": null,
+          "manager": null,
+          "department": null,
+          "retail": 1,
+          "escalation_level": null,
+          "company": {
+            "processing_days": 60,
+            "created_at": "2020-01-13 15:54:39",
+            "updated_at": "2020-01-13 15:54:39",
+            "id": 3,
+            "name": "mailinator.com",
+            "city": "n/a",
+            "state": "n/a",
+            "street_1": "n/a",
+            "street_2": "n/a",
+            "zip": "n/a",
+            "phone": null,
+            "group_email": null,
+            "admin_email": "not-assigned@mailinator.com",
+            "user_limit": null,
+            "bus
+            iness_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            id
+            ":6,"
+            report_id
+            ":4,"
+            user_id
+            ":14,"
+            anonym
+            ":false,"
+            status
+            ":"
+            confirmed
+            "},{"
+            created_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            id
+            ":7,"
+            report_id
+            ":4,"
+            user_id
+            ":15,"
+            anonym
+            ":false,"
+            status
+            ":"
+            new
+            "},{"
+            created_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            id
+            ":8,"
+            report_id
+            ":4,"
+            user_id
+            ":16,"
+            anonym
+            ":false,"
+            status
+            ":"
+            new
+            "}],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            id
+            ":5,"
+            report_id
+            ":4,"
+            user_id
+            ":17,"
+            status
+            ":"
+            new
+            "},{"
+            created_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 55
+            :
+            53
+            ","
+            id
+            ":6,"
+            report_id
+            ":4,"
+            user_id
+            ":18,"
+            status
+            ":"
+            new
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":4}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"
+            report_id
+            ":4}}]},{"
+            datetime
+            ":"
+            2019-02-04
+            14: 00
+            :
+            00
+            ","
+            submitted_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            46
+            ","
+            status_changed_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            54
+            ","
+            created_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            46
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            54
+            ","
+            id
+            ":6,"
+            parent_id
+            ":null,"
+            anonym
+            ":false,"
+            author_id
+            ":12,"
+            victim_id
+            ":12,"
+            counselling_service_id
+            ":null,"
+            location_state
+            ":null,"
+            location_city
+            ":null,"
+            location_street
+            ":null,"
+            location_zip
+            ":null,"
+            location_details
+            ":null,"
+            location_confirmation
+            ":false,"
+            document_confirmation
+            ":false,"
+            harassment_confirmation
+            ":false,"
+            happened_before
+            ":false,"
+            victim_proposed_solution
+            ":"
+            ","
+            details
+            ":"
+            Lorem
+            ipsum
+            dolor
+            sit
+            amet.
+            ","
+            file
+            ":null,"
+            resolutions_offered
+            ":0,"
+            status
+            ":"
+            proposed
+            ","
+            escalation_level_id
+            ":null,"
+            escalation_level
+            ":1,"
+            victim_verified_status
+            ":"
+            1
+            ","
+            current_user_role
+            ":"
+            aggressor
+            ","
+            victim
+            ":{"
+            role
+            ":"
+            user
+            ","
+            birthday
+            ":null,"
+            created_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            deleted_at
+            ":null,"
+            id
+            ":12,"
+            company_id
+            ":3,"
+            email
+            ":"
+            victim1@mailinator.com
+            ","
+            secondary_email
+            ":null,"
+            active
+            ":true,"
+            first_name
+            ":"
+            victim1-name
+            ","
+            last_name
+            ":"
+            victim1-lastname
+            ","
+            employer_name
+            ":null,"
+            employer_location
+            ":null,"
+            phone
+            ":null,"
+            address
+            ":null,"
+            manager
+            ":null,"
+            department
+            ":null,"
+            retail
+            ":1,"
+            escalation_level
+            ":null,"
+            company
+            ":{"
+            processing_days
+            ":60,"
+            created_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            updated_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            id
+            ":3,"
+            name
+            ":"
+            mailinator.com
+            ","
+            city
+            ":"
+            n/a
+            ","
+            state
+            ":"
+            n/a
+            ","
+            street_1
+            ":"
+            n/a
+            ","
+            street_2
+            ":"
+            n/a
+            ","
+            zip
+            ":"
+            n/a
+            ","
+            phone
+            ":null,"
+            group_email
+            ":null,"
+            admin_email
+            ":"
+            not-assigned@mailinator.com
+            ","
+            user_limit
+            ":null,"
+            business_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            46
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 58
+            :
+            46
+            ","
+            id
+            ":8,"
+            report_id
+            ":6,"
+            user_id
+            ":17,"
+            status
+            ":"
+            new
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":6}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"
+            report_id
+            ":6}}]},{"
+            datetime
+            ":"
+            2019-02-04
+            14: 00
+            :
+            00
+            ","
+            submitted_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            18
+            ","
+            status_changed_at
+            ":"
+            2020-02-04
+            20: 14
+            :
+            49
+            ","
+            created_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            18
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 14
+            :
+            49
+            ","
+            id
+            ":7,"
+            parent_id
+            ":null,"
+            anonym
+            ":false,"
+            author_id
+            ":12,"
+            victim_id
+            ":12,"
+            counselling_service_id
+            ":null,"
+            location_state
+            ":null,"
+            location_city
+            ":null,"
+            location_street
+            ":null,"
+            location_zip
+            ":null,"
+            location_details
+            ":null,"
+            location_confirmation
+            ":false,"
+            document_confirmation
+            ":false,"
+            harassment_confirmation
+            ":false,"
+            happened_before
+            ":false,"
+            victim_proposed_solution
+            ":"
+            ","
+            details
+            ":"
+            Lorem
+            ipsum
+            dolor
+            sit
+            amet.
+            ","
+            file
+            ":null,"
+            resolutions_offered
+            ":0,"
+            status
+            ":"
+            rejected
+            ","
+            escalation_level_id
+            ":null,"
+            escalation_level
+            ":1,"
+            victim_verified_status
+            ":"
+            1
+            ","
+            current_user_role
+            ":"
+            aggressor
+            ","
+            victim
+            ":{"
+            role
+            ":"
+            user
+            ","
+            birthday
+            ":null,"
+            created_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            deleted_at
+            ":null,"
+            id
+            ":12,"
+            company_id
+            ":3,"
+            email
+            ":"
+            victim1@mailinator.com
+            ","
+            secondary_email
+            ":null,"
+            active
+            ":true,"
+            first_name
+            ":"
+            victim1-name
+            ","
+            last_name
+            ":"
+            victim1-
+            lastname
+            ","
+            employer_name
+            ":null,"
+            employer_location
+            ":null,"
+            phone
+            ":null,"
+            address
+            ":null,"
+            manager
+            ":null,"
+            department
+            ":null,"
+            retail
+            ":1,"
+            escalation_level
+            ":null,"
+            company
+            ":{"
+            processing_days
+            ":60,"
+            created_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            updated_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            id
+            ":3,"
+            name
+            ":"
+            mailinator.com
+            ","
+            city
+            ":"
+            n/a
+            ","
+            state
+            ":"
+            n/a
+            ","
+            street_1
+            ":"
+            n/a
+            ","
+            street_2
+            ":"
+            n/a
+            ","
+            zip
+            ":"
+            n/a
+            ","
+            phone
+            ":null,"
+            group_email
+            ":null,"
+            admin_email
+            ":"
+            not-assigned@mailinator.com
+            ","
+            user_limit
+            ":null,"
+            business_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            18
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            18
+            ","
+            id
+            ":9,"
+            report_id
+            ":7,"
+            user_id
+            ":17,"
+            status
+            ":"
+            new
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":7}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"
+            report_id
+            ":7}}]}],"
+            bottomList
+            ":[{"
+            datetime
+            ":"
+            2019-02-04
+            14: 00
+            :
+            00
+            ","
+            submitted_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            19
+            ","
+            status_changed_at
+            ":"
+            2020-02-04
+            20: 16
+            :
+            13
+            ","
+            created_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            19
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 16
+            :
+            13
+            ","
+            id
+            ":8,"
+            parent_id
+            ":null,"
+            anonym
+            ":false,"
+            author_id
+            ":12,"
+            victim_id
+            ":12,"
+            counselling_service_id
+            ":null,"
+            location_state
+            ":null,"
+            location_city
+            ":null,"
+            location_street
+            ":null,"
+            location_zip
+            ":null,"
+            location_details
+            ":null,"
+            location_confirmation
+            ":false,"
+            document_confirmation
+            ":false,"
+            harassment_confirmation
+            ":false,"
+            happened_before
+            ":false,"
+            victim_proposed_solution
+            ":"
+            ","
+            details
+            ":"
+            Lorem
+            ipsum
+            dolor
+            sit
+            amet.
+            ","
+            file
+            ":null,"
+            resolutions_offered
+            ":0,"
+            status
+            ":"
+            resolved
+            ","
+            escalation_level_id
+            ":null,"
+            escalation_level
+            ":1,"
+            victim_verified_status
+            ":"
+            1
+            ","
+            current_user_role
+            ":"
+            aggressor
+            ","
+            victim
+            ":{"
+            role
+            ":"
+            user
+            ","
+            birthday
+            ":null,"
+            created_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            deleted_at
+            ":null,"
+            id
+            ":12,"
+            company_id
+            ":3,"
+            email
+            ":"
+            victim1@mailinator.com
+            ","
+            secondary_email
+            ":null,"
+            active
+            ":true,"
+            first_name
+            ":"
+            victim1-name
+            ","
+            last_name
+            ":"
+            victim1-lastname
+            ","
+            employer_name
+            ":null,"
+            employer_location
+            ":null,"
+            phone
+            ":null,"
+            address
+            ":null,"
+            manager
+            ":null,"
+            department
+            ":null,"
+            retail
+            ":1,"
+            escalation_level
+            ":null,"
+            company
+            ":{"
+            processing_days
+            ":60,"
+            created_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            updated_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            id
+            ":3,"
+            name
+            ":"
+            mailinator.com
+            ","
+            city
+            ":"
+            n/a
+            ","
+            state
+            ":"
+            n/a
+            ","
+            street_1
+            ":"
+            n/a
+            ","
+            street_2
+            ":"
+            n/a
+            ","
+            zip
+            ":"
+            n/a
+            ","
+            phone
+            ":null,"
+            group_email
+            ":null,"
+            admin_email
+            ":"
+            not-assigned@mailinator.com
+            ","
+            user_limit
+            ":null,"
+            business_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            19
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 13
+            :
+            19
+            ","
+            id
+            ":10,"
+            report_id
+            ":8,"
+            user_id
+            ":17,"
+            status
+            ":"
+            rejected
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":8}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"
+            report_id
+            ":8}}]},{"
+            datetime
+            ":"
+            2019-02-04
+            14: 00
+            :
+            00
+            ","
+            submitted_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            status_changed_at
+            ":"
+            2020-02-04
+            20: 20
+            :
+            02
+            ","
+            created_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 20
+            :
+            02
+            ","
+            id
+            ":10,"
+            parent_id
+            ":null,"
+            anonym
+            ":false,"
+            author_id
+            ":16,"
+            victim_id
+            ":12,"
+            counselling_service_id
+            ":null,"
+            location_state
+            ":null,"
+            location_city
+            ":null,"
+            location_street
+            ":null,"
+            location_zip
+            ":null,"
+            location_details
+            ":null,"
+            location_confirmation
+            ":false,"
+            document_confirmation
+            ":false,"
+            harassment_confirmation
+            ":false,"
+            happened_before
+            ":false,"
+            victim_proposed_solution
+            ":"
+            ","
+            details
+            ":"
+            Lorem
+            ipsum
+            dolor
+            sit
+            amet.
+            ","
+            file
+            ":null,"
+            resolutions_offered
+            ":0,"
+            status
+            ":"
+            closed
+            ","
+            escalation_level_id
+            ":null,"
+            escalation_level
+            ":1,"
+            victim_verified_status
+            ":"
+            0
+            ","
+            current_user_role
+            ":"
+            aggressor
+            ","
+            victim
+            ":{"
+            role
+            ":"
+            user
+            ","
+            birthday
+            ":null,"
+            created_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            deleted_at
+            ":null,"
+            id
+            ":12,"
+            company_id
+            ":3,"
+            email
+            ":"
+            victim1@mailinator.com
+            ","
+            secondary_email
+            ":null,"
+            active
+            ":true,"
+            first_name
+            ":"
+            victim1-name
+            ","
+            last_name
+            ":"
+            victim1-lastname
+            ","
+            employer_name
+            ":null,"
+            employer_location
+            ":null,"
+            p
+            hone
+            ":null,"
+            address
+            ":null,"
+            manager
+            ":null,"
+            department
+            ":null,"
+            retail
+            ":1,"
+            escalation_level
+            ":null,"
+            company
+            ":{"
+            processing_days
+            ":60,"
+            created_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            updated_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            id
+            ":3,"
+            name
+            ":"
+            mailinator.com
+            ","
+            city
+            ":"
+            n/a
+            ","
+            state
+            ":"
+            n/a
+            ","
+            street_1
+            ":"
+            n/a
+            ","
+            street_2
+            ":"
+            n/a
+            ","
+            zip
+            ":"
+            n/a
+            ","
+            phone
+            ":null,"
+            group_email
+            ":null,"
+            admin_email
+            ":"
+            not-assigned@mailinator.com
+            ","
+            user_limit
+            ":null,"
+            business_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            id
+            ":10,"
+            report_id
+            ":10,"
+            user_id
+            ":16,"
+            anonym
+            ":false,"
+            status
+            ":"
+            confirmed
+            "}],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 17
+            :
+            12
+            ","
+            id
+            ":12,"
+            report_id
+            ":10,"
+            user_id
+            ":19,"
+            status
+            ":"
+            rejected
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":10}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"
+            report_id
+            ":10}}]},{"
+            datetime
+            ":"
+            2019-02-04
+            14: 00
+            :
+            00
+            ","
+            submitted_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            status_changed_at
+            ":"
+            2020-02-04
+            20: 24
+            :
+            14
+            ","
+            created_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 24
+            :
+            14
+            ","
+            id
+            ":11,"
+            parent_id
+            ":null,"
+            anonym
+            ":false,"
+            author_id
+            ":12,"
+            victim_id
+            ":12,"
+            counselling_service_id
+            ":null,"
+            location_state
+            ":null,"
+            location_city
+            ":null,"
+            location_street
+            ":null,"
+            location_zip
+            ":null,"
+            location_details
+            ":null,"
+            location_confirmation
+            ":false,"
+            document_confirmation
+            ":false,"
+            harassment_confirmation
+            ":false,"
+            happened_before
+            ":false,"
+            victim_proposed_solution
+            ":"
+            ","
+            details
+            ":"
+            Lorem
+            ipsum
+            dolor
+            sit
+            amet.
+            ","
+            file
+            ":null,"
+            resolutions_offered
+            ":0,"
+            status
+            ":"
+            verifying
+            ","
+            escalation_level_id
+            ":null,"
+            escalation_level
+            ":1,"
+            victim_verified_status
+            ":"
+            1
+            ","
+            current_user_role
+            ":"
+            aggressor
+            ","
+            victim
+            ":{"
+            role
+            ":"
+            user
+            ","
+            birthday
+            ":null,"
+            created_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            19: 31
+            :
+            23
+            ","
+            deleted_at
+            ":null,"
+            id
+            ":12,"
+            company_id
+            ":3,"
+            email
+            ":"
+            victim1@mailinator.com
+            ","
+            secondary_email
+            ":null,"
+            active
+            ":true,"
+            first_name
+            ":"
+            victim1-name
+            ","
+            last_name
+            ":"
+            victim1-lastname
+            ","
+            employer_name
+            ":null,"
+            employer_location
+            ":null,"
+            phone
+            ":null,"
+            address
+            ":null,"
+            manager
+            ":null,"
+            department
+            ":null,"
+            retail
+            ":1,"
+            escalation_level
+            ":null,"
+            company
+            ":{"
+            processing_days
+            ":60,"
+            created_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            updated_at
+            ":"
+            2020-01-13
+            15: 54
+            :
+            39
+            ","
+            id
+            ":3,"
+            name
+            ":"
+            mailinator.com
+            ","
+            city
+            ":"
+            n/a
+            ","
+            state
+            ":"
+            n/a
+            ","
+            street_1
+            ":"
+            n/a
+            ","
+            street_2
+            ":"
+            n/a
+            ","
+            zip
+            ":"
+            n/a
+            ","
+            phone
+            ":null,"
+            group_email
+            ":null,"
+            admin_email
+            ":"
+            not-assigned@mailinator.com
+            ","
+            user_limit
+            ":null,"
+            business_sector
+            ":null,"
+            status
+            ":true,"
+            aggressor_notification
+            ":true,"
+            company_url
+            ":"
+            ","
+            storage_bucket
+            ":null}},"
+            ReportWitnesses
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 24
+            :
+            14
+            ","
+            id
+            ":12,"
+            report_id
+            ":11,"
+            user_id
+            ":15,"
+            anonym
+            ":false,"
+            status
+            ":"
+            confirmed
+            "},{"
+            created_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            id
+            ":11,"
+            report_id
+            ":11,"
+            user_id
+            ":16,"
+            anonym
+            ":false,"
+            status
+            ":"
+            new
+            "}],"
+            ReportAggressors
+            ":[{"
+            created_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            updated_at
+            ":"
+            2020-02-04
+            20: 21
+            :
+            59
+            ","
+            id
+            ":13,"
+            report_id
+            ":11,"
+            user_id
+            ":19,"
+            status
+            ":"
+            rejected
+            "}],"
+            HarassmentReasons
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            reason-1
+            ","
+            ReportHarassmentReason
+            ":{"
+            harassment_reason_id
+            ":1,"
+            report_id
+            ":11}}],"
+            HarassmentTypes
+            ":[{"
+            id
+            ":1,"
+            title
+            ":"
+            type-1
+            ","
+            ReportHarassmentType
+            ":{"
+            harassment_type_id
+            ":1,"report_id":11
+          }}]}]}}

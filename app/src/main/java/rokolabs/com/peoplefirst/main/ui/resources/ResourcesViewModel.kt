@@ -7,8 +7,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -18,7 +20,7 @@ import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.CounsellingService
 import rokolabs.com.peoplefirst.model.EscalationLevel
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
-import java.util.ArrayList
+import java.util.*
 
 class ResourcesViewModel(
     context: Context,
@@ -28,7 +30,7 @@ class ResourcesViewModel(
     private lateinit var context: Context
     private lateinit var mRepository: HarassmentRepository
     private lateinit var mService: PeopleFirstService
-    var saveButtonStatus:BehaviorSubject<Boolean> = BehaviorSubject.create()
+    var saveButtonStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
     var toastSubject: Subject<String> = PublishSubject.create()
     var termsClick: Subject<View> = PublishSubject.create()
     var privacyClick: Subject<View> = PublishSubject.create()
@@ -38,6 +40,7 @@ class ResourcesViewModel(
     var mCouncellingAdapter: CounsellingServicesAdapter = CounsellingServicesAdapter()
     var caption: ObservableField<String> = ObservableField()
     var councelling: ObservableField<String> = ObservableField()
+    var addButtonVisibility: ObservableField<Boolean> = ObservableField()
 
     init {
         this.context = context
@@ -68,8 +71,31 @@ class ResourcesViewModel(
             mRepository.me.subscribe { user ->
                 showCompanyName(user.company.name)
                 mAdapter.editable.onNext(user.is_retail)
-                saveButtonStatus.onNext(!user.is_retail)
-
+                saveButtonStatus.onNext(user.is_retail)
+                addButtonVisibility.set(user.is_retail)
+            },
+            addClick.subscribe {
+                Observable.just(EscalationLevel("name", "contact"))
+                    .map {
+                        return@map listOf(it)
+                    }
+                    .flatMap {
+                        mService.addEscalationLevels(it)
+                            .toObservable()
+                    }
+                    .subscribeBy(onNext = {
+                        mService.escalationLevels
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ response ->
+                                if (response.success) {
+                                    showLevels(response.data)
+                                }
+                            }, { throwable -> showToast("Unable to get escalation levels") })
+                    }, onError = {
+                        it.printStackTrace()
+                        showToast("Unable to add escalation level")
+                    })
             }
         )
     }
@@ -82,10 +108,10 @@ class ResourcesViewModel(
     fun showCounselling(levels: ArrayList<CounsellingService>) {
         mCouncellingAdapter?.setItems(context, levels)
         mCouncellingAdapter?.notifyDataSetChanged()
-        if(levels.size==0){
+        if (levels.size == 0) {
             councelling.set("")
-        }else if(mRepository.me.hasValue()){
-            var name=mRepository.me.value!!.company.name
+        } else if (mRepository.me.hasValue()) {
+            var name = mRepository.me.value!!.company.name
             councelling.set("$name Counseling Services")
         }
     }
@@ -99,9 +125,21 @@ class ResourcesViewModel(
         toastSubject.onNext(string)
 //        Toast.makeText(context,string, Toast.LENGTH_LONG).show()
     }
-    fun saveResources(){
 
+    fun saveResources() {
+        Observable.just(mAdapter.getmItems())
+            .flatMap {
+                mService.addEscalationLevels(it)
+                    .toObservable()
+            }
+            .subscribeBy(onError = {
+                it.printStackTrace()
+                showToast("Unable to save escalation levels")
+            }, onNext = {
+                showToast("Escalation levels updated")
+            })
     }
+
     fun dispose() {
         mDisposable.dispose()
     }

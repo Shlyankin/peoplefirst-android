@@ -18,23 +18,19 @@
         android:background="@android:color/white"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:error="@{viewModel.nameError}"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="18sp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -43,27 +39,24 @@
                 android:hint="Name"
                 android:enabled="@{viewModel.editeable}"
                 android:text="@={viewModel.name}"
-                app:error="@{viewModel.nameError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:errorEnabled="true"
+            app:error="@{viewModel.emailError}"
             app:layout_constraintBottom_toTopOf="@+id/secondaryEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="18sp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -73,28 +66,24 @@
                 android:inputType="textWebEmailAddress"
                 android:text="@={viewModel.email}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.emailError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/secondaryEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:errorEnabled="true"
+            app:error="@{viewModel.secondaryEmailError}"
             app:layout_constraintBottom_toTopOf="@+id/dateOfBirth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary Email"
-                android:textSize="18sp" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,58 +92,51 @@
                 android:inputType="textWebEmailAddress"
                 android:text="@={viewModel.secondaryEmail}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.secondaryEmailError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
+                android:layout_marginTop="8dp"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/dateOfBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:error="@{viewModel.birthDateError}"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/mailingAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/secondaryEmail">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date of birth"
-                android:textSize="18sp" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="Date of birth"
                 android:inputType="date"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:text="@={viewModel.birthDate}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.birthDateError}"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/mailingAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:errorEnabled="true"
+            app:error="@{viewModel.mailingAddressError}"
             app:layout_constraintBottom_toTopOf="@+id/suite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateOfBirth">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mailing Address"
-                android:textSize="18sp" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,27 +145,25 @@
                 android:inputType="textPostalAddress"
                 android:text="@={viewModel.mailingAddress}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.mailingAddressError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
+
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/suite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
+            app:errorEnabled="true"
+            app:error="@{viewModel.unitSuiteError}"
             app:layout_constraintBottom_toTopOf="@+id/telephoneNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mailingAddress">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apt / Unit / Suite"
-                android:textSize="18sp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -193,27 +173,24 @@
                 android:inputType="text"
                 android:text="@={viewModel.unitSuite}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.unitSuiteError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/telephoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
+            app:errorEnabled="true"
+            app:error="@{viewModel.telephoneError}"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/suite">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Telephone Number"
-                android:textSize="18sp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -223,10 +200,11 @@
                 android:inputType="phone"
                 android:text="@={viewModel.telephone}"
                 android:enabled="@{viewModel.editeable}"
-                app:error="@{viewModel.telephoneError}"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"

@@ -29,7 +29,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
 
     private ArrayList<Report> mEntities = null;
     private Context mContext;
-
+    private float widthChange;
     private final PublishSubject<Report> onClickDetailsSubject = PublishSubject.create();
 
     private final PublishSubject<Report> onClickEditSubject = PublishSubject.create();
@@ -39,10 +39,14 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
         mEntities = entities;
     }
 
+    public void setWidthChange(float widthChange) {
+        this.widthChange = widthChange;
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.listitem_report, parent, false);
+//        changeWidth(v);
         ViewHolder vh = new ViewHolder(v);
         vh.mDateTime = v.findViewById(R.id.dateTime);
         vh.mLocation = v.findViewById(R.id.location);
@@ -58,10 +62,17 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ViewHold
         layoutParams.height = (int) (view.getHeight() * scaleY);
         view.setLayoutParams(layoutParams);
     }
+    private void changeWidth(View view) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 
+        layoutParams.width = (int) (view.getWidth() -16);
+//        layoutParams.height = (int) (view.getHeight() * scaleY);
+        view.setLayoutParams(layoutParams);
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+//        changeWidth(holder.itemView);
         holder.mDateTime.setText(Utils.dateFormat(mEntities.get(position).datetime));
         holder.mLocation.setText((mEntities.get(position).location_city == null ? "" : mEntities.get(position).location_city) + " "
                 + (mEntities.get(position).location_details == null ? "" : mEntities.get(position).location_details) );

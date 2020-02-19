@@ -41,6 +41,10 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
         this.mItems = mItems;
     }
 
+    public ArrayList<EscalationLevel> getmItems() {
+        return mItems;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())

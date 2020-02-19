@@ -7,6 +7,7 @@ import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import rokolabs.com.peoplefirst.model.ConfirmationRefResponse;
+import rokolabs.com.peoplefirst.model.EscalationLevel;
 import rokolabs.com.peoplefirst.model.FileUrl;
 import rokolabs.com.peoplefirst.model.Report;
 import rokolabs.com.peoplefirst.model.RetailActivationRequest;
@@ -85,8 +86,8 @@ public class PeopleFirstService {
         return mApi.getReports();
     }
 
-    public Single<ReportsResponse> getMyReports(String status){
-        return mApi.getMyReports(status);
+    public Single<ReportsResponse> getMyReports(){
+        return mApi.getMyReports();
     }
 
     public Single<ReportResponse> addReport(Report report) {
@@ -246,7 +247,7 @@ public class PeopleFirstService {
         return mApi.resendCode(new ResendCodeRequest(email));
     }
 
-    public Single<BaseResponse> addEscalationLevels(List<RetailEscalationLevel> levels) {
+    public Single<BaseResponse> addEscalationLevels(List<EscalationLevel> levels) {
         return mApi.addEscalationLevels(levels);
     }
     public Single<BaseResponse> validateEmail(ValidateEmailRequest request) {

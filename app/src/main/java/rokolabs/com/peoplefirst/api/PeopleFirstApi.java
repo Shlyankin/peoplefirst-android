@@ -14,6 +14,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rokolabs.com.peoplefirst.model.ConfirmationRefResponse;
+import rokolabs.com.peoplefirst.model.EscalationLevel;
 import rokolabs.com.peoplefirst.model.FileUrl;
 import rokolabs.com.peoplefirst.model.Report;
 import rokolabs.com.peoplefirst.model.RetailActivationRequest;
@@ -81,8 +82,8 @@ public interface PeopleFirstApi {
     @GET("myOpenReports")
     Single<ReportsResponse> getReports();
 
-    @GET("reports/my/{status}")
-    Single<ReportsResponse> getMyReports(@Path("status") String status);
+    @GET("reports/my")
+    Single<ReportsResponse> getMyReports();
 
     @POST("reports")
     Single<ReportResponse> addReport(@Body Report report);
@@ -212,7 +213,7 @@ public interface PeopleFirstApi {
     Single<BaseResponse> resendCode(@Body ResendCodeRequest request);
 
     @POST("/companies/my/escalation-levels")
-    Single<BaseResponse> addEscalationLevels(@Body List<RetailEscalationLevel> levels);
+    Single<BaseResponse> addEscalationLevels(@Body List<EscalationLevel> levels);
 
     @POST("/users/validate-email")
     Single<BaseResponse> validateEmail(@Body ValidateEmailRequest request);
