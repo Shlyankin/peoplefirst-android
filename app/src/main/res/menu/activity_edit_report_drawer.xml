@@ -5,7 +5,7 @@
     <item android:title="What Happened?">
         <menu>
             <item
-                android:id="@+id/nav_home"
+                android:id="@+id/nav_incedent_type"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="@string/menu_home" />
             <item

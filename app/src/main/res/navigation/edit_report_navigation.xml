@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_incedent_type">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="rokolabs.com.peoplefirst.report.ui.home.HomeFragment"
+        android:id="@+id/nav_incedent_type"
+        android:name="rokolabs.com.peoplefirst.report.ui.home.MainQuestionsFragment"
         android:label=""
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_main_questions" />
 
     <fragment
         android:id="@+id/nav_gallery"

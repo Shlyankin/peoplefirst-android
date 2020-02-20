@@ -13,7 +13,9 @@ import rokolabs.com.peoplefirst.auth.password.reset.update.SetNewPasswordActivit
 import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailActivityKotlin;
 import rokolabs.com.peoplefirst.di.modules.ActivityModule;
 import rokolabs.com.peoplefirst.di.modules.BaseUrl;
+import rokolabs.com.peoplefirst.di.modules.ViewModelModule;
 import rokolabs.com.peoplefirst.di.scopes.PerActivity;
+import rokolabs.com.peoplefirst.report.EditReportActivity;
 import rokolabs.com.peoplefirst.repository.HarassmentRepository;
 
 /**
@@ -21,7 +23,7 @@ import rokolabs.com.peoplefirst.repository.HarassmentRepository;
  */
 
 @PerActivity
-@Component(dependencies = AppComponent.class, modules = ActivityModule.class)
+@Component(dependencies = AppComponent.class, modules = { ActivityModule.class, ViewModelModule.class})
 public interface ActivityComponent {
 
     Context context();
@@ -38,6 +40,7 @@ public interface ActivityComponent {
     void inject(SetNewPasswordActivity activity);
 
     void inject(LoginActivity activity);
+    void inject(EditReportActivity activity);
 //
 //    void inject(HarassmentTypeActivity activity);
 //

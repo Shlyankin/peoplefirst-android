@@ -1,65 +1,65 @@
 package rokolabs.com.peoplefirst.report
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import kotlinx.android.synthetic.main.activity_reports.*
 import rokolabs.com.peoplefirst.R
-import androidx.core.view.ViewCompat.setScaleY
-import androidx.core.view.ViewCompat.setScaleX
-import androidx.core.view.ViewCompat.setTranslationX
-import android.opengl.ETC1.getWidth
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
-import kotlinx.android.synthetic.main.activity_edit_report.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import kotlinx.android.synthetic.main.app_bar_edit_report.*
 import rokolabs.com.peoplefirst.databinding.ActivityEditReportBinding
+import rokolabs.com.peoplefirst.di.ComponentManager
+import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
+import javax.inject.Inject
 
 
 class EditReportActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var title:TextView
+    private lateinit var title: TextView
+    lateinit var navigationDrawerViewModel: NavigationDrawerViewModel
+    lateinit var navController: NavController
+    lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binder=DataBindingUtil.setContentView<ActivityEditReportBinding>(this,R.layout.activity_edit_report)
-        binder.drawerViewModel= NavigationDrawerViewModel()
-//        setContentView(R.layout.activity_edit_report)
+        ComponentManager.getInstance().getActivityComponent(this).inject(this)
+        navigationDrawerViewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(NavigationDrawerViewModel::class.java)
+        var binder = DataBindingUtil.setContentView<ActivityEditReportBinding>(
+            this,
+            R.layout.activity_edit_report
+        )
+        binder.drawerViewModel = navigationDrawerViewModel
         setSupportActionBar(toolbar)
-        title=findViewById(R.id.toolbar_title)
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.nav_home,
-//                R.id.nav_gallery,
-//                R.id.nav_slideshow,
-//                R.id.nav_tools,
-//                R.id.nav_share,
-//                R.id.nav_send
-//            ), drawerLayout
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
+        title = findViewById(R.id.toolbar_title)
+        drawerLayout= findViewById(R.id.drawer_layout)
+        navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_incedent_type,
+                R.id.nav_gallery,
+                R.id.nav_slideshow,
+                R.id.nav_tools,
+                R.id.nav_share,
+                R.id.nav_send
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
         drawerLayout.setScrimColor(getResources().getColor(android.R.color.transparent))
         drawerLayout.setDrawerElevation(0F)
         val toggle = object : ActionBarDrawerToggle(
@@ -68,30 +68,64 @@ class EditReportActivity : AppCompatActivity() {
         ) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 super.onDrawerSlide(drawerView, slideOffset)
-                if(slideOffset>=0.9f){
+                if (slideOffset >= 0.9f) {
                     supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_home_white)
-                }else{
+                } else {
                     supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
                 }
-                title.alpha=1.0f-slideOffset
+                title.alpha = 1.0f - slideOffset
                 val slideX = drawerView.getWidth() * slideOffset
                 content.setTranslationX(slideX)
             }
         }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            var handler= Handler()
+            var handler = Handler()
             handler.postDelayed({
                 supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
-            },200)
+            }, 200)
         }
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-        supportActionBar?.title=""
-//        supportActionBar?.setDisplayShowHomeEnabled(false)
+        supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun navigateTo(view: View) {
+        when (view.id) {
+            R.id.menuItem1 -> {
+                var t =navController.navigate(R.id.nav_share)
+            }
+            R.id.menuItem2 -> {
+
+            }
+            R.id.menuItem3 -> {
+
+            }
+            R.id.menuItem4 -> {
+
+            }
+            R.id.menuItem5 -> {
+
+            }
+            R.id.menuItem6 -> {
+
+            }
+            R.id.menuItem7 -> {
+
+            }
+            R.id.menuItem8->{
+
+            }
+            R.id.menuItem9->{
+
+            }
+
+        }
+        drawerLayout.closeDrawers()
     }
 }
