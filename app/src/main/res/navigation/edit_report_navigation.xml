@@ -22,6 +22,11 @@
         android:label=""
         tools:layout="@layout/activity_harassment_reason"/>
     <fragment
+        android:id="@+id/nav_report_happened_before"
+        android:name="rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_happened_before" />
+    <fragment
         android:id="@+id/nav_slideshow"
         android:name="rokolabs.com.peoplefirst.report.ui.slideshow.SlideshowFragment"
         android:label=""

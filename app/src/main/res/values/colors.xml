@@ -5,6 +5,7 @@
     <color name="colorAccent">#006F6B</color>
     <color name="buttonEnabledLine">#006F6B</color>
     <color name="buttonDisabledLine">#CCCCCC</color>
+    <drawable name="Transparent">@android:color/transparent</drawable>
 <!--    <drawable name="buttonEnabledLineDrawable">#006F6B</drawable>-->
 <!--    <drawable name="buttonDisabledLineDrawable">#CCCCCC</drawable>-->
 </resources>

@@ -124,6 +124,7 @@
                         android:layout_marginTop="8dp"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_happened_before}"
                         app:checked="@{viewModel.happenedBeforeDone}"
                         app:title="Has this happened before?" />
                 </LinearLayout>

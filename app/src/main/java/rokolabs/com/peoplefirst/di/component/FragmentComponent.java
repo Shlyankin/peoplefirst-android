@@ -9,6 +9,7 @@ import rokolabs.com.peoplefirst.di.scopes.PerFragment;
 import rokolabs.com.peoplefirst.main.ui.profile.ProfileFragment;
 import rokolabs.com.peoplefirst.main.ui.reports.ReportsFragment;
 import rokolabs.com.peoplefirst.main.ui.resources.ResourcesFragment;
+import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeFragment;
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsFragment;
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeFragment;
 
@@ -22,4 +23,5 @@ public interface FragmentComponent {
     void inject(ResourcesFragment fragment);
     void inject(HarassmentTypeFragment fragment);
     void inject(HarassmentReasonsFragment fragment);
+    void inject(HappenedBeforeFragment fragment);
 }

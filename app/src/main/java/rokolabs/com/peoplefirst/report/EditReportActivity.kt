@@ -112,7 +112,7 @@ class EditReportActivity : AppCompatActivity() {
                 R.id.nav_harassment_reasons
             }
             R.id.menuItem3 -> {
-                R.id.nav_harassment_type
+                R.id.nav_report_happened_before
             }
             R.id.menuItem4 -> {
                 R.id.nav_harassment_type
