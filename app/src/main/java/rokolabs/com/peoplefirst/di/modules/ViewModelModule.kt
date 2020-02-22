@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import rokolabs.com.peoplefirst.auth.login.LoginViewModel
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
-import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
+import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
+import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 
 @Module
 abstract class ViewModelModule {
@@ -22,6 +22,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NavigationDrawerViewModel::class)
     internal abstract fun orderListViewModel(orderListViewModel: NavigationDrawerViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(HarassmentTypeModel::class)
+    internal abstract fun harassmentTypeModel(harassmentTypeModel: HarassmentTypeModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(HarassmentReasonsModel::class)
+    internal abstract fun harassmentReasonsModel(harassmentReasonsModel: HarassmentReasonsModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

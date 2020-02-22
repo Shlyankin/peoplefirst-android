@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_incedent_type">
+    app:startDestination="@+id/nav_main_questions">
 
     <fragment
-        android:id="@+id/nav_incedent_type"
+        android:id="@+id/nav_main_questions"
         android:name="rokolabs.com.peoplefirst.report.ui.home.MainQuestionsFragment"
         android:label=""
         tools:layout="@layout/fragment_main_questions" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="rokolabs.com.peoplefirst.report.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_harassment_type"
+        android:name="rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeFragment"
         android:label=""
-        tools:layout="@layout/fragment_gallery" />
-
+        tools:layout="@layout/fragment_harassment_type" />
+    <fragment
+        android:id="@+id/nav_harassment_reasons"
+        android:name="rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsFragment"
+        android:label=""
+        tools:layout="@layout/activity_harassment_reason"/>
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="rokolabs.com.peoplefirst.report.ui.slideshow.SlideshowFragment"

@@ -14,10 +14,10 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 
-class SubMenuItem(context: Context?) : ConstraintLayout(context) {
+class SubMenuItem : ConstraintLayout {
     var textView:TextView
     var imageView:ImageView
-    constructor(context: Context?, attrs: AttributeSet?) : this(context) {
+    constructor(context: Context?, attrs: AttributeSet?) : super(context,attrs) {
         val ta = context?.obtainStyledAttributes(attrs, R.styleable.SubMenuItem, 0, 0)
         try {
             var check=ta?.getBoolean(R.styleable.SubMenuItem_checked,false)

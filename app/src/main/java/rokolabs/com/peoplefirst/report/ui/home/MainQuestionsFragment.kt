@@ -10,7 +10,7 @@ import rokolabs.com.peoplefirst.R
 
 class MainQuestionsFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: MainQuestionsModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +18,7 @@ class MainQuestionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProviders.of(this).get(HomeViewModel::class.java)
+            ViewModelProviders.of(this).get(MainQuestionsModel::class.java)
         val root = inflater.inflate(R.layout.fragment_main_questions, container, false)
         return root
     }

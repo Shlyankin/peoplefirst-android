@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/activity_edit_report">
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+        <import type="rokolabs.com.peoplefirst.R"/>
         <variable
             name="viewModel"
             type="rokolabs.com.peoplefirst.report.NavigationDrawerViewModel" />
@@ -39,26 +42,33 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="56dp"
             android:orientation="vertical"
             android:visibility="visible"
-            android:layout_marginTop="56dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/textView4"
+                reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="16dp"
-                android:text="What happened?"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="What happened?"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,55 +81,85 @@
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_harassment_type}"
+                        app:checked="@{viewModel.harassmentTypeDone}"
                         app:layout_constraintStart_toStartOf="@+id/guideline6"
                         app:layout_constraintTop_toTopOf="parent"
                         app:title="Type of incedent" />
                 </LinearLayout>
 
-
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                <LinearLayout
                     android:id="@+id/menuItem2"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="@+id/guideline6"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"
-                    app:title="Basis of incedent" />
-
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_harassment_reasons}"
+                        app:checked="@{viewModel.harassmentreasonsDone}"
+                        app:layout_constraintStart_toStartOf="@+id/guideline6"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        app:title="Basis of incedent" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/menuItem3"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Has this happened before?" />
+                    reactiveClick="@{viewModel.menuItemClick}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.happenedBeforeDone}"
+                        app:title="Has this happened before?" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/menuItem4"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Describe what happened" />
+                    android:layout_height="wrap_content">
+
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.detailsDone}"
+                        app:title="Describe what happened" />
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView11"
+            <LinearLayout
+                reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="16dp"
-                android:text="Who was involved?"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Who was involved?"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,42 +167,69 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                <LinearLayout
                     android:id="@+id/menuItem5"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="ho do you belive was harassed?" />
+                    android:layout_height="wrap_content">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.victimDone}"
+                        app:title="ho do you belive was harassed?" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/menuItem6"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Who do you belive was the agressor?" />
+                    android:layout_height="wrap_content">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.agressorsDone}"
+                        app:title="Who do you belive was the agressor?" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/menuItem7"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Where there any witnesses?" />
+                    android:layout_height="wrap_content">
+
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.witnessesDone}"
+                        app:title="Where there any witnesses?" />
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView15"
+            <LinearLayout
+                reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="16dp"
-                android:text="Where did it happen?"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Where did it happen?"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -170,39 +237,57 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                <LinearLayout
                     android:id="@+id/menuItem8"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Addrerss, and location" />
+                    android:layout_height="wrap_content">
 
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.locationCityDone}"
+                        app:title="Addrerss, and location" />
+                </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView17"
+            <LinearLayout
+                reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="16dp"
-                android:text="When did it happen?"
-                android:textColor="@android:color/white"
-                android:textSize="24sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="When did it happen?"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                <LinearLayout
                     android:id="@+id/menuItem9"
+                    reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:title="Date, and time" />
+                    android:layout_height="wrap_content">
 
+                    <rokolabs.com.peoplefirst.report.ui.SubMenuItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:checked="@{viewModel.dateTimeDone}"
+                        app:title="Date, and time" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

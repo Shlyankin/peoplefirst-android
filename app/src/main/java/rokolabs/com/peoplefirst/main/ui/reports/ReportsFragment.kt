@@ -18,7 +18,7 @@ import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
 import android.util.TypedValue
-
+import rokolabs.com.peoplefirst.model.Report
 
 
 class ReportsFragment : Fragment() {
@@ -67,6 +67,8 @@ class ReportsFragment : Fragment() {
 //            intent.putExtra("mode", ReportSummaryActivity.EDIT_MODE);
 //            startActivity(intent);
         }, viewModel.addReportSubject.subscribe {
+            mRepository.currentReport.onNext(Report())
+            mRepository.named = HarassmentRepository.EMPTY
             startActivity(Intent(context, EditReportActivity::class.java))
         })
     }
