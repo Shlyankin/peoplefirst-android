@@ -8,8 +8,13 @@ import dagger.multibindings.IntoMap
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
+import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedModel
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
+import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
+import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
+import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment
+import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedModel
 
 @Module
 abstract class ViewModelModule {
@@ -23,10 +28,7 @@ abstract class ViewModelModule {
     @ViewModelKey(HappenedBeforeModel::class)
     internal abstract fun happenedeBeforeModel(happenedBeforeModel: HappenedBeforeModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(NavigationDrawerViewModel::class)
-    internal abstract fun orderListViewModel(orderListViewModel: NavigationDrawerViewModel): ViewModel
+
 
     @Binds
     @IntoMap
@@ -37,6 +39,19 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HarassmentReasonsModel::class)
     internal abstract fun harassmentReasonsModel(harassmentReasonsModel: HarassmentReasonsModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(WhatHappenedModel::class)
+    internal abstract fun whatHappenedModel(whatHappenedModel: WhatHappenedModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(WhoBeingHarassedModel::class)
+    internal abstract fun whoBeingHarassedModel(whoBeingHarassedModel: WhoBeingHarassedModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SelectedUsersModel::class)
+    internal abstract fun selectedUsersModel(selectedUsersModel: SelectedUsersModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

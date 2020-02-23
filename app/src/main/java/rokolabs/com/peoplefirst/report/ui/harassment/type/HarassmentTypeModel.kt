@@ -64,6 +64,7 @@ constructor(
     }
 
     fun initDisposable() {
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
@@ -105,6 +106,7 @@ constructor(
 
     fun dispose() {
         mDisposable.dispose()
+        mDisposable.clear()
     }
 
     fun save(): Boolean {

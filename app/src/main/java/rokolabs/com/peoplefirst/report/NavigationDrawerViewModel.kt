@@ -39,6 +39,7 @@ constructor(
     }
 
     fun initDisposable() {
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             menuItemClick.subscribe {
                 mActivity.navigateTo(it)

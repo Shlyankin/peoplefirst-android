@@ -58,6 +58,7 @@ constructor(
     }
 
     fun initDisposable() {
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             prevSubject.subscribe {
                 acitivity.navigateTo(R.id.menuItem1)
@@ -138,6 +139,7 @@ constructor(
 
     fun dispose() {
         mDisposable.dispose()
+        mDisposable.clear()
     }
 
     fun showToast(string: String) {

@@ -134,13 +134,13 @@
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_what_happened}"
                         app:checked="@{viewModel.detailsDone}"
                         app:title="Describe what happened" />
                 </LinearLayout>
@@ -173,14 +173,14 @@
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_who_being_harassed}"
                         app:checked="@{viewModel.victimDone}"
-                        app:title="ho do you belive was harassed?" />
+                        app:title="Who do you belive was harassed?" />
                 </LinearLayout>
 
                 <LinearLayout

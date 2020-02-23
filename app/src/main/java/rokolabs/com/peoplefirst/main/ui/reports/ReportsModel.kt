@@ -36,6 +36,7 @@ class ReportsModel(
         this.mService = mService
     }
     fun initDisposable(){
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             mRepository.myOpenReports.subscribe {
                 mActive.set("Reports that need your attention: " + it.size)
@@ -51,5 +52,6 @@ class ReportsModel(
     }
     fun dispose(){
         mDisposable.dispose()
+        mDisposable.clear()
     }
 }

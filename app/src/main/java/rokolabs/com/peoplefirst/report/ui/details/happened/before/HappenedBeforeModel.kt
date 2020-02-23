@@ -36,9 +36,11 @@ constructor(
         activity=context as EditReportActivity
     }
     fun initDisposable(){
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
                 save()
+                activity.navigateTo(R.id.menuItem4)
             },
             prevClick.subscribe {
                 save()
@@ -70,6 +72,7 @@ constructor(
     }
     fun dispose(){
         mDisposable.dispose()
+        mDisposable.clear()
     }
     private fun save() {
         if (mRepository.named == HarassmentRepository.VICTIM) {

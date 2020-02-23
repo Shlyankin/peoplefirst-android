@@ -49,6 +49,7 @@ class ResourcesViewModel(
     }
 
     fun initDisposable() {
+        mDisposable=CompositeDisposable()
 //        mAdapter.editable.onNext(true)
         mDisposable.addAll(
             mService.escalationLevels
@@ -142,5 +143,6 @@ class ResourcesViewModel(
 
     fun dispose() {
         mDisposable.dispose()
+        mDisposable.clear()
     }
 }

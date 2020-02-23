@@ -111,6 +111,7 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
 
     }
     fun initDisposable(){
+        mDisposable=CompositeDisposable()
         mDisposable.addAll(
             logOut.subscribe {
                 mService.deletePushNotificationsToken(
@@ -187,6 +188,7 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
     }
     fun dispose(){
         mDisposable.dispose()
+        mDisposable.clear()
     }
     fun checkConditions(): Boolean {
         return name.get()?.length != 0 &&
