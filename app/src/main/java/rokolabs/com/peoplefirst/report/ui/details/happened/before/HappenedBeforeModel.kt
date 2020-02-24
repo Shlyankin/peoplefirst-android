@@ -5,10 +5,8 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.layout_edit_profile_drawer.view.*
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.Report
@@ -40,7 +38,7 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 save()
-                activity.navigateTo(R.id.menuItem4)
+                activity.navigateTo(R.id.nav_report_what_happened)
             },
             prevClick.subscribe {
                 save()

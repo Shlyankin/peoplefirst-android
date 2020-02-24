@@ -36,12 +36,12 @@ class WelcomeRetailActivity : AppCompatActivity() {
         createAccount.setOnClickListener {
             val intent = Intent(this, CreateAccountRetailActivityKotlin::class.java)
             startActivity(intent)
-            finish()
+//            finish()
         }
         login.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
+//            finish()
         }
     }
 

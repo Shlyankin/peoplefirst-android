@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
@@ -28,6 +29,8 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var mService: PeopleFirstService
     var viewModel: LoginViewModel = LoginViewModel()
+    var mDisposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         ComponentManager.getInstance().getActivityComponent(this).inject(this)
         super.onCreate(savedInstanceState)
@@ -43,39 +46,51 @@ class LoginActivity : AppCompatActivity() {
             gotoReportList()
             mRepository.getMe()
         }
-        viewModel.loginClick.subscribe {
-            mService.auth(viewModel.email.get(), viewModel.pass.get())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { loginRespose ->
-                        if (loginRespose.success) {
-                            Utils.savePermanentValue(
-                                "x-access-token",
-                                loginRespose.data.token,
-                                applicationContext
-                            )
-                            sendPushNotificationToken()
-                            mRepository.getMe()
-                            mRepository.getMyReports()
-                            if ("shown" == Utils.getPermanentValue("welcome", applicationContext)) {
-                                gotoReportList()
-                            } else {
-                                Utils.savePermanentValue("welcome", "shown", applicationContext)
-                                gotoReportList()
+        mDisposable = CompositeDisposable()
+        mDisposable.addAll(
+            viewModel.loginClick.subscribe {
+                mService.auth(viewModel.email.get(), viewModel.pass.get())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { loginRespose ->
+                            if (loginRespose.success) {
+                                Utils.savePermanentValue(
+                                    "x-access-token",
+                                    loginRespose.data.token,
+                                    applicationContext
+                                )
+                                sendPushNotificationToken()
+                                mRepository.getMe()
+                                mRepository.getMyReports()
+                                if ("shown" == Utils.getPermanentValue(
+                                        "welcome",
+                                        applicationContext
+                                    )
+                                ) {
+                                    gotoReportList()
+                                } else {
+                                    Utils.savePermanentValue("welcome", "shown", applicationContext)
+                                    gotoReportList()
+                                }
                             }
-                        }
-                    },
-                    { throwable ->
-                        Toast.makeText(this, "Unable to authroize", Toast.LENGTH_LONG).show()
-                    })
-        }
-        viewModel.forgotClick.subscribe {
-            startActivity(Intent(this,ResetPasswordActivityKotlin::class.java))
-        }
-        viewModel.registerClick.subscribe {
-            startActivity(Intent(this,CreateAccountRetailActivityKotlin::class.java))
-        }
+                        },
+                        { throwable ->
+                            Toast.makeText(this, "Unable to authroize", Toast.LENGTH_LONG).show()
+                        })
+            },
+            viewModel.forgotClick.subscribe {
+                startActivity(Intent(this, ResetPasswordActivityKotlin::class.java))
+            },
+            viewModel.registerClick.subscribe {
+                startActivity(Intent(this, CreateAccountRetailActivityKotlin::class.java))
+            })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mDisposable.dispose()
+        mDisposable.clear()
     }
 
     fun gotoReportList() {

@@ -1,12 +1,8 @@
 package rokolabs.com.peoplefirst.report.ui.details.what.happened
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.view.View
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -49,7 +45,7 @@ constructor(
                         mRepository.currentWitnessTestimony.value?.details =
                             details.get().toString()
                         mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-                        activity.navigateTo(R.id.menuItem5)
+                        activity.navigateTo(R.id.nav_report_who_being_harassed)
                     } else if (mRepository.named == HarassmentRepository.TRANSGRESSOR) {
                         mRepository.currentTransgressorReport.value?.details =
                             details.get().toString()
@@ -62,7 +58,7 @@ constructor(
 //                        intent = Intent(this, WhoAgressorActivity::class.java)
                     }
                 } else {
-                    activity.navigateTo(R.id.menuItem5)
+                    activity.navigateTo(R.id.nav_report_who_being_harassed)
                     save()
                 }
             },
@@ -83,12 +79,12 @@ constructor(
                         mRepository.currentVictimTestimony.value?.details =
                             details.get().toString()
                         mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.getValue()!!)
-                        activity.navigateTo(R.id.menuItem3)
+                        activity.navigateTo(R.id.nav_report_happened_before)
                     }
                 } else {
 //                    val intent = Intent(this, HarassmentReasonActivity::class.java)
                     save()
-                    activity.navigateTo(R.id.menuItem3)
+                    activity.navigateTo(R.id.nav_report_happened_before)
                 }
             },
             attachClick.subscribe {

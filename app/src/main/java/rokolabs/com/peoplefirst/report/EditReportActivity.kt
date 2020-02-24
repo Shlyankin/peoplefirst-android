@@ -126,19 +126,19 @@ class EditReportActivity : AppCompatActivity() {
 
     fun navigateTo(id: Int) {
         var pos = when (id) {
-            R.id.menuItem1 -> {
+            R.id.nav_harassment_type -> {
                 R.id.nav_harassment_type
             }
-            R.id.menuItem2 -> {
+            R.id.nav_harassment_reasons -> {
                 R.id.nav_harassment_reasons
             }
-            R.id.menuItem3 -> {
+            R.id.nav_report_happened_before -> {
                 R.id.nav_report_happened_before
             }
-            R.id.menuItem4 -> {
+            R.id.nav_report_what_happened,R.id.nav_report_what_happened_title -> {
                 R.id.nav_report_what_happened
             }
-            R.id.menuItem5 -> {
+            R.id.nav_report_who_being_harassed ,R.id.nav_report_who_being_harassed_title-> {
                 R.id.nav_report_who_being_harassed
             }
             R.id.menuItem6 -> {

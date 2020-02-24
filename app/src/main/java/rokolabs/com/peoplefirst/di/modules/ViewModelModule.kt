@@ -11,6 +11,7 @@ import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBefore
 import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedModel
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
+import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment
@@ -29,7 +30,10 @@ abstract class ViewModelModule {
     internal abstract fun happenedeBeforeModel(happenedBeforeModel: HappenedBeforeModel): ViewModel
 
 
-
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainQuestionsModel::class)
+    internal abstract fun mainQuestionsModel(mainQuestionsModel: MainQuestionsModel): ViewModel
     @Binds
     @IntoMap
     @ViewModelKey(HarassmentTypeModel::class)

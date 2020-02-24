@@ -61,12 +61,12 @@ constructor(
         mDisposable = CompositeDisposable()
         mDisposable.addAll(
             prevSubject.subscribe {
-                acitivity.navigateTo(R.id.menuItem1)
+                acitivity.navigateTo(R.id.nav_harassment_type)
                 save()
             },
             nextSubject.subscribe {
                 if (save())
-                    acitivity.navigateTo(R.id.menuItem3)
+                    acitivity.navigateTo(R.id.nav_report_happened_before)
             },
             mAdapter.typeClick.subscribe { harassmentReason ->
                 if (selectedReasons.indexOf(harassmentReason) >= 0)

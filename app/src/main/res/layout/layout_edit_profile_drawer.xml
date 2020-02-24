@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView">
 
             <LinearLayout
-                android:id="@+id/textView4"
+                android:id="@+id/nav_report_what_happened_title"
                 reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -77,7 +77,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/menuItem1"
+                    android:id="@+id/nav_harassment_type"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -113,7 +113,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menuItem3"
+                    android:id="@+id/nav_report_happened_before"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -130,7 +130,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menuItem4"
+                    android:id="@+id/nav_report_what_happened"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -147,6 +147,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/nav_report_who_being_harassed_title"
                 reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -169,7 +170,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/menuItem5"
+                    android:id="@+id/nav_report_who_being_harassed"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">

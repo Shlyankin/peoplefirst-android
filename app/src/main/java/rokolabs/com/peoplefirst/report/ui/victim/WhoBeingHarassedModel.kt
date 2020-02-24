@@ -68,7 +68,7 @@ constructor(
                 }
             },
             prevClick.subscribe {
-                activity.navigateTo(R.id.menuItem4)
+                activity.navigateTo(R.id.nav_report_what_happened)
                 save()
             }
         )
