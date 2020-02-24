@@ -82,8 +82,8 @@ public interface PeopleFirstApi {
     @GET("myOpenReports")
     Single<ReportsResponse> getReports();
 
-    @GET("reports/my")
-    Single<ReportsResponse> getMyReports();
+    @GET("reports/my/{status}")
+    Single<ReportsResponse> getMyReports(@Path("status") String status);
 
     @POST("reports")
     Single<ReportResponse> addReport(@Body Report report);

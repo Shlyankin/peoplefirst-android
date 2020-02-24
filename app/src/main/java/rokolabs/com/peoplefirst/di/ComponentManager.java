@@ -82,14 +82,14 @@ public final class ComponentManager {
 
         FragmentComponent fragmentComponent = fragmentComponentMap.get(key);
 
-//        if (fragmentComponent == null) {
+        if (fragmentComponent == null) {
             fragmentComponent = DaggerFragmentComponent.builder()
                     .activityComponent(activityComponent)
                     .fragmentModule(new FragmentModule(fragment))
                     .build();
 
             fragmentComponentMap.put(key, fragmentComponent);
-//        }
+        }
         return fragmentComponent;
 
     }

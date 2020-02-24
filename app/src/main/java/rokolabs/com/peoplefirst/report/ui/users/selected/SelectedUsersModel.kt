@@ -54,17 +54,6 @@ constructor(
     fun initDisposable() {
         mDisposable=CompositeDisposable()
         mDisposable.addAll(
-            addClicks.subscribe {
-                if (mRetailMode) {
-                    mUsers.add(User())
-                    mAdapter?.setEntities(context, mUsers, mRetailMode)
-                    mAdapter?.notifyDataSetChanged()
-                } else {
-                    val intent = Intent(context, UsersActivity::class.java)
-                    intent.putExtra("hideCurrentUserFromList", hideCurrentUserFromList)
-                    selectedUsersFragment.startActivityForResult(intent, EditReportActivity.ADD_VICTIM_CODE)
-                }
-            },
             clearClicks.subscribe {
                 clear()
                 showAdd()

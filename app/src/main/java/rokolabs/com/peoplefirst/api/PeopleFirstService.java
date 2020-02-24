@@ -86,8 +86,8 @@ public class PeopleFirstService {
         return mApi.getReports();
     }
 
-    public Single<ReportsResponse> getMyReports(){
-        return mApi.getMyReports();
+    public Single<ReportsResponse> getMyReports(String status){
+        return mApi.getMyReports(status);
     }
 
     public Single<ReportResponse> addReport(Report report) {

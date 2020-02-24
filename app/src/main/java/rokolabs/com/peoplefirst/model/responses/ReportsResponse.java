@@ -6,5 +6,5 @@ import rokolabs.com.peoplefirst.model.Report;
 
 public class ReportsResponse extends BaseResponse {
 
-    public Reports data;
+    public ArrayList<Report> data;
 }

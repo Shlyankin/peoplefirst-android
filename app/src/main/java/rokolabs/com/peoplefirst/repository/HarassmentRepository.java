@@ -232,7 +232,7 @@ public class HarassmentRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(reportsResponse -> {
                     if (reportsResponse.success)
-                        myOpenReports.onNext(reportsResponse.data.topList);
+                        myOpenReports.onNext(reportsResponse.data);
                     else
                         Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {
@@ -242,13 +242,23 @@ public class HarassmentRepository {
 
     @SuppressLint("CheckResult")
     public void getMyReports() {
-        mService.getMyReports()
+        mService.getMyReports("active")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(reportsResponse -> {
                     if (reportsResponse.success) {
-                        myOpenReports.onNext(reportsResponse.data.topList);
-                        myClosedResolvedReports.onNext(reportsResponse.data.bottomList);
+                        myOpenReports.onNext(reportsResponse.data);
+                    } else
+                        Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
+                }, throwable -> {
+                    Toast.makeText(mContext, "Could not get reports", Toast.LENGTH_LONG).show();
+                });
+        mService.getMyReports("inactive")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(reportsResponse -> {
+                    if (reportsResponse.success) {
+                        myClosedResolvedReports.onNext(reportsResponse.data);
                     } else
                         Toast.makeText(mContext, reportsResponse.error.message, Toast.LENGTH_LONG).show();
                 }, throwable -> {

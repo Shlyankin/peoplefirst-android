@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_selected_users.*
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.databinding.FragmentHappenedBeforeBinding
@@ -20,6 +21,7 @@ import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.model.User
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
+import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity
 import java.util.ArrayList
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ class SelectedUsersFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: SelectedUsersModel
     lateinit var recyclerView :RecyclerView
+    var mDisposable = CompositeDisposable()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +54,20 @@ class SelectedUsersFragment : Fragment() {
         super.onResume()
         recyclerView.layoutManager=LinearLayoutManager(context)
         recyclerView.adapter=viewModel.mAdapter
+        mDisposable= CompositeDisposable()
+        mDisposable.addAll(
+            viewModel.addClicks.subscribe {
+                if (viewModel.mRetailMode) {
+                    viewModel.mUsers.add(User())
+                    viewModel.mAdapter?.setEntities(context, viewModel.mUsers,viewModel.mRetailMode)
+                    viewModel.mAdapter?.notifyDataSetChanged()
+                } else {
+                    val intent = Intent(context, UsersActivity::class.java)
+                    intent.putExtra("hideCurrentUserFromList", viewModel.hideCurrentUserFromList)
+                    startActivityForResult(intent, EditReportActivity.ADD_VICTIM_CODE)
+                }
+            }
+        )
         viewModel.initDisposable()
     }
 

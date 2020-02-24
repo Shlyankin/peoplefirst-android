@@ -3,6 +3,8 @@ package rokolabs.com.peoplefirst.auth.registration
 import android.view.View
 import androidx.databinding.ObservableField
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.model.RetailRegistrationRequest
 import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
 
@@ -18,7 +20,7 @@ class CreateAccountRetailViewModel {
     var firstName: ObservableField<String> = ObservableField()
     var secondName: ObservableField<String> = ObservableField()
     var corporateEmail: ObservableField<String> = ObservableField()
-    var registerClicks: BehaviorSubject<View> = BehaviorSubject.create()
+    var registerClicks: Subject<View> = PublishSubject.create()
 
     init {
         firstName.addOnPropertyChanged {
