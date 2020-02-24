@@ -58,14 +58,15 @@ constructor(
     }
 
     fun initDisposable() {
-        mDisposable=CompositeDisposable()
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             prevSubject.subscribe {
                 acitivity.navigateTo(R.id.menuItem1)
                 save()
             },
             nextSubject.subscribe {
-                save()
+                if (save())
+                    acitivity.navigateTo(R.id.menuItem3)
             },
             mAdapter.typeClick.subscribe { harassmentReason ->
                 if (selectedReasons.indexOf(harassmentReason) >= 0)
