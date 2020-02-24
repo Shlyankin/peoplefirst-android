@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                                 gotoReportList()
                             } else {
                                 Utils.savePermanentValue("welcome", "shown", applicationContext)
-                                gotoIntro()
+                                gotoReportList()
                             }
                         }
                     },
