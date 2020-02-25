@@ -95,8 +95,8 @@ public interface PeopleFirstApi {
     @GET("reports/{id}")
     Single<ReportResponse> getReport(@Path("id") int id);
 
-    @HTTP(method = "PATCH", path = "reports/{id}", hasBody = true)
-    Single<Response<BaseResponse>> updateReport(@Path("id") int id, @Body Report report);
+    @HTTP(method = "PATCH", path = "reports", hasBody = true)
+    Single<Response<BaseResponse>> updateReport( @Body Report report);
 
     @POST("auth/logout")
     Single<BaseResponse> logout();

@@ -105,6 +105,7 @@ public class HarassmentRepository {
                     .subscribe(reportResponse -> {
                         if (reportResponse.success) {
                             getMyReports();
+                            currentReport.onNext(reportResponse.data);
                             Intent intent = new Intent("REPORT_ADDED");
                             intent.putExtra("reportId", reportResponse.data.id);
                             intent.putExtra("type", "initial");
@@ -135,6 +136,7 @@ public class HarassmentRepository {
                     .subscribe(reportResponse -> {
                         if (reportResponse.success) {
                             getMyReports();
+                            currentReport.onNext(reportResponse.data);
                             Intent intent = new Intent("REPORT_ADDED");
                             intent.putExtra("reportId", reportResponse.data.id);
                             intent.putExtra("type", "initial");

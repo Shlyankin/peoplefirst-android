@@ -103,7 +103,7 @@ public class PeopleFirstService {
     }
 
     public Single<Response<BaseResponse>> updateReport(int id, Report report) {
-        return mApi.updateReport(id, report);
+        return mApi.updateReport( report);
     }
 
     public Single<BaseResponse> logout() {
