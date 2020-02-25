@@ -72,11 +72,11 @@ class EditReportActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_main_questions,
-                R.id.nav_gallery,
-                R.id.nav_slideshow,
-                R.id.nav_tools,
-                R.id.nav_share,
-                R.id.nav_send
+                R.id.nav_harassment_type,
+                R.id.nav_harassment_reasons,
+                R.id.nav_report_happened_before,
+                R.id.nav_report_what_happened,
+                R.id.nav_report_who_being_harassed
             ), drawerLayout
         )
 
@@ -120,6 +120,15 @@ class EditReportActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         mDisposable = CompositeDisposable()
+        mDisposable.add(
+            mRepository.currentReport.subscribe {
+                if (it.status == null) {
+                    mRepository.addReport(it)
+                } else {
+                    mRepository.updateCurrentReport()
+                }
+            }
+        )
     }
 
     override fun onPause() {
@@ -139,7 +148,7 @@ class EditReportActivity : AppCompatActivity() {
 
     fun navigateTo(id: Int) {
         var pos = when (id) {
-            R.id.nav_harassment_type -> {
+            R.id.nav_harassment_type,R.id.nav_harassment_type_title -> {
                 R.id.nav_harassment_type
             }
             R.id.nav_harassment_reasons -> {
@@ -148,7 +157,7 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_happened_before -> {
                 R.id.nav_report_happened_before
             }
-            R.id.nav_report_what_happened, R.id.nav_report_what_happened_title -> {
+            R.id.nav_report_what_happened-> {
                 R.id.nav_report_what_happened
             }
             R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
@@ -171,28 +180,12 @@ class EditReportActivity : AppCompatActivity() {
             }
 
         }
-        save {
-            navController.navigate(pos)
-            navigationDrawerViewModel.currentPos.set(pos)
-            drawerLayout.closeDrawers()
-        }
+        navController.navigate(pos)
+        navigationDrawerViewModel.currentPos.set(pos)
+        drawerLayout.closeDrawers()
 
     }
 
-    fun save(void: () -> Unit) {
-        mDisposable.add(
-            mRepository.me.subscribe {
-                var report = mRepository.currentReport
-                if (report.hasValue() && report.value!!.status == null) {
-                    mRepository.addReport(report.value!!)
-                } else {
-                    mRepository.updateCurrentReport()
-                }
-                void.invoke()
-
-            }
-        )
-    }
 
     fun chooseFile() {
         if (ContextCompat.checkSelfPermission(

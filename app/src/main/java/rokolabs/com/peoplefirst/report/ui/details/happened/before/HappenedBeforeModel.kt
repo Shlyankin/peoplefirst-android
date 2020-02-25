@@ -42,7 +42,7 @@ constructor(
             },
             prevClick.subscribe {
                 save()
-                activity.navigateTo(R.id.menuItem2)
+                activity.navigateTo(R.id.nav_harassment_reasons)
             },
             yesSubject.subscribe {
                 yesFlag.set(true)

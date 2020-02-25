@@ -39,9 +39,9 @@ constructor(
     }
 
     fun initDisposable() {
-        mDisposable= CompositeDisposable()
+        mDisposable = CompositeDisposable()
         nextClick.subscribe {
-            var t=0
+            var t = 0
         }
         mDisposable.addAll(
             selfReporting.addOnPropertyChanged {
@@ -69,68 +69,42 @@ constructor(
             },
             prevClick.subscribe {
                 activity.navigateTo(R.id.nav_report_what_happened)
-                save()
             }
         )
-        if (mRepository.named == HarassmentRepository.EMPTY) {
-            mDisposable.add(mRepository.currentReport.subscribe { report ->
-                if (report !== Report.EMPTY) {
-                    if (report.victim != null) {
-                        val victim = ArrayList<User>()
-                        victim.add(report.victim)
-                        if (mSelectedUsers.getUsers().size === 0)
-                            mSelectedUsers.setUsers(victim)
-                        if (mRepository.me.value?.id == report.victim.id) {
-                            selfReporting.set(true)
-                        }
+
+        mDisposable.add(mRepository.currentReport.subscribe { report ->
+            if (report !== Report.EMPTY) {
+                if (report.victim != null) {
+                    val victim = ArrayList<User>()
+                    victim.add(report.victim)
+                    if (mSelectedUsers.getUsers().size === 0)
+                        mSelectedUsers.setUsers(victim)
+                    if (mRepository.me.value?.id == report.victim.id) {
+                        selfReporting.set(true)
                     }
                 }
-            })
-        } else {
-            if (mRepository.named == HarassmentRepository.WITNESS) {
-                mDisposable.add(mRepository.currentWitnessTestimony.subscribe { report ->
-                    if (report.victim != null) {
-                        val victim = ArrayList<User>()
-                        victim.add(report.victim)
-                        if (mSelectedUsers.getUsers().size === 0)
-                            mSelectedUsers.setUsers(victim)
-                        if (mRepository.me.value?.id == report.victim.id) {
-                            selfReporting.set(true)
-                        }
-                    }
-                })
             }
-        }
+        })
+
     }
 
     fun save(): Boolean {
-        val intent = Intent()
-//        intent.putExtra("beingHarassed", mSelectedUsers.getUsers())
-//        setResult(RESULT_OK, intent)
-        if (mRepository.named == HarassmentRepository.EMPTY) {
-            if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
-                if (mSelectedUsers.getUsers().size > 0) {
-                    if (mRepository.me.value!!.retail==1 && !mSelectedUsers.viewModel.conformsToDomain()) {
-                        Toast.makeText(
-                            context,
-                            "People included in your report must have the same email domain as yours",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return false
-                    }
-                    mRepository.currentReport.value!!.victim = mSelectedUsers.getUsers()[0]
-                    mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
+        if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
+            if (mSelectedUsers.getUsers().size > 0) {
+                if (mRepository.me.value!!.retail == 1 && !mSelectedUsers.viewModel.conformsToDomain()) {
+                    Toast.makeText(
+                        context,
+                        "People included in your report must have the same email domain as yours",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return false
                 }
-            }
-        } else {
-            if (mRepository.currentWitnessTestimony.value != null) {
-                if (mSelectedUsers.getUsers().size > 0) {
-                    mRepository.currentWitnessTestimony.value!!.victim =
-                        mSelectedUsers.getUsers()[0]
-                    mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-                }
+                mRepository.currentReport.value!!.victim = mSelectedUsers.getUsers()[0]
+                mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
             }
         }
+
+
         if (mRepository.currentReport.value?.victim != null) {//жертва указана
             if (mRepository.currentReport.value?.victim != mRepository.me.value) {//репорт составлен на жертву другого человека
                 if (!mRepository.currentReport?.value!!.witnesses.contains(mRepository.me.value)) {

@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jakewharton.rxbinding3.widget.RxTextView;
+
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.subjects.BehaviorSubject;
@@ -64,9 +67,43 @@ public class EscalationLevelsAdapter extends RecyclerView.Adapter<EscalationLeve
         holder.mContact.setText(mItems.get(position).contact);
         holder.mDays.setText(String.valueOf(mItems.get(position).days));
         editable.observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
-                    holder.mContact.setEnabled(aBoolean);
-                    holder.mDays.setEnabled(aBoolean);
-                    holder.mName.setEnabled(aBoolean);
+            holder.mContact.setEnabled(aBoolean);
+            holder.mDays.setEnabled(aBoolean);
+            holder.mName.setEnabled(aBoolean);
+            if (aBoolean) {
+                RxTextView.afterTextChangeEvents(holder.mContact)
+                        .skip(1)
+                        .debounce(400, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(e -> {
+                            if (position < mItems.size()) {
+                                mItems.get(position).contact = e.getEditable().toString();
+                            }
+                        });
+                RxTextView.afterTextChangeEvents(holder.mDays)
+                        .skip(1)
+                        .debounce(400, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(e -> {
+                            if (position < mItems.size()) {
+                                String days = e.getEditable().toString();
+                                try {
+                                    mItems.get(position).days = Integer.parseInt(days);
+                                } catch (NumberFormatException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        });
+                RxTextView.afterTextChangeEvents(holder.mName)
+                        .skip(1)
+                        .debounce(400, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(e -> {
+                            if (position < mItems.size()) {
+                                mItems.get(position).name = e.getEditable().toString();
+                            }
+                        });
+            }
         });
         holder.itemView.setOnClickListener(buttonView -> {
             mLevelClick.onNext(mItems.get(position));

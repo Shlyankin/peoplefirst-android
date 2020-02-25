@@ -18,20 +18,20 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    private var mActivity:EditReportActivity = context as EditReportActivity
+    private var mActivity: EditReportActivity = context as EditReportActivity
     private var mDisposable = CompositeDisposable()
-    var currentPos :ObservableField<Int> = ObservableField()
+    var currentPos: ObservableField<Int> = ObservableField()
     var menuItemClick: Subject<View> = PublishSubject.create()
 
-    var harassmentTypeDone : ObservableField<Boolean> =ObservableField()
-    var harassmentreasonsDone : ObservableField<Boolean> = ObservableField()
-    var detailsDone : ObservableField<Boolean> =ObservableField()
-    var victimDone : ObservableField<Boolean> =ObservableField()
-    var agressorsDone : ObservableField<Boolean> =ObservableField()
-    var witnessesDone : ObservableField<Boolean> =ObservableField()
-    var locationCityDone : ObservableField<Boolean> =ObservableField()
-    var dateTimeDone : ObservableField<Boolean> =ObservableField()
-    var happenedBeforeDone : ObservableField<Boolean> =ObservableField()
+    var harassmentTypeDone: ObservableField<Boolean> = ObservableField()
+    var harassmentreasonsDone: ObservableField<Boolean> = ObservableField()
+    var detailsDone: ObservableField<Boolean> = ObservableField()
+    var victimDone: ObservableField<Boolean> = ObservableField()
+    var agressorsDone: ObservableField<Boolean> = ObservableField()
+    var witnessesDone: ObservableField<Boolean> = ObservableField()
+    var locationCityDone: ObservableField<Boolean> = ObservableField()
+    var dateTimeDone: ObservableField<Boolean> = ObservableField()
+    var happenedBeforeDone: ObservableField<Boolean> = ObservableField()
 
     init {
         currentPos.set(R.id.nav_main_questions)
@@ -39,7 +39,7 @@ constructor(
     }
 
     fun initDisposable() {
-        mDisposable=CompositeDisposable()
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             menuItemClick.subscribe {
                 mActivity.navigateTo(it)
@@ -51,7 +51,10 @@ constructor(
                 victimDone.set(report.victim != null)
                 agressorsDone.set(report.aggressors.size > 0)
                 witnessesDone.set(report.witnesses.size > 0)
-                locationCityDone.set(report.location_city != null || report.location_details != null)
+                locationCityDone.set(
+                    (report.location_city != null && report.location_city.length > 0) ||
+                            (report.location_details != null && report.location_details.length > 0)
+                )
                 dateTimeDone.set(report.datetime != null)
                 happenedBeforeDone.set(report.happened_before != null)
             }

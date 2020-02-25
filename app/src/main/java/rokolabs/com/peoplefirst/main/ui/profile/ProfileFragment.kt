@@ -25,6 +25,7 @@ import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.auth.login.LoginActivity
 import rokolabs.com.peoplefirst.databinding.FragmentProfileBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
+import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.model.User
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.Utils
@@ -33,13 +34,10 @@ import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
     @Inject
-    lateinit var mRepository: HarassmentRepository
-    @Inject
-    lateinit var mService: PeopleFirstService
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: ProfileViewModel
 
-    private var mDisposable = CompositeDisposable()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,26 +50,14 @@ class ProfileFragment : Fragment() {
             container,
             false
         )
-        viewModel = ProfileViewModel(context!!, mRepository, mService)
+        viewModel=ViewModelProviders.of(this,viewModelFactory).get(ProfileViewModel::class.java)
         binder.viewModel = viewModel
         return binder.root
     }
 
-    @SuppressLint("HardwareIds")
+
     override fun onResume() {
         super.onResume()
-        activity?.findViewById<ImageView>(R.id.save)?.setOnClickListener {
-            viewModel.saveUser()
-        }
-        mDisposable.add(
-            viewModel.editeable.addOnPropertyChanged {
-                var edit = it.get()!!
-                if (edit) {
-                    activity?.findViewById<ImageView>(R.id.save)?.visibility = View.VISIBLE
-                } else {
-                    activity?.findViewById<ImageView>(R.id.save)?.visibility = View.GONE
-                }
-            })
         viewModel.initDisposable()
         viewModel.enableEditing()
     }
@@ -79,7 +65,5 @@ class ProfileFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         viewModel.dispose()
-        mDisposable.dispose()
-        activity?.findViewById<ImageView>(R.id.save)?.visibility = View.GONE
     }
 }

@@ -25,6 +25,7 @@ import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.databinding.FragmentReportsBinding
 import rokolabs.com.peoplefirst.databinding.FragmentResourcesBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
+import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.model.CounsellingService
 import rokolabs.com.peoplefirst.model.EscalationLevel
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
@@ -32,12 +33,10 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 class ResourcesFragment : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
-    @Inject
-    lateinit var mRepository: HarassmentRepository
-    @Inject
-    lateinit var mService: PeopleFirstService
-    private lateinit var viewModel: ResourcesViewModel
+    lateinit var viewModel: ResourcesViewModel
 
     var mDisposable = CompositeDisposable()
 
@@ -53,7 +52,8 @@ class ResourcesFragment : Fragment() {
             container,
             false
         )
-        viewModel = ResourcesViewModel(context!!,mRepository, mService)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ResourcesViewModel::class.java)
         binder.viewModel = viewModel
         return binder.root
     }
@@ -69,26 +69,7 @@ class ResourcesFragment : Fragment() {
         privacy.setPaintFlags(privacy.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         terms.setPaintFlags(terms.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         mDisposable.addAll(
-            viewModel.toastSubject.subscribe {
-                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
-            },
-            viewModel!!.termsClick.subscribe {
-                val browserIntent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://www.peoplefirstrh.com/terms-of-service")
-                )
-                startActivity(browserIntent)
-            },
-            viewModel!!.privacyClick.subscribe {
-                val browserIntent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://www.peoplefirstrh.com/privacy-policy")
-                )
-                startActivity(browserIntent)
-            },
-            viewModel!!.saveButtonStatus.subscribe {
-                showhideSaveButton(it)
-            }
+
         )
         activity?.findViewById<ImageView>(R.id.save)?.setOnClickListener {
             viewModel!!.saveResources()
@@ -99,9 +80,8 @@ class ResourcesFragment : Fragment() {
         super.onPause()
         mDisposable.dispose()
         viewModel.dispose()
-        showhideSaveButton(false)
+        viewModel.showhideSaveButton(false)
     }
-    fun showhideSaveButton(boolean: Boolean){
-        activity?.findViewById<ImageView>(R.id.save)?.visibility = if(boolean) View.VISIBLE else View.GONE
-    }
+
+
 }

@@ -1,38 +1,29 @@
 package rokolabs.com.peoplefirst
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData
 
 import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
 
 import javax.inject.Inject
 
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import rokolabs.com.peoplefirst.api.PeopleFirstService
-import rokolabs.com.peoplefirst.auth.WelcomeRetailActivity
 import rokolabs.com.peoplefirst.auth.login.LoginActivity
 //import rokolabs.com.peoplefirst.auth.login.LoginActivity
 import rokolabs.com.peoplefirst.auth.password.reset.update.SetNewPasswordActivity
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.model.requests.ValidateEmailRequest
-import rokolabs.com.peoplefirst.model.responses.BaseResponse
 
 class SplashActivity : AppCompatActivity() {
     @Inject
@@ -81,17 +72,17 @@ class SplashActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        startWlcomeRetail()
+                        startLoginActivity()
                     }
                 }
-                .addOnFailureListener(this) { startWlcomeRetail() }
+                .addOnFailureListener(this) { startLoginActivity() }
     }
 
     @SuppressLint("CheckResult")
-    private fun startWlcomeRetail() {
+    private fun startLoginActivity() {
         Observable.timer(1, TimeUnit.SECONDS)
                 .subscribe { i ->
-                    val intent = Intent(this, WelcomeRetailActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

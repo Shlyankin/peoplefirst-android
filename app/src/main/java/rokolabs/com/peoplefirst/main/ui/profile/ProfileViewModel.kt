@@ -21,16 +21,19 @@ import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.auth.login.LoginActivity
+import rokolabs.com.peoplefirst.main.MainActivity
 import rokolabs.com.peoplefirst.model.User
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.Utils
 import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
+import javax.inject.Inject
 
-class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mService:PeopleFirstService){
-
-    private lateinit var context:Context
-    private lateinit var mRepository:HarassmentRepository
-    private lateinit var mService: PeopleFirstService
+class ProfileViewModel @Inject constructor(
+    private val context: Context,
+    private val mService: PeopleFirstService,
+    private val mRepository: HarassmentRepository
+) : ViewModel() {
+    var activity: MainActivity
 
     var name: ObservableField<String> = ObservableField<String>()
     var email: ObservableField<String> = ObservableField<String>()
@@ -51,12 +54,11 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
     var unitSuiteError: ObservableField<String> = ObservableField<String>()
     var telephoneError: ObservableField<String> = ObservableField<String>()
 
-    var mDisposable=CompositeDisposable()
+    var mDisposable = CompositeDisposable()
 
     init {
-        this.context=context
-        this.mRepository=mRepository
-        this.mService=mService
+        activity = context as MainActivity
+
         enableEditing()
         name.addOnPropertyChanged {
             if (it.get()?.length == 0) {
@@ -110,8 +112,11 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
 
 
     }
-    fun initDisposable(){
-        mDisposable=CompositeDisposable()
+
+    fun initDisposable() {
+        activity.findViewById<ImageView>(R.id.save)?.setOnClickListener {
+            saveUser()
+        }
         mDisposable.addAll(
             logOut.subscribe {
                 mService.deletePushNotificationsToken(
@@ -183,13 +188,24 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
                     telephone.set(user.phone)
                     unitSuite.set(user.address_unit_apt_suite)
                 }
+            },
+            editeable.addOnPropertyChanged {
+                var edit = it.get()!!
+                if (edit) {
+                    activity.findViewById<ImageView>(R.id.save)?.visibility = View.VISIBLE
+                } else {
+                    activity.findViewById<ImageView>(R.id.save)?.visibility = View.GONE
+                }
             }
         )
+
     }
-    fun dispose(){
-        mDisposable.dispose()
+
+    fun dispose() {
+        activity?.findViewById<ImageView>(R.id.save)?.visibility = View.GONE
         mDisposable.clear()
     }
+
     fun checkConditions(): Boolean {
         return name.get()?.length != 0 &&
                 email.get()?.length != 0 &&
@@ -206,7 +222,9 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
 
     fun enableEditing() {
         editeable.set(true)
+        editeable.notifyChange()
     }
+
     @SuppressLint("CheckResult")
     private fun logout() {
         mService.logout()
@@ -228,6 +246,7 @@ class ProfileViewModel (context: Context,mRepository: HarassmentRepository,mServ
                     mRepository.me.onNext(User.EMPTY)
                 })
     }
+
     fun saveUser() {
         if (checkConditions()) {
             val user = User()

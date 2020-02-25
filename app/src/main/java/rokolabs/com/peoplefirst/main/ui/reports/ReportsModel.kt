@@ -1,6 +1,7 @@
 package rokolabs.com.peoplefirst.main.ui.reports
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -10,48 +11,59 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.api.PeopleFirstService
+import rokolabs.com.peoplefirst.main.MainActivity
+import rokolabs.com.peoplefirst.model.Report
+import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import javax.inject.Inject
 
-class ReportsModel(
-    mContext: Context,
-    mRepository: HarassmentRepository,
-    mService: PeopleFirstService
-) {
+class ReportsModel @Inject constructor(
+    private val context: Context,
+    private val mService: PeopleFirstService,
+    private val mRepository: HarassmentRepository
+) : ViewModel() {
+    var activity: MainActivity
+    var activeAdapter = ReportsAdapter()
+    var inactiveAdapter = ReportsAdapter()
 
-    var activeAdapter=ReportsAdapter()
-    var inactiveAdapter=ReportsAdapter()
 
-    private lateinit var context: Context
-    private lateinit var mRepository: HarassmentRepository
-    private lateinit var mService: PeopleFirstService
+    var mActive: ObservableField<String> = ObservableField()
+    var mSubmitted: ObservableField<String> = ObservableField()
 
-    var mActive:ObservableField<String> = ObservableField()
-    var mSubmitted:ObservableField<String> = ObservableField()
+    var addReportSubject: Subject<View> = PublishSubject.create<View>()
+    var mDisposable = CompositeDisposable()
 
-    var addReportSubject: Subject<View> =PublishSubject.create<View>()
-    var mDisposable=CompositeDisposable()
     init {
-        this.context = mContext
-        this.mRepository = mRepository
-        this.mService = mService
+        activity = context as MainActivity
     }
-    fun initDisposable(){
-        mDisposable=CompositeDisposable()
+
+    fun initDisposable() {
         mDisposable.addAll(
             mRepository.myOpenReports.subscribe {
                 mActive.set("Reports that need your attention: " + it.size)
                 activeAdapter.setEntities(context, it)
-                inactiveAdapter.notifyDataSetChanged()
+                activeAdapter.notifyDataSetChanged()
             },
             mRepository.myClosedResolvedReports.subscribe {
                 mSubmitted.set("Reports that do not need attention: " + it.size)
-                inactiveAdapter.setEntities(context,it)
+                inactiveAdapter.setEntities(context, it)
                 inactiveAdapter.notifyDataSetChanged()
+            },
+            activeAdapter.getOnClickEditSubject().subscribe {
+                mRepository.currentReport.onNext(it);
+//            Intent intent = new Intent(this, ReportSummaryActivity.class);
+//            intent.putExtra("mode", ReportSummaryActivity.EDIT_MODE);
+//            startActivity(intent);
+            },
+            addReportSubject.subscribe {
+                mRepository.currentReport.onNext(Report())
+                mRepository.named = HarassmentRepository.EMPTY
+                activity.startActivity(Intent(context, EditReportActivity::class.java))
             }
         )
     }
-    fun dispose(){
-        mDisposable.dispose()
+
+    fun dispose() {
         mDisposable.clear()
     }
 }

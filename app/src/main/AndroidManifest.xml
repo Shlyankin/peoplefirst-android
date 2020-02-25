@@ -56,8 +56,8 @@
         </activity>
         <activity android:name=".auth.WelcomeRetailActivity" />
         <activity android:name=".auth.password.reset.update.SetNewPasswordActivity" />
-        <activity android:name=".auth.password.reset.send.request.ResetPasswordActivityKotlin" />
-        <activity android:name=".auth.registration.CreateAccountRetailActivityKotlin" />
+        <activity android:name=".auth.password.reset.send.request.ResetPasswordActivity" />
+        <activity android:name=".auth.registration.CreateAccountRetailActivity" />
         <activity android:name=".auth.login.LoginActivity" />
 
         <service

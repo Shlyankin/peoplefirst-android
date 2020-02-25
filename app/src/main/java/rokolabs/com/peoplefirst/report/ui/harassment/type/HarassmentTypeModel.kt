@@ -11,7 +11,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.layout_edit_profile_drawer.view.*
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.HarassmentType
@@ -33,58 +32,25 @@ constructor(
     private var acitivty: EditReportActivity
     var nextClick: PublishSubject<View> = PublishSubject.create()
     var prevClick: PublishSubject<View> = PublishSubject.create()
-    var prevEnabled:ObservableField<Boolean> = ObservableField()
+    var prevEnabled: ObservableField<Boolean> = ObservableField()
+
     init {
         acitivty = context as EditReportActivity
-        mAdapter = TypesAdapter()
-        when (mRepository.named) {
-            HarassmentRepository.VICTIM -> {
-                // victim verify flow
-                makePreviousButtonActive()
-                mRepository.currentVictimTestimony.subscribe { testimony ->
-                    selectedHarassments = testimony.harassment_types
-                }
-            }
-            HarassmentRepository.WITNESS -> {
-                // witness verify flow
-                makePreviousButtonActive()
-                mRepository.currentWitnessTestimony.subscribe { report ->
-                    selectedHarassments = report.harassment_types
-                }
-            }
-            else ->
-                // victim flow
-                mRepository.currentReport.subscribe { report ->
-                    if (report !== Report.EMPTY) selectedHarassments = report.harassment_types
-                }
-        }
-//        if (mRepository.named == HarassmentRepository.EMPTY) {
-//            acitivty.toggleDrawer()
-//        }
+        mAdapter= TypesAdapter()
     }
 
     fun initDisposable() {
-        mDisposable=CompositeDisposable()
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
-                    acitivty.navigateTo(R.id.menuItem2)
+                    acitivty.navigateTo(R.id.nav_harassment_reasons)
                 }
             },
             prevClick.subscribe {
-                if (mRepository.named == HarassmentRepository.VICTIM) {
-//                    val intent = Intent(this, VerifyVictimActivity::class.java)
-//                    startActivity(intent)
-//                    save()
-//                    overridePendingTransition(R.anim.enter_back, R.anim.exit_back)
-                } else if (mRepository.named == HarassmentRepository.WITNESS) {
-//                    val intent = Intent(this, VerifyActivity::class.java)
-//                    startActivity(intent)
-//                    save()
-//                    overridePendingTransition(R.anim.enter_back, R.anim.exit_back)
-                }
+
             },
-            mAdapter!!.typeClick.subscribe {
+            mAdapter?.typeClick?.subscribe {
                 if (selectedHarassments.indexOf(it) >= 0)
                     selectedHarassments.remove(it)
                 else
@@ -95,11 +61,15 @@ constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(onError = {
                     showToast("Unable to get harassment types")
-                },onSuccess = {
+                }, onSuccess = {
                     if (it.success) {
                         showTypes(it.data)
                     }
-                })
+                }),
+            mRepository.currentReport.subscribe {
+                if (it !== Report.EMPTY)
+                    selectedHarassments = it.harassment_types
+            }
 
         )
     }
@@ -117,13 +87,7 @@ constructor(
             showToast("This info is required")
             return false
         }
-        if (mRepository.named == HarassmentRepository.VICTIM) {
-            mRepository.currentVictimTestimony.getValue()!!.harassment_types = selectedHarassments
-            mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.getValue()!!)
-        } else if (mRepository.named == HarassmentRepository.WITNESS) {
-            mRepository.currentWitnessTestimony.getValue()!!.harassment_types = selectedHarassments
-            mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-        } else if (mRepository.currentReport.getValue() !== Report.EMPTY && mRepository.currentReport.getValue() != null) {
+        if (mRepository.currentReport.getValue() !== Report.EMPTY && mRepository.currentReport.getValue() != null) {
             mRepository.currentReport.getValue()!!.harassment_types = selectedHarassments
             mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
         }
@@ -132,40 +96,23 @@ constructor(
     }
 
     fun showTypes(types: ArrayList<HarassmentType>) {
-        if (mRepository.named == HarassmentRepository.VICTIM) {
-            mAdapter?.setItems(
-                context, types,
-                if (mRepository.currentVictimTestimony.value != null && mRepository.currentVictimTestimony.value?.harassment_types != null)
-                    mRepository.currentVictimTestimony.value?.harassment_types
-                else
-                    ArrayList()
+        mAdapter?.setItems(
+            context, types,
+            if (mRepository.currentReport.value !== Report.EMPTY
+                && mRepository.currentReport.value != null && mRepository.currentReport.value?.harassment_types != null
             )
-        } else if (mRepository.named == HarassmentRepository.WITNESS) {
-            mAdapter?.setItems(
-                context, types,
-                if (mRepository.currentWitnessTestimony.value != null && mRepository.currentWitnessTestimony.value?.harassment_types != null)
-                    mRepository.currentWitnessTestimony.value?.harassment_types
-                else
-                    ArrayList()
-            )
-        } else {
-            mAdapter?.setItems(
-                context, types,
-                if (mRepository.currentReport.value !== Report.EMPTY
-                    && mRepository.currentReport.value != null && mRepository.currentReport.value?.harassment_types != null
-                )
-                    mRepository.currentReport.value?.harassment_types
-                else
-                    ArrayList()
-            )
-        }
+                mRepository.currentReport.value?.harassment_types
+            else
+                ArrayList()
+        )
         mAdapter?.notifyDataSetChanged()
     }
 
     private fun makePreviousButtonActive() {
         prevEnabled.set(true)
     }
-    fun showToast(string: String){
-        Toast.makeText(context,string,Toast.LENGTH_LONG).show()
+
+    fun showToast(string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_LONG).show()
     }
 }

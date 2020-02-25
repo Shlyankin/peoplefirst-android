@@ -6,15 +6,13 @@ import android.content.Context;
 import dagger.Component;
 import rokolabs.com.peoplefirst.SplashActivity;
 import rokolabs.com.peoplefirst.api.PeopleFirstService;
-import rokolabs.com.peoplefirst.auth.WelcomeRetailActivity;
 import rokolabs.com.peoplefirst.auth.login.LoginActivity;
-import rokolabs.com.peoplefirst.auth.password.reset.send.request.ResetPasswordActivityKotlin;
+import rokolabs.com.peoplefirst.auth.password.reset.send.request.ResetPasswordActivity;
 import rokolabs.com.peoplefirst.auth.password.reset.update.SetNewPasswordActivity;
-import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailActivityKotlin;
+import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailActivity;
 import rokolabs.com.peoplefirst.di.modules.ActivityModule;
 import rokolabs.com.peoplefirst.di.modules.ActivityViewModelModule;
 import rokolabs.com.peoplefirst.di.modules.BaseUrl;
-import rokolabs.com.peoplefirst.di.modules.ViewModelModule;
 import rokolabs.com.peoplefirst.di.scopes.PerActivity;
 import rokolabs.com.peoplefirst.report.EditReportActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
@@ -36,8 +34,8 @@ public interface ActivityComponent {
 
     BaseUrl baseUrl();
 
-    void inject(ResetPasswordActivityKotlin activity);
-    void inject(CreateAccountRetailActivityKotlin activity);
+    void inject(ResetPasswordActivity activity);
+    void inject(CreateAccountRetailActivity activity);
 //    void inject(ReportsActivity activity);
     void inject(SetNewPasswordActivity activity);
 
@@ -109,7 +107,7 @@ public interface ActivityComponent {
 //
 //    void inject(RejectedReportActivity activity);
 //
-    void inject(WelcomeRetailActivity activity);
+//    void inject(WelcomeRetailActivity activity);
 //
 //    void inject(EmailCodeRetailActivity activity);
 //

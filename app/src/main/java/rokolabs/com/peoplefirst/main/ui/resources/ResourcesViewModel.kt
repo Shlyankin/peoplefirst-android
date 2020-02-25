@@ -1,8 +1,13 @@
 package rokolabs.com.peoplefirst.main.ui.resources
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -13,26 +18,30 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import okhttp3.ResponseBody
 import retrofit2.HttpException
+import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
+import rokolabs.com.peoplefirst.main.MainActivity
 import rokolabs.com.peoplefirst.model.CounsellingService
 import rokolabs.com.peoplefirst.model.EscalationLevel
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import java.util.*
+import javax.inject.Inject
 
-class ResourcesViewModel(
-    context: Context,
-    mRepository: HarassmentRepository,
-    mService: PeopleFirstService
-) {
-    private lateinit var context: Context
-    private lateinit var mRepository: HarassmentRepository
-    private lateinit var mService: PeopleFirstService
+class ResourcesViewModel
+@Inject constructor(
+    private val context: Context,
+    private val mService: PeopleFirstService,
+    private val mRepository: HarassmentRepository
+) : ViewModel() {
+    var activity: MainActivity
+    var mDisposable = CompositeDisposable()
+
     var saveButtonStatus: BehaviorSubject<Boolean> = BehaviorSubject.create()
     var toastSubject: Subject<String> = PublishSubject.create()
     var termsClick: Subject<View> = PublishSubject.create()
     var privacyClick: Subject<View> = PublishSubject.create()
     var addClick: Subject<View> = PublishSubject.create()
-    var mDisposable = CompositeDisposable()
+
     var mAdapter: EscalationLevelsAdapter = EscalationLevelsAdapter()
     var mCouncellingAdapter: CounsellingServicesAdapter = CounsellingServicesAdapter()
     var caption: ObservableField<String> = ObservableField()
@@ -40,14 +49,10 @@ class ResourcesViewModel(
     var addButtonVisibility: ObservableField<Boolean> = ObservableField()
 
     init {
-        this.context = context
-        this.mRepository = mRepository
-        this.mService = mService
+        activity = context as MainActivity
     }
 
     fun initDisposable() {
-        mDisposable = CompositeDisposable()
-//        mAdapter.editable.onNext(true)
         mDisposable.addAll(
             mService.escalationLevels
                 .subscribeOn(Schedulers.io())
@@ -77,36 +82,26 @@ class ResourcesViewModel(
                 items.add(EscalationLevel("name", "contact"))
                 mAdapter.setItems(context, items)
                 mAdapter.notifyDataSetChanged()
-//                Observable.just(EscalationLevel("name", ""))
-//                    .map {
-//                        return@map listOf(it)
-//                    }
-//                    .flatMap {
-//                        mService.addEscalationLevels(it)
-//                            .toObservable()
-//                    }
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribeBy(onNext = {
-//                        mService.escalationLevels
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe({ response ->
-//                                if (response.success) {
-//                                    showLevels(response.data)
-//                                }
-//                            }, { throwable -> showToast("Unable to get escalation levels") })
-//                    }, onError = {
-//                        it.printStackTrace()
-//                        if(it is HttpException){
-//                            var http=it as HttpException
-//                            var t=(http.response().errorBody() as ResponseBody).string()
-//
-//                            var u=0
-//                            u++
-//                        }
-//                        showToast("Unable to add escalation level")
-//                    })
+            },
+            toastSubject.subscribe {
+                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+            },
+            termsClick.subscribe {
+                val browserIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.peoplefirstrh.com/terms-of-service")
+                )
+                activity.startActivity(browserIntent)
+            },
+            privacyClick.subscribe {
+                val browserIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.peoplefirstrh.com/privacy-policy")
+                )
+                activity.startActivity(browserIntent)
+            },
+            saveButtonStatus.subscribe {
+                showhideSaveButton(it)
             }
         )
     }
@@ -136,7 +131,10 @@ class ResourcesViewModel(
         toastSubject.onNext(string)
 //        Toast.makeText(context,string, Toast.LENGTH_LONG).show()
     }
-
+    fun showhideSaveButton(boolean: Boolean) {
+        activity?.findViewById<ImageView>(R.id.save)?.visibility =
+            if (boolean) View.VISIBLE else View.GONE
+    }
     fun saveResources() {
         Observable.just(mAdapter.getmItems())
             .flatMap {
@@ -160,20 +158,19 @@ class ResourcesViewModel(
                 showToast("Unable to save escalation levels")
             }, onNext = {
                 mService.escalationLevels
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({ response ->
-                                if (response.success) {
-                                    showLevels(response.data)
-                                }
-                            }, { throwable -> showToast("Unable to get escalation levels") })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        if (response.success) {
+                            showLevels(response.data)
+                        }
+                    }, { throwable -> showToast("Unable to get escalation levels") })
                 showToast("Escalation levels updated")
 
             })
     }
 
     fun dispose() {
-        mDisposable.dispose()
         mDisposable.clear()
     }
 }

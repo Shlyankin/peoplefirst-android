@@ -36,87 +36,25 @@ constructor(
     }
 
     fun initDisposable() {
-        mDisposable=CompositeDisposable()
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
-                if (mRepository.named != HarassmentRepository.EMPTY) {
-                    var intent: Intent? = null
-                    if (mRepository.named == HarassmentRepository.WITNESS) {
-                        mRepository.currentWitnessTestimony.value?.details =
-                            details.get().toString()
-                        mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-                        activity.navigateTo(R.id.nav_report_who_being_harassed)
-                    } else if (mRepository.named == HarassmentRepository.TRANSGRESSOR) {
-                        mRepository.currentTransgressorReport.value?.details =
-                            details.get().toString()
-                        mRepository.currentTransgressorReport.onNext(mRepository.currentTransgressorReport.getValue()!!)
-//                        intent = Intent(this, WitnessYesNoActivity::class.java)
-                    } else if (mRepository.named == HarassmentRepository.VICTIM) {
-                        mRepository.currentVictimTestimony.value?.details =
-                            details.get().toString()
-                        mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.getValue()!!)
-//                        intent = Intent(this, WhoAgressorActivity::class.java)
-                    }
-                } else {
-                    activity.navigateTo(R.id.nav_report_who_being_harassed)
-                    save()
-                }
+                activity.navigateTo(R.id.nav_report_who_being_harassed)
+                save()
             },
             prevClick.subscribe {
-                if (mRepository.named != HarassmentRepository.EMPTY) {
-                    var intent: Intent? = null
-                    if (mRepository.named == HarassmentRepository.WITNESS) {
-                        mRepository.currentWitnessTestimony.value?.details =
-                            details.get().toString()
-                        mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-//                        intent = Intent(this, VerifyActivity::class.java)
-                    } else if (mRepository.named == HarassmentRepository.TRANSGRESSOR) {
-                        mRepository.currentTransgressorReport.value?.details =
-                            details.get().toString()
-                        mRepository.currentTransgressorReport.onNext(mRepository.currentTransgressorReport.getValue()!!)
-//                        intent = Intent(this, VerifyActivity::class.java)
-                    } else if (mRepository.named == HarassmentRepository.VICTIM) {
-                        mRepository.currentVictimTestimony.value?.details =
-                            details.get().toString()
-                        mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.getValue()!!)
-                        activity.navigateTo(R.id.nav_report_happened_before)
-                    }
-                } else {
-//                    val intent = Intent(this, HarassmentReasonActivity::class.java)
-                    save()
-                    activity.navigateTo(R.id.nav_report_happened_before)
-                }
+                activity.navigateTo(R.id.nav_report_happened_before)
             },
             attachClick.subscribe {
                 activity.chooseFile()
             }
         )
-        if (mRepository.named == HarassmentRepository.EMPTY) {
-            mDisposable.add(mRepository.currentReport.subscribe { report ->
-                if (report !== Report.EMPTY) {
-                    if (details.get().toString().isEmpty())
-                        details.set(report.details)
-                }
-            })
-        } else {
-            if (mRepository.named == HarassmentRepository.WITNESS) {
-                mDisposable.add(mRepository.currentWitnessTestimony.subscribe { witnessReport ->
-                    if (details.get().toString().isEmpty())
-                        details.set(witnessReport.details)
-                })
-            } else if (mRepository.named == HarassmentRepository.TRANSGRESSOR) {
-                mDisposable.add(mRepository.currentTransgressorReport.subscribe { witnessReport ->
-                    if (details.get().toString().isEmpty())
-                        details.set(witnessReport.details)
-                })
-            } else if (mRepository.named == HarassmentRepository.VICTIM) {
-                mDisposable.add(mRepository.currentVictimTestimony.subscribe { victimTestimony ->
-                    if (details.get().toString().isEmpty())
-                        details.set(victimTestimony.details)
-                })
+        mDisposable.add(mRepository.currentReport.subscribe { report ->
+            if (report !== Report.EMPTY) {
+                if (details.get().toString().isEmpty())
+                    details.set(report.details)
             }
-
-        }
+        })
     }
 
     fun dispose() {

@@ -297,7 +297,7 @@ public class HarassmentRepository {
                 .subscribe(baseResponse -> {
                     if (baseResponse.body() != null && baseResponse.body().success) {
                         getMyReports();
-                        Toast.makeText(mContext, "Report updated", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(mContext, "Report updated", Toast.LENGTH_LONG).show();
                     } else if (baseResponse.errorBody() != null) {
                         Toast.makeText(mContext,
                                 new Gson().fromJson(baseResponse.errorBody().string(), BaseResponse.class).error.message

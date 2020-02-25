@@ -38,23 +38,6 @@ constructor(
     init {
         mAdapter = ReasonsAdapter()
         acitivity = context as EditReportActivity
-        when (mRepository.named) {
-            HarassmentRepository.VICTIM ->
-                // victim verify flow
-                mRepository.currentVictimTestimony.subscribe { testimony ->
-                    selectedReasons = testimony.harassment_reasons
-                }
-            HarassmentRepository.WITNESS ->
-                // witness verify flow
-                mRepository.currentWitnessTestimony.subscribe { report ->
-                    selectedReasons = report.harassment_reasons
-                }
-            else ->
-                // victim flow
-                mRepository.currentReport.subscribe { report ->
-                    if (report !== Report.EMPTY) selectedReasons = report.harassment_reasons
-                }
-        }
     }
 
     fun initDisposable() {
@@ -84,7 +67,10 @@ constructor(
                     if (it.success) {
                         showReasons(it.data)
                     }
-                })
+                }),
+            mRepository.currentReport.subscribe { report ->
+                if (report !== Report.EMPTY) selectedReasons = report.harassment_reasons
+            }
         )
     }
 
@@ -94,13 +80,7 @@ constructor(
             showToast("This info is required")
             return false
         }
-        if (mRepository.named == HarassmentRepository.VICTIM) {
-            mRepository.currentVictimTestimony.value?.harassment_reasons = selectedReasons
-            mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.getValue()!!)
-        } else if (mRepository.named == HarassmentRepository.WITNESS) {
-            mRepository.currentWitnessTestimony.value?.harassment_reasons = selectedReasons
-            mRepository.currentWitnessTestimony.onNext(mRepository.currentWitnessTestimony.getValue()!!)
-        } else if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
+        if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
             mRepository.currentReport.value?.harassment_reasons = selectedReasons
             mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
         }
@@ -108,33 +88,15 @@ constructor(
     }
 
     fun showReasons(reasons: ArrayList<HarassmentReason>) {
-        if (mRepository.named == HarassmentRepository.VICTIM) {
-            mAdapter.setItems(
-                context, reasons,
-                if (mRepository.currentVictimTestimony.value != null && mRepository.currentVictimTestimony.value?.harassment_reasons != null)
-                    mRepository.currentVictimTestimony.value?.harassment_reasons
-                else
-                    ArrayList()
+        mAdapter.setItems(
+            context, reasons,
+            if (mRepository.currentReport.value !== Report.EMPTY
+                && mRepository.currentReport.value != null && mRepository.currentReport.value?.harassment_reasons != null
             )
-        } else if (mRepository.named == HarassmentRepository.WITNESS) {
-            mAdapter.setItems(
-                context, reasons,
-                if (mRepository.currentWitnessTestimony.value != null && mRepository.currentWitnessTestimony.value?.harassment_reasons != null)
-                    mRepository.currentWitnessTestimony.value?.harassment_reasons
-                else
-                    ArrayList()
-            )
-        } else {
-            mAdapter.setItems(
-                context, reasons,
-                if (mRepository.currentReport.value !== Report.EMPTY
-                    && mRepository.currentReport.value != null && mRepository.currentReport.value?.harassment_reasons != null
-                )
-                    mRepository.currentReport.value?.harassment_reasons
-                else
-                    ArrayList()
-            )
-        }
+                mRepository.currentReport.value?.harassment_reasons
+            else
+                ArrayList()
+        )
         mAdapter.notifyDataSetChanged()
     }
 

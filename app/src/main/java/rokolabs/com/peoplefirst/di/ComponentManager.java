@@ -62,10 +62,10 @@ public final class ComponentManager {
     public final ActivityComponent getActivityComponent(final Activity activity) {
         final String key = getKey(activity);
         ActivityComponent activityComponent = activityComponentMap.get(key);
-        if (activityComponent == null) {
-            activityComponent = createNewActivityComponent(activity);
-            activityComponentMap.put(key, activityComponent);
-        }
+//        if (activityComponent == null) {
+        activityComponent = createNewActivityComponent(activity);
+        activityComponentMap.put(key, activityComponent);
+//        }
         return activityComponent;
     }
 

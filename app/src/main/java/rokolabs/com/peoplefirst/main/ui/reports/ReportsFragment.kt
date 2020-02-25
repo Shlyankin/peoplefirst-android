@@ -18,32 +18,24 @@ import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
 import android.util.TypedValue
+import androidx.lifecycle.ViewModelProviders
+import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.model.Report
 
 
 class ReportsFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory:ViewModelFactory
     private lateinit var viewModel: ReportsModel
-    @Inject
-    lateinit var mRepository: HarassmentRepository
-    @Inject
-    lateinit var mService: PeopleFirstService
-    var mDisposable = CompositeDisposable()
-    val dip = 16f
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         ComponentManager.getInstance().getFragmentComponent(this).inject(this)
-        viewModel = ReportsModel(context!!, mRepository, mService)
-        val r = resources
-        val px = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dip,
-            r.displayMetrics
-        )
-        viewModel.activeAdapter.setWidthChange(px)
+        viewModel =ViewModelProviders.of(this,viewModelFactory).get(ReportsModel::class.java)
         var binder = DataBindingUtil.inflate<FragmentReportsBinding>(
             inflater,
             R.layout.fragment_reports,
@@ -61,16 +53,7 @@ class ReportsFragment : Fragment() {
         listActive.adapter = viewModel.activeAdapter
         listInactive.adapter = viewModel.inactiveAdapter
         viewModel.initDisposable()
-        mDisposable.addAll(viewModel.activeAdapter.getOnClickEditSubject().subscribe {
-            mRepository.currentReport.onNext(it);
-//            Intent intent = new Intent(this, ReportSummaryActivity.class);
-//            intent.putExtra("mode", ReportSummaryActivity.EDIT_MODE);
-//            startActivity(intent);
-        }, viewModel.addReportSubject.subscribe {
-            mRepository.currentReport.onNext(Report())
-            mRepository.named = HarassmentRepository.EMPTY
-            startActivity(Intent(context, EditReportActivity::class.java))
-        })
+
     }
 
     override fun onPause() {

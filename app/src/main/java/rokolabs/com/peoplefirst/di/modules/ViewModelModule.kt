@@ -6,6 +6,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
+import rokolabs.com.peoplefirst.main.ui.profile.ProfileViewModel
+import rokolabs.com.peoplefirst.main.ui.reports.ReportsModel
+import rokolabs.com.peoplefirst.main.ui.resources.ResourcesViewModel
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
 import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedModel
@@ -56,6 +59,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SelectedUsersModel::class)
     internal abstract fun selectedUsersModel(selectedUsersModel: SelectedUsersModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReportsModel::class)
+    internal abstract fun reportsModel(reportsModel: ReportsModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun profileViewModel(profileViewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResourcesViewModel::class)
+    internal abstract fun resourcesViewModel(resourcesViewModel: ResourcesViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap
