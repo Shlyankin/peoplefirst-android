@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_edit_report.*
 import kotlinx.android.synthetic.main.app_bar_edit_report.*
 import rokolabs.com.peoplefirst.databinding.ActivityEditReportBinding
@@ -39,13 +40,14 @@ class EditReportActivity : AppCompatActivity() {
     companion object {
         val PERMISSION_REQUEST_CODE = 1
         val CHOOSE_FILE_CODE = 2
-        val ADD_VICTIM_CODE=3
+        val ADD_VICTIM_CODE = 3
     }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var mRepository: HarassmentRepository
+    var mDisposable = CompositeDisposable()
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var title: TextView
     lateinit var navigationDrawerViewModel: NavigationDrawerViewModel
@@ -115,6 +117,17 @@ class EditReportActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mDisposable = CompositeDisposable()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mDisposable.dispose()
+        mDisposable.clear()
+    }
+
     fun toggleDrawer() {
         var t = drawerLayout.isDrawerOpen(nav_view)
         if (t) {
@@ -135,10 +148,10 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_happened_before -> {
                 R.id.nav_report_happened_before
             }
-            R.id.nav_report_what_happened,R.id.nav_report_what_happened_title -> {
+            R.id.nav_report_what_happened, R.id.nav_report_what_happened_title -> {
                 R.id.nav_report_what_happened
             }
-            R.id.nav_report_who_being_harassed ,R.id.nav_report_who_being_harassed_title-> {
+            R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
                 R.id.nav_report_who_being_harassed
             }
             R.id.menuItem6 -> {
@@ -158,9 +171,27 @@ class EditReportActivity : AppCompatActivity() {
             }
 
         }
-        navController.navigate(pos)
-        navigationDrawerViewModel.currentPos.set(pos)
-        drawerLayout.closeDrawers()
+        save {
+            navController.navigate(pos)
+            navigationDrawerViewModel.currentPos.set(pos)
+            drawerLayout.closeDrawers()
+        }
+
+    }
+
+    fun save(void: () -> Unit) {
+        mDisposable.add(
+            mRepository.me.subscribe {
+                var report = mRepository.currentReport
+                if (report.hasValue() && report.value!!.status == null) {
+                    mRepository.addReport(report.value!!)
+                } else {
+                    mRepository.updateCurrentReport()
+                }
+                void.invoke()
+
+            }
+        )
     }
 
     fun chooseFile() {

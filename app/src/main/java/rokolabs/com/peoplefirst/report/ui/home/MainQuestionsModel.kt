@@ -17,19 +17,20 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    var activity :EditReportActivity
+    var activity: EditReportActivity
     var mDisposable = CompositeDisposable()
 
-    var whatHappenedObject : Subject<View> = PublishSubject.create()
-    var whoInvolvedObject : Subject<View> = PublishSubject.create()
-    var whereHappenedObject : Subject<View> = PublishSubject.create()
-    var whenHappenedObject : Subject<View> = PublishSubject.create()
+    var whatHappenedObject: Subject<View> = PublishSubject.create()
+    var whoInvolvedObject: Subject<View> = PublishSubject.create()
+    var whereHappenedObject: Subject<View> = PublishSubject.create()
+    var whenHappenedObject: Subject<View> = PublishSubject.create()
 
     init {
-        activity= context as EditReportActivity
+        activity = context as EditReportActivity
     }
-    fun initDisposable(){
-        mDisposable= CompositeDisposable()
+
+    fun initDisposable() {
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             whatHappenedObject.subscribe {
                 activity.navigateTo(it)
@@ -42,10 +43,14 @@ constructor(
             },
             whenHappenedObject.subscribe {
                 activity.navigateTo(it)
+
             }
         )
     }
-    fun dispose(){
+
+
+
+    fun dispose() {
         mDisposable.dispose()
         mDisposable.clear()
     }

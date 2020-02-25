@@ -12,7 +12,7 @@ public class Report {
     public String created_at;
     public String updated_at;
     public String submitted_at;
-    public Integer id;
+    public Integer id=null;
     public int author_id;
     public User victim;
     public ArrayList<User> aggressors = new ArrayList<>();
@@ -20,8 +20,8 @@ public class Report {
     public ArrayList<HarassmentType> harassment_types = new ArrayList<>();
     public ArrayList<HarassmentReason> harassment_reasons = new ArrayList<>();
     public int counselling_service_id;
-    public String location_city;
-    public String location_details;
+    public String location_city="";
+    public String location_details="";
     public String details;
     public String file;
     public String status;
@@ -33,6 +33,7 @@ public class Report {
     public ArrayList<File> attachments = new ArrayList<>();
     public int days_left;
 
+
     public RetailReport convertToRetail() {
         RetailReport rr = new RetailReport();
         rr.datetime = datetime;
@@ -41,10 +42,11 @@ public class Report {
         rr.submitted_at = submitted_at;
         rr.id = id;
         rr.author_id = author_id;
-        rr.victim = victim.convertToRetail();
+        if (victim != null)
+            rr.victim = victim.convertToRetail();
         for (User aggressor : aggressors)
             rr.aggressors.add(aggressor.convertToRetail());
-        for(User witness : witnesses)
+        for (User witness : witnesses)
             rr.witnesses.add(witness.convertToRetail());
         rr.harassment_types = harassment_types;
         rr.harassment_reasons = harassment_reasons;

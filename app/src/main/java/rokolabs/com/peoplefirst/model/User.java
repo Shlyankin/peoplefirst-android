@@ -28,7 +28,7 @@ public class User implements Serializable {
 
     public String address_unit_apt_suite;
 
-    public boolean is_retail;
+    public Integer retail;
 
     @Override
     public boolean equals(Object o) {

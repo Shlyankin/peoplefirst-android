@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_who_being_harassed.*
 import rokolabs.com.peoplefirst.R
-import rokolabs.com.peoplefirst.databinding.FragmentSelectedUsersBinding
 import rokolabs.com.peoplefirst.databinding.FragmentWhoBeingHarassedBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
@@ -53,7 +52,7 @@ class WhoBeingHarassedFragment : Fragment() {
             }
         }
         mSelectedUsers.viewModel.disableMultiselect()
-        mSelectedUsers.viewModel.mRetailMode = mRepository.me.getValue()!!.is_retail
+        mSelectedUsers.viewModel.mRetailMode = mRepository.me.getValue()!!.retail==1
         mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.getValue()!!.email
 
         binder.viewModel = viewModel

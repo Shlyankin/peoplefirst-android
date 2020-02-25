@@ -110,7 +110,7 @@ constructor(
         if (mRepository.named == HarassmentRepository.EMPTY) {
             if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
                 if (mSelectedUsers.getUsers().size > 0) {
-                    if (mRepository.me.value!!.is_retail && !mSelectedUsers.viewModel.conformsToDomain()) {
+                    if (mRepository.me.value!!.retail==1 && !mSelectedUsers.viewModel.conformsToDomain()) {
                         Toast.makeText(
                             context,
                             "People included in your report must have the same email domain as yours",

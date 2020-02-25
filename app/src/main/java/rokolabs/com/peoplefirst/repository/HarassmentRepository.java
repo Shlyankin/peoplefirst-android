@@ -89,7 +89,7 @@ public class HarassmentRepository {
 
 
     public void addReport(Report report) {
-        if (me.getValue().is_retail) {
+        if (me.getValue().retail==1) {
             RetailReport rr = report.convertToRetail();
             RetailUser rme = me.getValue().convertToRetail();
             if (rr.victim != null) {
@@ -112,7 +112,14 @@ public class HarassmentRepository {
                         } else
                             Toast.makeText(mContext, reportResponse.error.message, Toast.LENGTH_LONG).show();
                     }, throwable -> {
+                        if(throwable instanceof HttpException){
+                            HttpException exception= (HttpException) throwable;
+                            String s=exception.response().errorBody().string();
+                            String t=s;
+                            t=t+"asd";
+                        }
                         Toast.makeText(mContext, "Could not add report", Toast.LENGTH_LONG).show();
+
                     });
         } else {
             if (report.victim != null) {//жертва указана
@@ -141,7 +148,7 @@ public class HarassmentRepository {
     }
 
     public void addWitnessReport() {
-        if (me.getValue().is_retail) {
+        if (me.getValue().retail==1) {
             RetailWitnessTestimony rwr = currentWitnessTestimony.getValue().convertToRetail();
             mService.addRetailWitnessTestimony(currentReport.getValue().id, rwr)
                     .subscribeOn(Schedulers.io())
@@ -338,7 +345,7 @@ public class HarassmentRepository {
 
     public void addWitnesses() {
         if (mSelectedUsersForWitnessOrAggressorReport.size() > 0) {
-            if (me.getValue().is_retail) {
+            if (me.getValue().retail==1) {
                 ArrayList<RetailUser> retailUsers = new ArrayList<>();
                 for (User u : mSelectedUsersForWitnessOrAggressorReport) {
                     retailUsers.add(u.convertToRetail());

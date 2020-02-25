@@ -2,11 +2,7 @@ package rokolabs.com.peoplefirst.main.ui.resources
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +11,6 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.fragment_resources.*
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.CounsellingService
 import rokolabs.com.peoplefirst.model.EscalationLevel
@@ -71,9 +66,9 @@ class ResourcesViewModel(
                 ),
             mRepository.me.subscribe { user ->
                 showCompanyName(user.company.name)
-                mAdapter.editable.onNext(user.is_retail)
-                saveButtonStatus.onNext(user.is_retail)
-                addButtonVisibility.set(user.is_retail)
+                mAdapter.editable.onNext(user.retail==1)
+                saveButtonStatus.onNext(user.retail==1)
+                addButtonVisibility.set(user.retail==1)
             },
             addClick.subscribe {
                 Observable.just(EscalationLevel("name", "contact"))
