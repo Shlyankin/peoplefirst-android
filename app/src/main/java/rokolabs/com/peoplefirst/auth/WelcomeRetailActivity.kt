@@ -3,6 +3,7 @@ package rokolabs.com.peoplefirst.auth
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_welcome_retail.*
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.auth.login.LoginActivity
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class WelcomeRetailActivity : AppCompatActivity() {
     @Inject
     lateinit var mRepository: HarassmentRepository
-
+    var mDisposable=CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ComponentManager.getInstance().getActivityComponent(this).inject(this)

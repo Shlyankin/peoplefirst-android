@@ -11,6 +11,8 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import okhttp3.ResponseBody
+import retrofit2.HttpException
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.CounsellingService
 import rokolabs.com.peoplefirst.model.EscalationLevel
@@ -44,7 +46,7 @@ class ResourcesViewModel(
     }
 
     fun initDisposable() {
-        mDisposable=CompositeDisposable()
+        mDisposable = CompositeDisposable()
 //        mAdapter.editable.onNext(true)
         mDisposable.addAll(
             mService.escalationLevels
@@ -66,32 +68,45 @@ class ResourcesViewModel(
                 ),
             mRepository.me.subscribe { user ->
                 showCompanyName(user.company.name)
-                mAdapter.editable.onNext(user.retail==1)
-                saveButtonStatus.onNext(user.retail==1)
-                addButtonVisibility.set(user.retail==1)
+                mAdapter.editable.onNext(user.retail == 1)
+                saveButtonStatus.onNext(user.retail == 1)
+                addButtonVisibility.set(user.retail == 1)
             },
             addClick.subscribe {
-                Observable.just(EscalationLevel("name", "contact"))
-                    .map {
-                        return@map listOf(it)
-                    }
-                    .flatMap {
-                        mService.addEscalationLevels(it)
-                            .toObservable()
-                    }
-                    .subscribeBy(onNext = {
-                        mService.escalationLevels
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({ response ->
-                                if (response.success) {
-                                    showLevels(response.data)
-                                }
-                            }, { throwable -> showToast("Unable to get escalation levels") })
-                    }, onError = {
-                        it.printStackTrace()
-                        showToast("Unable to add escalation level")
-                    })
+                var items = mAdapter.getmItems()
+                items.add(EscalationLevel("name", "contact"))
+                mAdapter.setItems(context, items)
+                mAdapter.notifyDataSetChanged()
+//                Observable.just(EscalationLevel("name", ""))
+//                    .map {
+//                        return@map listOf(it)
+//                    }
+//                    .flatMap {
+//                        mService.addEscalationLevels(it)
+//                            .toObservable()
+//                    }
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribeBy(onNext = {
+//                        mService.escalationLevels
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe({ response ->
+//                                if (response.success) {
+//                                    showLevels(response.data)
+//                                }
+//                            }, { throwable -> showToast("Unable to get escalation levels") })
+//                    }, onError = {
+//                        it.printStackTrace()
+//                        if(it is HttpException){
+//                            var http=it as HttpException
+//                            var t=(http.response().errorBody() as ResponseBody).string()
+//
+//                            var u=0
+//                            u++
+//                        }
+//                        showToast("Unable to add escalation level")
+//                    })
             }
         )
     }
@@ -128,11 +143,32 @@ class ResourcesViewModel(
                 mService.addEscalationLevels(it)
                     .toObservable()
             }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(onError = {
                 it.printStackTrace()
+                if (it is HttpException) {
+                    var http = it as HttpException
+                    var t = (http.response().errorBody() as ResponseBody).string()
+                    if (t.contains("email", true)) {
+                        showToast("All contacts should be email")
+                        return@subscribeBy
+                    }
+                    var u = 0
+                    u++
+                }
                 showToast("Unable to save escalation levels")
             }, onNext = {
+                mService.escalationLevels
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ response ->
+                                if (response.success) {
+                                    showLevels(response.data)
+                                }
+                            }, { throwable -> showToast("Unable to get escalation levels") })
                 showToast("Escalation levels updated")
+
             })
     }
 
