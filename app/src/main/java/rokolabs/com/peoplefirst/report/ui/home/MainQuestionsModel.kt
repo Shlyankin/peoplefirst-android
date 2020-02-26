@@ -44,10 +44,15 @@ constructor(
             whenHappenedObject.subscribe {
                 activity.navigateTo(it)
 
+            },
+            activity.onBackPressedObject.subscribe {
+                previous()
             }
         )
     }
-
+    fun previous(){
+        activity.finish()
+    }
 
 
     fun dispose() {

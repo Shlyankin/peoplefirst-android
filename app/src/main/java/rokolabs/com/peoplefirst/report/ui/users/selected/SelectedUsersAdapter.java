@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,14 +56,14 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         vh.mLastName = v.findViewById(R.id.lastName);
         vh.mCompany = v.findViewById(R.id.company);
         vh.mEmail = v.findViewById(R.id.email);
-
+        vh.mClick=v.findViewById(R.id.clickView);
         if (mRetailMode) {
             RxTextView.afterTextChangeEvents(vh.mFirstName)
                     .skip(1)
                     .debounce(400, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(e -> {
-                        Integer pos = (Integer)e.component1().getTag();
+                        Integer pos = (Integer) e.component1().getTag();
                         mUsers.get(pos).first_name = e.getEditable().toString();
                     });
 
@@ -71,7 +72,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
                     .debounce(400, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(e -> {
-                        Integer pos = (Integer)e.component1().getTag();
+                        Integer pos = (Integer) e.component1().getTag();
                         mUsers.get(pos).last_name = e.getEditable().toString();
                     });
 
@@ -81,7 +82,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
                     .filter(e -> Utils.isValidEmail(e.component2()))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(e -> {
-                        Integer pos = (Integer)e.component1().getTag();
+                        Integer pos = (Integer) e.component1().getTag();
                         mUsers.get(pos).email = e.getEditable().toString();
                         if (!"".equals(e.component2().toString()) && !emailDomainValid(e.component2().toString())) {
                             e.component1().setError("People included in your report must have the same email domain as your username");
@@ -101,11 +102,19 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
             holder.mEmail.setText(mUsers.get(position).email);
             holder.mEmail.setTag(new Integer(position));
             holder.mCompany.setVisibility(View.GONE);
-
+            holder.mClick.setVisibility(View.GONE);
+//            holder.mEmail.setEnabled(true);
+//            holder.mFirstName.setEnabled(true);
+//            holder.mLastName.setEnabled(true);
         } else {
+//            holder.mCompany.setEnabled(false);
+//            holder.mEmail.setEnabled(false);
+//            holder.mFirstName.setEnabled(false);
+//            holder.mLastName.setEnabled(false);
+            holder.mClick.setVisibility(View.VISIBLE);
             holder.mEmail.setVisibility(View.GONE);
             holder.mCompany.setText(mUsers.get(position).company.name);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.mClick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onClickDetailsSubject.onNext(mUsers.get(position));
@@ -123,7 +132,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         return email.substring(email.indexOf("@") + 1);
     }
 
-    public Observable<User> getUsersClicks(){
+    public Observable<User> getUsersClicks() {
         return onClickDetailsSubject;
     }
 
@@ -137,6 +146,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         public TextView mLastName;
         public TextView mCompany;
         public TextView mEmail;
+        public LinearLayout mClick;
         public ViewHolder(View v) {
             super(v);
         }

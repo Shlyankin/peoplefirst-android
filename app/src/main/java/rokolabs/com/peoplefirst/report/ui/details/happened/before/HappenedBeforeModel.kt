@@ -21,28 +21,32 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    var activity:EditReportActivity
+    var activity: EditReportActivity
     var mDisposable = CompositeDisposable()
 
-    var nextClick : Subject<View> = PublishSubject.create()
-    var prevClick : Subject<View> = PublishSubject.create()
-    var yesSubject : Subject<View> =PublishSubject.create()
-    var noSubject : Subject<View> =PublishSubject.create()
-    var yesFlag:ObservableField<Boolean> = ObservableField()
+    var nextClick: Subject<View> = PublishSubject.create()
+    var prevClick: Subject<View> = PublishSubject.create()
+    var yesSubject: Subject<View> = PublishSubject.create()
+    var noSubject: Subject<View> = PublishSubject.create()
+    var yesFlag: ObservableField<Boolean> = ObservableField()
+
     init {
         yesFlag.set(false)
-        activity=context as EditReportActivity
+        activity = context as EditReportActivity
     }
-    fun initDisposable(){
-        mDisposable=CompositeDisposable()
+
+    fun initDisposable() {
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
                 save()
                 activity.navigateTo(R.id.nav_report_what_happened)
             },
             prevClick.subscribe {
-                save()
-                activity.navigateTo(R.id.nav_harassment_reasons)
+                previous()
+            },
+            activity.onBackPressedObject.subscribe {
+                previous()
             },
             yesSubject.subscribe {
                 yesFlag.set(true)
@@ -68,10 +72,16 @@ constructor(
             )
         }
     }
-    fun dispose(){
+
+    fun previous() {
+        activity.navigateTo(R.id.nav_harassment_reasons)
+    }
+
+    fun dispose() {
         mDisposable.dispose()
         mDisposable.clear()
     }
+
     private fun save() {
         if (mRepository.named == HarassmentRepository.VICTIM) {
             mRepository.currentVictimTestimony.value?.happened_before = yesFlag.get()

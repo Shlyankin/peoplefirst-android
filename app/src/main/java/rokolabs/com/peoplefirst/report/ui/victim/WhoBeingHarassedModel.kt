@@ -68,7 +68,10 @@ constructor(
                 }
             },
             prevClick.subscribe {
-                activity.navigateTo(R.id.nav_report_what_happened)
+               previous()
+            },
+            activity.onBackPressedObject.subscribe {
+                previous()
             }
         )
 
@@ -87,7 +90,9 @@ constructor(
         })
 
     }
-
+    fun previous(){
+        activity.navigateTo(R.id.nav_report_what_happened)
+    }
     fun save(): Boolean {
         if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
             if (mSelectedUsers.getUsers().size > 0) {

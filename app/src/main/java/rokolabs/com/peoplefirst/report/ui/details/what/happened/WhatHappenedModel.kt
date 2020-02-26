@@ -43,7 +43,10 @@ constructor(
                 save()
             },
             prevClick.subscribe {
-                activity.navigateTo(R.id.nav_report_happened_before)
+                previous()
+            },
+            activity.onBackPressedObject.subscribe {
+              previous()
             },
             attachClick.subscribe {
                 activity.chooseFile()
@@ -56,7 +59,9 @@ constructor(
             }
         })
     }
-
+    fun previous(){
+        activity.navigateTo(R.id.nav_report_happened_before)
+    }
     fun dispose() {
         mDisposable.dispose()
         mDisposable.clear()

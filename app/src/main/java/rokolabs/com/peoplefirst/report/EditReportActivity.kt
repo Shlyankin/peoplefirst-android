@@ -23,6 +23,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_edit_report.*
 import kotlinx.android.synthetic.main.app_bar_edit_report.*
 import rokolabs.com.peoplefirst.databinding.ActivityEditReportBinding
@@ -53,6 +54,7 @@ class EditReportActivity : AppCompatActivity() {
     lateinit var navigationDrawerViewModel: NavigationDrawerViewModel
     lateinit var navController: NavController
     lateinit var drawerLayout: DrawerLayout
+    public var onBackPressedObject:PublishSubject<Int> = PublishSubject.create()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -255,5 +257,10 @@ class EditReportActivity : AppCompatActivity() {
 
     fun navigateTo(view: View) {
         navigateTo(view.id)
+    }
+
+    override fun onBackPressed() {
+        onBackPressedObject.onNext(0)
+
     }
 }

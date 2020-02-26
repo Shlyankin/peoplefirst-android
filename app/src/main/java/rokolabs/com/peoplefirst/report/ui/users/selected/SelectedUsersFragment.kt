@@ -23,14 +23,17 @@ import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity
 import java.util.ArrayList
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SelectedUsersFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: SelectedUsersModel
-    lateinit var recyclerView :RecyclerView
+    lateinit var recyclerView: RecyclerView
     var mDisposable = CompositeDisposable()
+
+    var indexOfUserToReplace: Int = -1
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,28 +48,41 @@ class SelectedUsersFragment : Fragment() {
             container,
             false
         )
-        recyclerView=binder.root.findViewById(R.id.list)
+        recyclerView = binder.root.findViewById(R.id.list)
         binder.viewModel = viewModel
         return binder.root
     }
 
     override fun onResume() {
         super.onResume()
-        recyclerView.layoutManager=LinearLayoutManager(context)
-        recyclerView.adapter=viewModel.mAdapter
-        mDisposable= CompositeDisposable()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = viewModel.mAdapter
+        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             viewModel.addClicks.subscribe {
                 if (viewModel.mRetailMode) {
                     viewModel.mUsers.add(User())
-                    viewModel.mAdapter?.setEntities(context, viewModel.mUsers,viewModel.mRetailMode)
+                    viewModel.mAdapter?.setEntities(
+                        context,
+                        viewModel.mUsers,
+                        viewModel.mRetailMode
+                    )
                     viewModel.mAdapter?.notifyDataSetChanged()
                 } else {
                     val intent = Intent(context, UsersActivity::class.java)
                     intent.putExtra("hideCurrentUserFromList", viewModel.hideCurrentUserFromList)
                     startActivityForResult(intent, EditReportActivity.ADD_VICTIM_CODE)
                 }
-            }
+            },
+            viewModel.mAdapter?.usersClicks
+                ?.debounce(500, TimeUnit.MILLISECONDS)
+                ?.subscribe {
+                    indexOfUserToReplace = viewModel.mUsers.indexOf(it)
+                    val intent = Intent(context, UsersActivity::class.java)
+                    intent.putExtra("hideCurrentUserFromList", viewModel.hideCurrentUserFromList)
+                    startActivityForResult(intent, EditReportActivity.ADD_VICTIM_CODE)
+
+                }
         )
         viewModel.initDisposable()
     }
@@ -74,7 +90,9 @@ class SelectedUsersFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         viewModel.dispose()
+        mDisposable.clear()
     }
+
     fun getUsers(): ArrayList<User> {
         return viewModel.mUsers
     }
@@ -90,14 +108,22 @@ class SelectedUsersFragment : Fragment() {
         viewModel.mAdapter?.setEntities(activity, viewModel.mUsers, viewModel.mRetailMode)
         viewModel?.mAdapter?.notifyDataSetChanged()
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == EditReportActivity.ADD_VICTIM_CODE && resultCode == Activity.RESULT_OK) {
             val user = data!!.getSerializableExtra("user") as User
             if (viewModel.onUserSelectedCallback != null)
                 viewModel.onUserSelectedCallback!!.onUserSelected(user)
-            if (!viewModel.enableMultiselect)
+            if (indexOfUserToReplace >= 0) {
+                viewModel.mUsers.set(indexOfUserToReplace, user)
+            } else {
+                viewModel.mUsers.add(user)
+
+            }
+            if (!viewModel.enableMultiselect) {
                 viewModel.mUsers.clear()
-            viewModel.mUsers.add(user)
+                viewModel.mUsers.add(user)
+            }
             viewModel.mAdapter?.setEntities(activity, viewModel.mUsers, viewModel.mRetailMode)
             viewModel.mAdapter?.notifyDataSetChanged()
             if (!viewModel.enableMultiselect) {

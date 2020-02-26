@@ -36,7 +36,7 @@ constructor(
 
     init {
         acitivty = context as EditReportActivity
-        mAdapter= TypesAdapter()
+        mAdapter = TypesAdapter()
     }
 
     fun initDisposable() {
@@ -48,7 +48,10 @@ constructor(
                 }
             },
             prevClick.subscribe {
-
+                previous()
+            },
+            acitivty.onBackPressedObject.subscribe {
+                previous()
             },
             mAdapter?.typeClick?.subscribe {
                 if (selectedHarassments.indexOf(it) >= 0)
@@ -72,6 +75,10 @@ constructor(
             }
 
         )
+    }
+
+    fun previous() {
+        acitivty.navigateTo(0)
     }
 
     fun dispose() {

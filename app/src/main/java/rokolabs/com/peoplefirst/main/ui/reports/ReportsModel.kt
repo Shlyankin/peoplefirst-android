@@ -49,15 +49,13 @@ class ReportsModel @Inject constructor(
                 inactiveAdapter.setEntities(context, it)
                 inactiveAdapter.notifyDataSetChanged()
             },
-            activeAdapter.getOnClickEditSubject().subscribe {
+            activeAdapter.detailsClicks.subscribe {
                 mRepository.currentReport.onNext(it);
-//            Intent intent = new Intent(this, ReportSummaryActivity.class);
-//            intent.putExtra("mode", ReportSummaryActivity.EDIT_MODE);
-//            startActivity(intent);
+                activity.startActivity(Intent(context, EditReportActivity::class.java))
             },
             addReportSubject.subscribe {
                 mRepository.currentReport.onNext(Report())
-                mRepository.named = HarassmentRepository.EMPTY
+//                mRepository.named = HarassmentRepository.EMPTY
                 activity.startActivity(Intent(context, EditReportActivity::class.java))
             }
         )

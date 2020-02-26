@@ -44,8 +44,10 @@ constructor(
         mDisposable = CompositeDisposable()
         mDisposable.addAll(
             prevSubject.subscribe {
-                acitivity.navigateTo(R.id.nav_harassment_type)
-                save()
+                previous()
+            },
+            acitivity.onBackPressedObject.subscribe {
+                previous()
             },
             nextSubject.subscribe {
                 if (save())
@@ -72,6 +74,10 @@ constructor(
                 if (report !== Report.EMPTY) selectedReasons = report.harassment_reasons
             }
         )
+    }
+
+    fun previous() {
+        acitivity.navigateTo(R.id.nav_harassment_type)
     }
 
     private fun save(): Boolean {
