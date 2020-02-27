@@ -54,7 +54,7 @@ class EditReportActivity : AppCompatActivity() {
     lateinit var navigationDrawerViewModel: NavigationDrawerViewModel
     lateinit var navController: NavController
     lateinit var drawerLayout: DrawerLayout
-    public var onBackPressedObject:PublishSubject<Int> = PublishSubject.create()
+    public var onBackPressedObject: PublishSubject<Int> = PublishSubject.create()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +78,9 @@ class EditReportActivity : AppCompatActivity() {
                 R.id.nav_harassment_reasons,
                 R.id.nav_report_happened_before,
                 R.id.nav_report_what_happened,
-                R.id.nav_report_who_being_harassed
+                R.id.nav_report_who_being_harassed,
+                R.id.nav_report_who_agressor_was,
+                R.id.nav_report_were_any_witnesses
             ), drawerLayout
         )
 
@@ -103,15 +105,14 @@ class EditReportActivity : AppCompatActivity() {
         }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             var handler = Handler()
-            handler.postDelayed({
-                supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
-            }, 200)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
         }
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.title = ""
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -150,7 +151,7 @@ class EditReportActivity : AppCompatActivity() {
 
     fun navigateTo(id: Int) {
         var pos = when (id) {
-            R.id.nav_harassment_type,R.id.nav_harassment_type_title -> {
+            R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
                 R.id.nav_harassment_type
             }
             R.id.nav_harassment_reasons -> {
@@ -159,23 +160,26 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_happened_before -> {
                 R.id.nav_report_happened_before
             }
-            R.id.nav_report_what_happened-> {
+            R.id.nav_report_what_happened -> {
                 R.id.nav_report_what_happened
             }
             R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
                 R.id.nav_report_who_being_harassed
             }
-            R.id.menuItem6 -> {
-                R.id.nav_harassment_type
+            R.id.nav_report_who_agressor_was -> {
+                R.id.nav_report_who_agressor_was
             }
-            R.id.menuItem7 -> {
-                R.id.nav_harassment_type
+            R.id.nav_report_were_any_witnesses -> {
+                R.id.nav_report_were_any_witnesses
             }
             R.id.menuItem8 -> {
                 R.id.nav_harassment_type
             }
             R.id.menuItem9 -> {
                 R.id.nav_harassment_type
+            }
+            R.id.nav_report_witness_information -> {
+                R.id.nav_report_witness_information
             }
             else -> {
                 R.id.nav_main_questions

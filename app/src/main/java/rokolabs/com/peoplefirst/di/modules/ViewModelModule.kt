@@ -9,16 +9,16 @@ import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.main.ui.profile.ProfileViewModel
 import rokolabs.com.peoplefirst.main.ui.reports.ReportsModel
 import rokolabs.com.peoplefirst.main.ui.resources.ResourcesViewModel
-import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
+import rokolabs.com.peoplefirst.report.ui.agressor.WhoAgressorWasModel
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
 import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedModel
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
-import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
-import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedModel
+import rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessModel
+import rokolabs.com.peoplefirst.report.ui.witness.information.WitnessInformationModel
 
 @Module
 abstract class ViewModelModule {
@@ -74,6 +74,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ResourcesViewModel::class)
     internal abstract fun resourcesViewModel(resourcesViewModel: ResourcesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WhoAgressorWasModel::class)
+    internal abstract fun whoAgressorWasModel(whoAgressorWasModel: WhoAgressorWasModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WereAnyWitnessModel::class)
+    internal abstract fun whereAnyWitnessModel(wereAnyWitnessModel: WereAnyWitnessModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WitnessInformationModel::class)
+    internal abstract fun witnessInformationModel(witnessInformationModel: WitnessInformationModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

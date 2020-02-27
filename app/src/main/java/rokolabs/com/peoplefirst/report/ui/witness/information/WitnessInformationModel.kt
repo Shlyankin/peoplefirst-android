@@ -1,4 +1,4 @@
-package rokolabs.com.peoplefirst.report.ui.agressor
+package rokolabs.com.peoplefirst.report.ui.witness.information
 
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,7 @@ import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersFragment
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
 
-class WhoAgressorWasModel @Inject
+class WitnessInformationModel @Inject
 constructor(
     private val context: Context,
     private val mService: PeopleFirstService,
@@ -34,32 +34,33 @@ constructor(
     }
 
     fun initDisposable() {
+        mSelectedUsers.viewModel.mRetailMode = mRepository.me.getValue()?.retail == 1
+        mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.getValue()?.email!!
+
         mDisposable.addAll(
-            nextClick.subscribe {
-                save()
-                activity.navigateTo(R.id.nav_report_were_any_witnesses)
-            },
             prevClick.subscribe {
-                previos()
+                previous()
+            },
+            nextClick.subscribe {
+                if (save()) {
+                    var t = 0
+                }
             },
             activity.onBackPressedObject.subscribe {
-                previos()
+                previous()
             },
-            mRepository.currentReport.subscribe {
-                if (it !== Report.EMPTY) {
-                    if (it.aggressors != null && it.aggressors.size > 0) {
-                        mSelectedUsers.setUsers(it.aggressors)
+            mRepository.currentReport.subscribe { report ->
+                if (report !== Report.EMPTY) {
+                    if (report.witnesses != null) {
+                        mSelectedUsers.setUsers(report.witnesses)
                     }
                 }
             }
         )
-        mSelectedUsers.viewModel.mRetailMode = mRepository.me.value?.retail == 1
-        mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.value?.email!!
-
     }
 
-    fun previos() {
-        activity.navigateTo(R.id.nav_report_who_being_harassed)
+    fun previous() {
+        activity.navigateTo(R.id.nav_report_were_any_witnesses)
     }
 
     fun dispose() {
@@ -67,25 +68,9 @@ constructor(
     }
 
     fun save(): Boolean {
-        if (mRepository.named == HarassmentRepository.EMPTY) {
-            if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
-                if (mSelectedUsers.getUsers().contains(mRepository.me.value)) {
-                    Toast.makeText(
-                        context,
-                        "Current user can not be named and aggressor",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
-                if (mSelectedUsers.getUsers().contains(mRepository.currentReport.value?.victim)) {
-                    Toast.makeText(
-                        context,
-                        "One and the same user can not be victim and aggressor simultaneously",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
-                if (mRepository.me.value?.retail==1 && !mSelectedUsers.viewModel.conformsToDomain()) {
+        if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
+            if (mRepository.named == HarassmentRepository.EMPTY) {
+                if (mRepository.me.value?.retail == 1 && !mSelectedUsers.viewModel.conformsToDomain()) {
                     Toast.makeText(
                         context,
                         "People included in your report must have the same email domain as yours",
@@ -93,8 +78,10 @@ constructor(
                     ).show()
                     return false
                 }
-                mRepository.currentReport.value?.aggressors = mSelectedUsers.getUsers()
+                mRepository.currentReport.value?.witnesses = mSelectedUsers.getUsers()
                 mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
+            } else {
+                mRepository.mSelectedUsersForWitnessOrAggressorReport = mSelectedUsers.getUsers()
             }
         }
         return true

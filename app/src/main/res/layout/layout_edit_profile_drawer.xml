@@ -185,7 +185,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menuItem6"
+                    android:id="@+id/nav_report_who_agressor_was"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -196,12 +196,13 @@
                         android:layout_marginTop="8dp"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_who_agressor_was}"
                         app:checked="@{viewModel.agressorsDone}"
                         app:title="Who do you belive was the agressor?" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menuItem7"
+                    android:id="@+id/nav_report_were_any_witnesses"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -212,6 +213,7 @@
                         android:layout_marginTop="8dp"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_were_any_witnesses || viewModel.currentPos.get() == R.id.nav_report_witness_information}"
                         app:checked="@{viewModel.witnessesDone}"
                         app:title="Where there any witnesses?" />
                 </LinearLayout>

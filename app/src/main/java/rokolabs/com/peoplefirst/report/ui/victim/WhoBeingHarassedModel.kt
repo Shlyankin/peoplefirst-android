@@ -62,6 +62,7 @@ constructor(
             nextClick.subscribe {
                 if (save()) {
                     var t = 0
+                    activity.navigateTo(R.id.nav_report_who_agressor_was)
 //                    val intent = Intent(this, WhoAgressorActivity::class.java)
 //                    startActivity(intent)
 //                    overridePendingTransition(R.anim.enter, R.anim.exit)

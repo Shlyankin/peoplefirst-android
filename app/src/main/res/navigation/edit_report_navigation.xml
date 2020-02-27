@@ -36,5 +36,20 @@
         android:name="rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment"
         android:label=""
         tools:layout="@layout/fragment_who_being_harassed" />
+    <fragment
+        android:id="@+id/nav_report_who_agressor_was"
+        android:name="rokolabs.com.peoplefirst.report.ui.agressor.WhoAgressorWasFragment"
+        android:label=""
+        tools:layout="@layout/fragment_report_agressor" />
+    <fragment
+        android:id="@+id/nav_report_were_any_witnesses"
+        android:name="rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessesFragment"
+        android:label=""
+        tools:layout="@layout/fragment_were_any_witnesses" />
+    <fragment
+        android:id="@+id/nav_report_witness_information"
+        android:name="rokolabs.com.peoplefirst.report.ui.witness.information.WitnessInformationFragment"
+        android:label=""
+        tools:layout="@layout/fragment_witness_information" />
 
 </navigation>
