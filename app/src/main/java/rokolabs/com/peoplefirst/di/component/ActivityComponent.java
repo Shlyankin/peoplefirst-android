@@ -15,6 +15,7 @@ import rokolabs.com.peoplefirst.di.modules.ActivityViewModelModule;
 import rokolabs.com.peoplefirst.di.modules.BaseUrl;
 import rokolabs.com.peoplefirst.di.scopes.PerActivity;
 import rokolabs.com.peoplefirst.report.EditReportActivity;
+import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
 import rokolabs.com.peoplefirst.repository.HarassmentRepository;
 
@@ -23,7 +24,7 @@ import rokolabs.com.peoplefirst.repository.HarassmentRepository;
  */
 
 @PerActivity
-@Component(dependencies = AppComponent.class, modules = { ActivityModule.class, ActivityViewModelModule.class})
+@Component(dependencies = AppComponent.class, modules = {ActivityModule.class, ActivityViewModelModule.class})
 public interface ActivityComponent {
 
     Context context();
@@ -35,13 +36,20 @@ public interface ActivityComponent {
     BaseUrl baseUrl();
 
     void inject(ResetPasswordActivity activity);
+
     void inject(CreateAccountRetailActivity activity);
-//    void inject(ReportsActivity activity);
+
+    //    void inject(ReportsActivity activity);
     void inject(SetNewPasswordActivity activity);
 
     void inject(LoginActivity activity);
+
     void inject(EditReportActivity activity);
+
     void inject(UsersActivity activity);
+
+    void inject(AddressLookupActivity activity);
+
     //
 //    void inject(HarassmentTypeActivity activity);
 //

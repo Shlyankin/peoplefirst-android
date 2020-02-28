@@ -2,12 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,40 +44,40 @@
 
             <TextView
                 android:id="@+id/nav_harassment_type"
+                reactiveClick="@{viewModel.whatHappenedObject}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
                 android:text="What happened?"
-                reactiveClick="@{viewModel.whatHappenedObject}"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/nav_report_who_being_harassed"
+                reactiveClick="@{viewModel.whoInvolvedObject}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                reactiveClick="@{viewModel.whoInvolvedObject}"
                 android:text="Who was involved?"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/nav_report_place"
+                reactiveClick="@{viewModel.whereHappenedObject}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                reactiveClick="@{viewModel.whereHappenedObject}"
                 android:text="Where did it happen?"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textView7"
+                reactiveClick="@{viewModel.whenHappenedObject}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                reactiveClick="@{viewModel.whenHappenedObject}"
                 android:text="When did it Happened?"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />

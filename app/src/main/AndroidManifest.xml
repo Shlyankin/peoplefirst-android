@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".report.ui.users.activity.UsersActivity"></activity>
+        <activity android:name=".report.ui.place.search.AddressLookupActivity"></activity>
+        <activity android:name=".report.ui.users.activity.UsersActivity" />
         <activity
             android:name=".report.EditReportActivity"
             android:label="@string/title_activity_edit_report"

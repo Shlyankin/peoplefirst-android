@@ -7,7 +7,9 @@
     <data>
 
         <import type="android.view.View" />
-        <import type="rokolabs.com.peoplefirst.R"/>
+
+        <import type="rokolabs.com.peoplefirst.R" />
+
         <variable
             name="viewModel"
             type="rokolabs.com.peoplefirst.report.NavigationDrawerViewModel" />
@@ -134,6 +136,7 @@
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -174,6 +177,7 @@
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -220,6 +224,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/nav_report_place_title"
                 reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -242,7 +247,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/menuItem8"
+                    android:id="@+id/nav_report_place"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -252,6 +257,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
+                        app:active="@{viewModel.currentPos.get() == R.id.nav_report_place}"
                         app:checked="@{viewModel.locationCityDone}"
                         app:title="Addrerss, and location" />
                 </LinearLayout>

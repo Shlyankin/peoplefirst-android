@@ -10,6 +10,8 @@ import rokolabs.com.peoplefirst.auth.password.reset.update.SetNewPasswordViewMod
 import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailViewModel
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
+import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
+import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
 
@@ -44,4 +46,9 @@ abstract class ActivityViewModelModule {
     @IntoMap
     @ViewModelKey(CreateAccountRetailViewModel::class)
     internal abstract fun createAccountRetailViewModel(createAccountRetailViewModel: CreateAccountRetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddressLookupModel::class)
+    internal abstract fun addressLookupModel(addressLookupModel: AddressLookupModel): ViewModel
 }

@@ -80,7 +80,8 @@ class EditReportActivity : AppCompatActivity() {
                 R.id.nav_report_what_happened,
                 R.id.nav_report_who_being_harassed,
                 R.id.nav_report_who_agressor_was,
-                R.id.nav_report_were_any_witnesses
+                R.id.nav_report_were_any_witnesses,
+                R.id.nav_report_place
             ), drawerLayout
         )
 
@@ -172,8 +173,8 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_were_any_witnesses -> {
                 R.id.nav_report_were_any_witnesses
             }
-            R.id.menuItem8 -> {
-                R.id.nav_harassment_type
+            R.id.nav_report_place, R.id.nav_report_place_title -> {
+                R.id.nav_report_place
             }
             R.id.menuItem9 -> {
                 R.id.nav_harassment_type

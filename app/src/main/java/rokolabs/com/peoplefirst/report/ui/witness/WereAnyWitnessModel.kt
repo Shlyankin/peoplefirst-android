@@ -52,7 +52,7 @@ constructor(
     }
 
     fun next() {
-
+        activity.navigateTo(R.id.nav_report_place)
     }
 
     fun previous() {

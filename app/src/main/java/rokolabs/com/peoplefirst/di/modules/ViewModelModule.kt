@@ -15,6 +15,7 @@ import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedMode
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
+import rokolabs.com.peoplefirst.report.ui.place.PlaceModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedModel
 import rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessModel
@@ -89,6 +90,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WitnessInformationModel::class)
     internal abstract fun witnessInformationModel(witnessInformationModel: WitnessInformationModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PlaceModel::class)
+    internal abstract fun placeModel(placeModel: PlaceModel): ViewModel
 //
 //    @Binds
 //    @IntoMap
