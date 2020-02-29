@@ -25,7 +25,6 @@ constructor(
 ) : ViewModel() {
     var activity: EditReportActivity
     var mDisposable = CompositeDisposable()
-    lateinit var mSelectedUsers: SelectedUsersFragment
 
     var nextClick: Subject<View> = PublishSubject.create()
     var prevClick: Subject<View> = PublishSubject.create()
@@ -35,6 +34,8 @@ constructor(
 
     init {
         activity = context as EditReportActivity
+        details.set("")
+        location.set("")
     }
 
     fun initDisposable() {
@@ -54,7 +55,7 @@ constructor(
                 if (report !== Report.EMPTY) {
                     if (location.get().toString().isEmpty())
                         location.set(report.location_city)
-                    location.set(report.location_details)
+                    details.set(report.location_details)
                 }
             }
         )

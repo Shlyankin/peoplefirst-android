@@ -21,6 +21,7 @@ import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
+import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
 
 class PlaceFragment : Fragment() {
@@ -62,6 +63,7 @@ class PlaceFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         viewModel.dispose()
+        mDisposable.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
