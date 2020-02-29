@@ -33,10 +33,11 @@ constructor(
 
     init {
         activity = context as EditReportActivity
+        details.set("")
     }
 
     fun initDisposable() {
-        mDisposable = CompositeDisposable()
+//        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
                 activity.navigateTo(R.id.nav_report_who_being_harassed)
@@ -46,7 +47,7 @@ constructor(
                 previous()
             },
             activity.onBackPressedObject.subscribe {
-              previous()
+                previous()
             },
             attachClick.subscribe {
                 activity.chooseFile()
@@ -59,11 +60,13 @@ constructor(
             }
         })
     }
-    fun previous(){
+
+    fun previous() {
         activity.navigateTo(R.id.nav_report_happened_before)
     }
+
     fun dispose() {
-        mDisposable.dispose()
+//        mDisposable.dispose()
         mDisposable.clear()
     }
 
