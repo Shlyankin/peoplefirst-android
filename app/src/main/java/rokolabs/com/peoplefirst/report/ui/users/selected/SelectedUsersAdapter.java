@@ -85,7 +85,8 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
 //            holder.mLastName.setEnabled(false);
             holder.mClick.setVisibility(View.VISIBLE);
             holder.mEmail.setVisibility(View.GONE);
-            holder.mCompany.setText(mUsers.get(position).company.name);
+            if (mUsers.get(position).company != null)
+                holder.mCompany.setText(mUsers.get(position).company.name);
             holder.mClick.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
