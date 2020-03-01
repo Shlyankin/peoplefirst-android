@@ -7,17 +7,17 @@ public class User implements Serializable {
 
     public final static User EMPTY = new User();
 
-    public int id = new Long(System.currentTimeMillis()).intValue();
+    public Integer id;
     public int company_id;
-    public String email;
+    public String email = "";
     public String secondary_email;
     public String birthday;
     public String address;
     public String phone;
     public String role;
-    public String first_name;
+    public String first_name = "";
     public String last_name;
-    public String department;
+    public String department = "";
     public String created_at;
     public String updated_at;
 

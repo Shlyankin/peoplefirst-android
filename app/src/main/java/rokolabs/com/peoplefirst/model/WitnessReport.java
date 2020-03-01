@@ -8,7 +8,7 @@ public class WitnessReport {
     public Boolean location_confirmation = false;
     public Boolean victim_confirmation = false;
     public Boolean aggressor_confirmation = false;
-    public String details;
+    public String details="";
     public User victim;
     public User aggressor;
     public boolean anonym;

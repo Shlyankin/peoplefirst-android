@@ -1,5 +1,6 @@
 package rokolabs.com.peoplefirst.report.ui.victim
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ class WhoBeingHarassedFragment : Fragment() {
     lateinit var viewModel: WhoBeingHarassedModel
     lateinit var mSelectedUsers: SelectedUsersFragment
 
+    @SuppressLint("CheckResult")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,8 +53,17 @@ class WhoBeingHarassedFragment : Fragment() {
                 viewModel?.selfReporting.set(user.id === mRepository.me.getValue()!!.id)
             }
         }
+        mSelectedUsers.viewModel.mAdapter?.onUserEdited?.subscribe {
+            viewModel.dispose()
+            if (it.id == null) {
+                viewModel.selfReporting.set(false)
+            } else {
+                viewModel.selfReporting.set(it.id === mRepository.me.value!!.id)
+            }
+            viewModel.initDisposable()
+        }
         mSelectedUsers.viewModel.disableMultiselect()
-        mSelectedUsers.viewModel.mRetailMode = mRepository.me.getValue()!!.retail==1
+        mSelectedUsers.viewModel.mRetailMode = mRepository.me.getValue()!!.retail == 1
         mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.getValue()!!.email
 
         binder.viewModel = viewModel

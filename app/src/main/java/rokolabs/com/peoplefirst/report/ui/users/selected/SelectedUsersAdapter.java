@@ -1,5 +1,6 @@
 package rokolabs.com.peoplefirst.report.ui.users.selected;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 import rokolabs.com.peoplefirst.R;
 import rokolabs.com.peoplefirst.model.User;
@@ -35,7 +37,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
     private String mRetailMeEmail = "";
 
     private final PublishSubject<User> onClickDetailsSubject = PublishSubject.create();
-
+    public final BehaviorSubject<User> onUserEdited = BehaviorSubject.create();
 
     public void setEntities(Context context, List<User> entities, boolean retailMode) {
         mContext = context;
@@ -47,6 +49,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         mRetailMeEmail = s;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -56,39 +59,8 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         vh.mLastName = v.findViewById(R.id.lastName);
         vh.mCompany = v.findViewById(R.id.company);
         vh.mEmail = v.findViewById(R.id.email);
-        vh.mClick=v.findViewById(R.id.clickView);
-        if (mRetailMode) {
-            RxTextView.afterTextChangeEvents(vh.mFirstName)
-                    .skip(1)
-                    .debounce(400, TimeUnit.MILLISECONDS)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(e -> {
-                        Integer pos = (Integer) e.component1().getTag();
-                        mUsers.get(pos).first_name = e.getEditable().toString();
-                    });
+        vh.mClick = v.findViewById(R.id.clickView);
 
-            RxTextView.afterTextChangeEvents(vh.mLastName)
-                    .skip(1)
-                    .debounce(400, TimeUnit.MILLISECONDS)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(e -> {
-                        Integer pos = (Integer) e.component1().getTag();
-                        mUsers.get(pos).last_name = e.getEditable().toString();
-                    });
-
-            RxTextView.afterTextChangeEvents(vh.mEmail)
-                    .skip(1)
-                    .debounce(400, TimeUnit.MILLISECONDS)
-                    .filter(e -> Utils.isValidEmail(e.component2()))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(e -> {
-                        Integer pos = (Integer) e.component1().getTag();
-                        mUsers.get(pos).email = e.getEditable().toString();
-                        if (!"".equals(e.component2().toString()) && !emailDomainValid(e.component2().toString())) {
-                            e.component1().setError("People included in your report must have the same email domain as your username");
-                        }
-                    });
-        }
         return vh;
     }
 
@@ -121,6 +93,56 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
                 }
             });
         }
+        if (mRetailMode) {
+            RxTextView.afterTextChangeEvents(holder.mFirstName)
+                    .skip(1)
+                    .debounce(400, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(e -> {
+                        Integer pos = (Integer) e.component1().getTag();
+                        if (mUsers.size() > pos) {
+                            mUsers.get(pos).id = null;
+                            mUsers.get(pos).first_name = e.getEditable().toString();
+                            if (mRetailMode) {
+                                onUserEdited.onNext(mUsers.get(pos));
+                            }
+                        }
+                    });
+
+            RxTextView.afterTextChangeEvents(holder.mLastName)
+                    .skip(1)
+                    .debounce(400, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(e -> {
+                        Integer pos = (Integer) e.component1().getTag();
+                        if (mUsers.size() > pos) {
+                            mUsers.get(pos).id = null;
+                            mUsers.get(pos).last_name = e.getEditable().toString();
+                            if (mRetailMode) {
+                                onUserEdited.onNext(mUsers.get(pos));
+                            }
+                        }
+                    });
+
+            RxTextView.afterTextChangeEvents(holder.mEmail)
+                    .skip(1)
+                    .debounce(400, TimeUnit.MILLISECONDS)
+                    .filter(e -> Utils.isValidEmail(e.component2()))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(e -> {
+                        Integer pos = (Integer) e.component1().getTag();
+                        if (mUsers.size() > pos) {
+                            mUsers.get(pos).id = null;
+                            mUsers.get(pos).email = e.getEditable().toString();
+                            if (mRetailMode) {
+                                onUserEdited.onNext(mUsers.get(pos));
+                            }
+                        }
+                        if (!"".equals(e.component2().toString()) && !emailDomainValid(e.component2().toString())) {
+                            e.component1().setError("People included in your report must have the same email domain as your username");
+                        }
+                    });
+        }
 
     }
 
@@ -147,6 +169,7 @@ public class SelectedUsersAdapter extends RecyclerView.Adapter<SelectedUsersAdap
         public TextView mCompany;
         public TextView mEmail;
         public LinearLayout mClick;
+
         public ViewHolder(View v) {
             super(v);
         }
