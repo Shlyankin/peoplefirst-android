@@ -1,16 +1,19 @@
 package rokolabs.com.peoplefirst.report.ui.users.selected
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_selected_users.*
 import rokolabs.com.peoplefirst.R
@@ -22,7 +25,7 @@ import rokolabs.com.peoplefirst.model.User
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity
-import java.util.ArrayList
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -107,6 +110,48 @@ class SelectedUsersFragment : Fragment() {
         viewModel.mUsers.clear()
         viewModel.mAdapter?.setEntities(activity, viewModel.mUsers, viewModel.mRetailMode)
         viewModel?.mAdapter?.notifyDataSetChanged()
+    }
+
+    @SuppressLint("CheckResult")
+    fun checkConditions(): Boolean {
+        var popularDomains = listOf<String>(
+            "gmail.com",
+            "yahoo.com",
+            "outlook.com",
+            " aol.com",
+            "icloud.com",
+            " me.com",
+            " Comcast.com"
+        )
+        if (viewModel.mRetailMode) {
+            var flag = true
+            var flag2 = true
+            viewModel.mUsers.forEach {
+                var email = it.email
+                popularDomains.forEach {
+                    if (email.endsWith(it, true)) {
+                        flag = false
+                    }
+                }
+                flag2
+                it.first_name.isNotEmpty() && it.last_name.isNotEmpty() && it.email.isNotEmpty()
+
+            }
+            if (!flag2) {
+                Toast.makeText(context, "All fields are required!", Toast.LENGTH_LONG)
+                    .show()
+            }
+            if (!flag) {
+                Toast.makeText(
+                    context,
+                    "Popular domains are forbiden!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            return flag && flag2
+        } else {
+            return true
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

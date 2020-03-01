@@ -43,6 +43,7 @@ constructor(
             nextClick.subscribe {
                 if (save()) {
                     var t = 0
+                    activity.finish()
                 }
             },
             prevClick.subscribe {

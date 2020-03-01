@@ -34,6 +34,8 @@ constructor(
     }
 
     fun initDisposable() {
+        mSelectedUsers.viewModel.mRetailMode = mRepository.me.value?.retail == 1
+        mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.value?.email!!
         mDisposable.addAll(
             nextClick.subscribe {
                 save()
@@ -53,8 +55,7 @@ constructor(
                 }
             }
         )
-        mSelectedUsers.viewModel.mRetailMode = mRepository.me.value?.retail == 1
-        mSelectedUsers.viewModel.mRetailMeEmail = mRepository.me.value?.email!!
+
 
     }
 
@@ -68,7 +69,7 @@ constructor(
 
     fun save(): Boolean {
         if (mRepository.named == HarassmentRepository.EMPTY) {
-            if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
+            if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null && mSelectedUsers.checkConditions()) {
                 if (mSelectedUsers.getUsers().contains(mRepository.me.value)) {
                     Toast.makeText(
                         context,
@@ -85,7 +86,7 @@ constructor(
                     ).show()
                     return false
                 }
-                if (mRepository.me.value?.retail==1 && !mSelectedUsers.viewModel.conformsToDomain()) {
+                if (mRepository.me.value?.retail == 1 && !mSelectedUsers.viewModel.conformsToDomain()) {
                     Toast.makeText(
                         context,
                         "People included in your report must have the same email domain as yours",
