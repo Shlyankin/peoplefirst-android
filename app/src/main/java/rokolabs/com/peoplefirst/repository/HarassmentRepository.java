@@ -296,7 +296,7 @@ public class HarassmentRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(baseResponse -> {
                     if (baseResponse.body() != null && baseResponse.body().success) {
-                        getMyReports();
+//                        getMyReports();
 //                        Toast.makeText(mContext, "Report updated", Toast.LENGTH_LONG).show();
                     } else if (baseResponse.errorBody() != null) {
                         Toast.makeText(mContext,
