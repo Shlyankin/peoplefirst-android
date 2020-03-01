@@ -33,58 +33,67 @@ class SplashActivity : AppCompatActivity() {
         ComponentManager.getInstance().getActivityComponent(this).inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        handleDeepLink()
+
     }
 
     private fun handleDeepLink() {
         val activity = this
         FirebaseDynamicLinks.getInstance()
-                .getDynamicLink(intent)
-                .addOnSuccessListener(this) { pendingDynamicLinkData ->
-                    // Get deep link from result (may be null if no link is found)
-                    val deepLink: Uri?
-                    if (pendingDynamicLinkData != null) {
-                        deepLink = pendingDynamicLinkData.link
-                        if (deepLink != null) {
-                            val path = deepLink.lastPathSegment
-                            when (path) {
-                                "auth" -> kotlin.run {
-                                    var email = deepLink.getQueryParameter("user")!!
-                                    var token = deepLink.getQueryParameter("token")!!
-                                    mService!!.validateEmail(ValidateEmailRequest(email, token))
-                                            .subscribeOn(Schedulers.io())
-                                            .observeOn(AndroidSchedulers.mainThread())
-                                            .subscribeBy(onSuccess = {
-                                                if (it.success) {
-                                                    Toast.makeText(this, "Account verified", Toast.LENGTH_LONG).show()
-                                                    startActivity(Intent(this, LoginActivity::class.java))
-                                                }
-                                            })
-                                }
-                                "setpassword"->kotlin.run {
-                                    var email = deepLink.getQueryParameter("user")!!
-                                    var token = deepLink.getQueryParameter("token")!!
-                                    var intent=Intent(this,SetNewPasswordActivity::class.java)
-                                    intent.putExtra("token",token)
-                                    startActivity(intent)
-                                    finish()
-                                }
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                // Get deep link from result (may be null if no link is found)
+                val deepLink: Uri?
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                    if (deepLink != null) {
+                        val path = deepLink.lastPathSegment
+                        when (path) {
+                            "auth" -> kotlin.run {
+                                var email = deepLink.getQueryParameter("user")!!
+                                var token = deepLink.getQueryParameter("token")!!
+                                mService!!.validateEmail(ValidateEmailRequest(email, token))
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeBy(onSuccess = {
+                                        if (it.success) {
+                                            Toast.makeText(
+                                                this,
+                                                "Account verified",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            startActivity(Intent(this, LoginActivity::class.java))
+                                        }
+                                    })
+                            }
+                            "setpassword" -> kotlin.run {
+                                var email = deepLink.getQueryParameter("user")!!
+                                var token = deepLink.getQueryParameter("token")!!
+                                var intent = Intent(this, SetNewPasswordActivity::class.java)
+                                intent.putExtra("token", token)
+                                startActivity(intent)
+                                finish()
                             }
                         }
-                    } else {
-                        startLoginActivity()
                     }
+                } else {
+                    startLoginActivity()
                 }
-                .addOnFailureListener(this) { startLoginActivity() }
+            }
+            .addOnFailureListener(this) { startLoginActivity() }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleDeepLink()
     }
 
     @SuppressLint("CheckResult")
     private fun startLoginActivity() {
         Observable.timer(1, TimeUnit.SECONDS)
-                .subscribe { i ->
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+            .subscribe { i ->
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
     }
 }

@@ -59,6 +59,7 @@ class ReportsModel @Inject constructor(
                 activity.startActivity(Intent(context, EditReportActivity::class.java))
             }
         )
+        mRepository.getMyReports()
     }
 
     fun dispose() {
