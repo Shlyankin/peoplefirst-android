@@ -9,12 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.ui.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.toolbar_with_logo.*
 import rokolabs.com.peoplefirst.R
+import rokolabs.com.peoplefirst.api.PeopleFirstService
+import rokolabs.com.peoplefirst.di.ComponentManager
+import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    @Inject
+    lateinit var mRepository: HarassmentRepository
+    @Inject
+    lateinit var mService: PeopleFirstService
+    var mDisposable = CompositeDisposable()
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return true
     }
@@ -23,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ComponentManager.getInstance().getActivityComponent(this).inject(this)
         setContentView(R.layout.activity_main)
 //        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -42,24 +56,52 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             appBarConfiguration
         )
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            var handler=Handler()
+            var handler = Handler()
             handler.postDelayed({
                 supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
-            },200)
+            }, 200)
         }
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
-        navView.setNavigationItemSelectedListener(this);
+
         navView.getMenu().getItem(0).setChecked(true);
         navView.setupWithNavController(navController)
         supportActionBar?.title = ""
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
+        mDisposable.add(
+            mRepository.me.subscribe {
+                if (it.retail == 1) {
+                    mDisposable.add(
+                        mService.escalationLevels
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                { response ->
+                                    if (response.success) {
+                                        if (response.data.size == 0) {
+                                            navController.navigate(R.id.nav_resources)
+                                        }
+                                    }
+                                },
+                                { throwable ->
+                                    Toast.makeText(
+                                        this,
+                                        "Unable to get escalation levels",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                })
+                    )
+                }
+            }
+        )
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onResume() {
         super.onResume()
-
     }
 
+    override fun onPause() {
+        super.onPause()
+        mDisposable.clear()
+    }
 }

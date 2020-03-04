@@ -14,6 +14,7 @@ import rokolabs.com.peoplefirst.di.modules.ActivityModule;
 import rokolabs.com.peoplefirst.di.modules.ActivityViewModelModule;
 import rokolabs.com.peoplefirst.di.modules.BaseUrl;
 import rokolabs.com.peoplefirst.di.scopes.PerActivity;
+import rokolabs.com.peoplefirst.main.MainActivity;
 import rokolabs.com.peoplefirst.report.EditReportActivity;
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
@@ -49,6 +50,8 @@ public interface ActivityComponent {
     void inject(UsersActivity activity);
 
     void inject(AddressLookupActivity activity);
+
+    void inject(MainActivity activity);
 
     //
 //    void inject(HarassmentTypeActivity activity);

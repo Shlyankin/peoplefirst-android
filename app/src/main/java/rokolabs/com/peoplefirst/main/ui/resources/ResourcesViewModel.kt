@@ -54,15 +54,7 @@ class ResourcesViewModel
 
     fun initDisposable() {
         mDisposable.addAll(
-            mService.escalationLevels
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response ->
-                    if (response.success) {
-                        showLevels(response.data)
-                    }
-                }, { throwable -> showToast("Unable to get escalation levels") })
-            , mService.getCounsellingServices(mRepository.me.value!!.company.id)
+            mService.getCounsellingServices(mRepository.me.value!!.company.id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response ->
@@ -71,12 +63,6 @@ class ResourcesViewModel
                     }
                 }, { throwable -> showToast("Unable to get counseling services") }
                 ),
-            mRepository.me.subscribe { user ->
-                showCompanyName(user.company.name)
-                mAdapter.editable.onNext(user.retail == 1)
-                saveButtonStatus.onNext(user.retail == 1)
-                addButtonVisibility.set(user.retail == 1)
-            },
             addClick.subscribe {
                 var items = mAdapter.getmItems()
                 items.add(EscalationLevel("name", "contact"))
@@ -104,6 +90,34 @@ class ResourcesViewModel
                 showhideSaveButton(it)
             }
         )
+        updateEscalationLevels()
+    }
+
+    fun updateEscalationLevels() {
+        mDisposable.add(mRepository.me.subscribe { user ->
+            showCompanyName(user.company.name)
+            mDisposable.add(
+                mService.escalationLevels
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onError = {
+                        showToast("Unable to get escalation levels")
+                    }, onSuccess = {
+                        if (it.success) {
+                            if (it.data.size == 0) {
+                                mAdapter.editable.onNext(user.retail == 1)
+                                saveButtonStatus.onNext(user.retail == 1)
+                                addButtonVisibility.set(user.retail == 1)
+                            } else {
+                                mAdapter.editable.onNext(false)
+                                saveButtonStatus.onNext(false)
+                                addButtonVisibility.set(false)
+                            }
+                            showLevels(it.data)
+                        }
+                    })
+            )
+        })
     }
 
     fun showLevels(levels: ArrayList<EscalationLevel>) {
@@ -131,10 +145,12 @@ class ResourcesViewModel
         toastSubject.onNext(string)
 //        Toast.makeText(context,string, Toast.LENGTH_LONG).show()
     }
+
     fun showhideSaveButton(boolean: Boolean) {
         activity?.findViewById<ImageView>(R.id.save)?.visibility =
             if (boolean) View.VISIBLE else View.GONE
     }
+
     fun saveResources() {
         Observable.just(mAdapter.getmItems())
             .flatMap {
@@ -157,14 +173,7 @@ class ResourcesViewModel
                 }
                 showToast("Unable to save escalation levels")
             }, onNext = {
-                mService.escalationLevels
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ response ->
-                        if (response.success) {
-                            showLevels(response.data)
-                        }
-                    }, { throwable -> showToast("Unable to get escalation levels") })
+                updateEscalationLevels()
                 showToast("Escalation levels updated")
 
             })
