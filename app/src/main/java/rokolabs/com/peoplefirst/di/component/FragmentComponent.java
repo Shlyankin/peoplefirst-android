@@ -10,6 +10,7 @@ import rokolabs.com.peoplefirst.main.ui.profile.ProfileFragment;
 import rokolabs.com.peoplefirst.main.ui.reports.ReportsFragment;
 import rokolabs.com.peoplefirst.main.ui.resources.ResourcesFragment;
 import rokolabs.com.peoplefirst.report.ui.agressor.WhoAgressorWasFragment;
+import rokolabs.com.peoplefirst.report.ui.date.DateTimeSelectionFragment;
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeFragment;
 import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedFragment;
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsFragment;
@@ -51,7 +52,10 @@ public interface FragmentComponent {
     void inject(WereAnyWitnessesFragment fragment);
 
     void inject(WitnessInformationFragment fragment);
+
     void inject(PlaceFragment fragment);
+
+    void inject(DateTimeSelectionFragment fragment);
 
 }
 

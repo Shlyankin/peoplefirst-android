@@ -10,6 +10,7 @@ import rokolabs.com.peoplefirst.main.ui.profile.ProfileViewModel
 import rokolabs.com.peoplefirst.main.ui.reports.ReportsModel
 import rokolabs.com.peoplefirst.main.ui.resources.ResourcesViewModel
 import rokolabs.com.peoplefirst.report.ui.agressor.WhoAgressorWasModel
+import rokolabs.com.peoplefirst.report.ui.date.DateTimeSelectionViewModel
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
 import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedModel
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
@@ -38,6 +39,7 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainQuestionsModel::class)
     internal abstract fun mainQuestionsModel(mainQuestionsModel: MainQuestionsModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(HarassmentTypeModel::class)
@@ -47,10 +49,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HarassmentReasonsModel::class)
     internal abstract fun harassmentReasonsModel(harassmentReasonsModel: HarassmentReasonsModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(WhatHappenedModel::class)
     internal abstract fun whatHappenedModel(whatHappenedModel: WhatHappenedModel): ViewModel
+
     @Binds
     @IntoMap
     @ViewModelKey(WhoBeingHarassedModel::class)
@@ -95,7 +99,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PlaceModel::class)
     internal abstract fun placeModel(placeModel: PlaceModel): ViewModel
-//
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DateTimeSelectionViewModel::class)
+    internal abstract fun dateTimeSelectionViewModel(dateTimeSelectionViewModel: DateTimeSelectionViewModel): ViewModel
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(OrderViewModel::class)

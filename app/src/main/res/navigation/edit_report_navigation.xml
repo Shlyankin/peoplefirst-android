@@ -20,7 +20,7 @@
         android:id="@+id/nav_harassment_reasons"
         android:name="rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsFragment"
         android:label=""
-        tools:layout="@layout/activity_harassment_reason"/>
+        tools:layout="@layout/activity_harassment_reason" />
     <fragment
         android:id="@+id/nav_report_happened_before"
         android:name="rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeFragment"
@@ -56,5 +56,10 @@
         android:name="rokolabs.com.peoplefirst.report.ui.place.PlaceFragment"
         android:label=""
         tools:layout="@layout/fragment__place" />
+    <fragment
+        android:id="@+id/nav_report_date_time"
+        android:name="rokolabs.com.peoplefirst.report.ui.date.DateTimeSelectionFragment"
+        android:label=""
+        tools:layout="@layout/fragment_date_time_selection" />
 
 </navigation>

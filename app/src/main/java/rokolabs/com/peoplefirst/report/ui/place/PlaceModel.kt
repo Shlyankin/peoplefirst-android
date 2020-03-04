@@ -28,7 +28,7 @@ constructor(
 
     var nextClick: Subject<View> = PublishSubject.create()
     var prevClick: Subject<View> = PublishSubject.create()
-    var locationClick :Subject<View> = PublishSubject.create()
+    var locationClick: Subject<View> = PublishSubject.create()
     var location: ObservableField<String> = ObservableField()
     var details: ObservableField<String> = ObservableField()
 
@@ -43,7 +43,7 @@ constructor(
             nextClick.subscribe {
                 if (save()) {
                     var t = 0
-                    activity.finish()
+                    activity.navigateTo(R.id.nav_report_date_time)
                 }
             },
             prevClick.subscribe {

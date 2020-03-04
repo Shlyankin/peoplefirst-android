@@ -176,8 +176,8 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_place, R.id.nav_report_place_title -> {
                 R.id.nav_report_place
             }
-            R.id.menuItem9 -> {
-                R.id.nav_harassment_type
+            R.id.nav_report_date_time,R.id.nav_report_date_time_title -> {
+                R.id.nav_report_date_time
             }
             R.id.nav_report_witness_information -> {
                 R.id.nav_report_witness_information
