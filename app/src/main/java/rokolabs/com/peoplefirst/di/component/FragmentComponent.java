@@ -17,6 +17,9 @@ import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsFr
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeFragment;
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsFragment;
 import rokolabs.com.peoplefirst.report.ui.place.PlaceFragment;
+import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedFragment;
+import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedModel;
+import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryFragment;
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersFragment;
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment;
 import rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessesFragment;
@@ -56,6 +59,10 @@ public interface FragmentComponent {
     void inject(PlaceFragment fragment);
 
     void inject(DateTimeSelectionFragment fragment);
+
+    void inject(HowResolvedFragment fragment);
+
+    void inject(ReportSummaryFragment fragment);
 
 }
 

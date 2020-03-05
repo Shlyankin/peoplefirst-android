@@ -176,11 +176,17 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_place, R.id.nav_report_place_title -> {
                 R.id.nav_report_place
             }
-            R.id.nav_report_date_time,R.id.nav_report_date_time_title -> {
+            R.id.nav_report_date_time, R.id.nav_report_date_time_title -> {
                 R.id.nav_report_date_time
+            }
+            R.id.nav_report_how_resolved -> {
+                R.id.nav_report_how_resolved
             }
             R.id.nav_report_witness_information -> {
                 R.id.nav_report_witness_information
+            }
+            R.id.nav_report_summary -> {
+                R.id.nav_report_summary
             }
             else -> {
                 R.id.nav_main_questions

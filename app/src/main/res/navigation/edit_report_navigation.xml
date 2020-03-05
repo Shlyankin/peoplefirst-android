@@ -61,5 +61,15 @@
         android:name="rokolabs.com.peoplefirst.report.ui.date.DateTimeSelectionFragment"
         android:label=""
         tools:layout="@layout/fragment_date_time_selection" />
+    <fragment
+        android:id="@+id/nav_report_how_resolved"
+        android:name="rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedFragment"
+        android:label=""
+        tools:layout="@layout/fragment_how_resolved" />
+    <fragment
+        android:id="@+id/nav_report_summary"
+        android:name="rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryFragment"
+        android:label=""
+        tools:layout="@layout/fragment_report_summary" />
 
 </navigation>

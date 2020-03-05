@@ -305,7 +305,8 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/changePassword"
+            android:id="@+id/nav_report_summary"
+            reactiveClick="@{viewModel.menuItemClick}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

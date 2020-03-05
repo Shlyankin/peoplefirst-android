@@ -17,6 +17,8 @@ import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsMo
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
 import rokolabs.com.peoplefirst.report.ui.place.PlaceModel
+import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedModel
+import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedModel
 import rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessModel
@@ -104,6 +106,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DateTimeSelectionViewModel::class)
     internal abstract fun dateTimeSelectionViewModel(dateTimeSelectionViewModel: DateTimeSelectionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HowResolvedModel::class)
+    internal abstract fun howResolvedModel(howResolvedModel: HowResolvedModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReportSummaryModel::class)
+    internal abstract fun reportSummaryModel(reportSummaryModel: ReportSummaryModel): ViewModel
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(OrderViewModel::class)

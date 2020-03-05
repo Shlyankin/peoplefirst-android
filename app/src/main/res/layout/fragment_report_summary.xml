@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/ic_background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/drawable_rounded_bkg_white"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    app:layout_constraintBottom_toTopOf="@+id/add"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@{viewModel.title}"
+                        android:textColor="@android:color/black"
+                        android:textSize="33sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tapAnyQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Tap any question to make an edit."
+                        android:textColor="#676767"
+                        android:visibility="@{viewModel.tapAnyQuestionVisibility}" />
+
+                    <CheckBox
+                        android:id="@+id/anonym"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:checked="@{viewModel.anonymousChecked}"
+                        android:text="I wish to report this anonymously"
+                        android:visibility="@{viewModel.anonymousCheckedVisibility}" />
+
+                    <LinearLayout
+                        android:id="@+id/nav_harassment_typer"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="What type of harassment do you believe took place?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whatTypeOfHarasmentTookPlace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@{viewModel.harassmentType}"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            tools:text="Offensive jokes" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_harassment_reasons"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Basis of harassment"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whatReasonOfHarasmentTookPlace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.harassmentBasis}"
+                            tools:text="Skin color" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_happened_before"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Has this happened before?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/hasThisHappenedBefore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.happenedBefore}"
+                            tools:text="No" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_what_happened"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Describe what happened"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whatHappened"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.whatHappened}"
+                            tools:text="They laughed at me" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_who_being_harassed"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Who do you believe was harassed?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whoWasHarassed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.whoHarassed}"
+                            tools:text="Alex Miller" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_who_agressor_wasr"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Who do you believe the aggressor was?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whoWasTheAggressor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.whoAggressor}"
+                            tools:text="John Hancock" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_were_any_witnesses"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Were there any witnesses?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whereThereAnyWitnesses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.wereWitnesses}"
+                            tools:text="Alice Cooper" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_place"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Where did this take place?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whereDidThisTakePlace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.place}"
+                            tools:text="New York City" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/nav_report_date_time"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When did this take place?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/whenDidItHappen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.dateTime}"
+                            tools:text="01/01/2020 1:10 AM" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/howResolved"
+                        reactiveClick="@{viewModel.editClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="How would you like this resolved?"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/howResolvedDetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:text="@{viewModel.howResolved}"
+                            tools:text="Make justice" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/attachments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="29dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_marginRight="29dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Attachments"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/add"
+                    reactiveClick="@{viewModel.submitClick}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/drawable_rounded_bkg_lioght_green"
+                    android:gravity="center_horizontal"
+                    android:padding="15dp"
+                    android:text="Submit your report"
+                    android:textColor="#006F6B"
+                    android:visibility="@{viewModel.doneVisibility}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

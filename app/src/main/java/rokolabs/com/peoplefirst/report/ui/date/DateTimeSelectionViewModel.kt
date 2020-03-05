@@ -71,7 +71,7 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
-                    mActivity.finish()
+                    mActivity.navigateTo(R.id.nav_report_how_resolved)
                 }
             },
             prevClick.subscribe {
