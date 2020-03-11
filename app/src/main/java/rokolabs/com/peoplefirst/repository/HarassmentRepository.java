@@ -38,7 +38,7 @@ import rokolabs.com.peoplefirst.utils.Utils;
 public class HarassmentRepository {
 
     public final static int WITNESS = 0;
-    public final static int TRANSGRESSOR = 1;
+    public final static int AGGRESSOR = 1;
     public final static int VICTIM = 2;
     public final static int EMPTY = -1;
 
@@ -63,6 +63,7 @@ public class HarassmentRepository {
     public boolean profileForCreateReport = false;
 
     @Inject
+    @SuppressLint("CheckResult")
     public HarassmentRepository(PeopleFirstService service, Context context) {
         mService = service;
         mContext = context;
@@ -84,12 +85,36 @@ public class HarassmentRepository {
                 }
             }
         };
+        currentReport.subscribe(report -> {
+            if (!report.status.contains("created"))
+                me.subscribe(user -> {
+                    if (user.email.equals(report.victim.email)) {
+                        named = VICTIM;
+                        return;
+                    }
+                    for (User agressor : report.aggressors) {
+                        if (agressor.email.equals(user.email)) {
+                            named = AGGRESSOR;
+                            return;
+                        }
+                    }
+
+                    for (User witness : report.witnesses) {
+                        if (witness.email.equals(user.email)) {
+                            named = WITNESS;
+                            return;
+                        }
+                    }
+
+                });
+
+        });
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, new IntentFilter("REPORT_ADDED"));
     }
 
 
     public void addReport(Report report) {
-        if (me.getValue().retail==1) {
+        if (me.getValue().retail == 1) {
             RetailReport rr = report.convertToRetail();
             RetailUser rme = me.getValue().convertToRetail();
             if (rr.victim != null) {
@@ -113,11 +138,11 @@ public class HarassmentRepository {
                         } else
                             Toast.makeText(mContext, reportResponse.error.message, Toast.LENGTH_LONG).show();
                     }, throwable -> {
-                        if(throwable instanceof HttpException){
-                            HttpException exception= (HttpException) throwable;
-                            String s=exception.response().errorBody().string();
-                            String t=s;
-                            t=t+"asd";
+                        if (throwable instanceof HttpException) {
+                            HttpException exception = (HttpException) throwable;
+                            String s = exception.response().errorBody().string();
+                            String t = s;
+                            t = t + "asd";
                         }
                         Toast.makeText(mContext, "Could not add report", Toast.LENGTH_LONG).show();
 
@@ -150,7 +175,7 @@ public class HarassmentRepository {
     }
 
     public void addWitnessReport() {
-        if (me.getValue().retail==1) {
+        if (me.getValue().retail == 1) {
             RetailWitnessTestimony rwr = currentWitnessTestimony.getValue().convertToRetail();
             mService.addRetailWitnessTestimony(currentReport.getValue().id, rwr)
                     .subscribeOn(Schedulers.io())
@@ -347,7 +372,7 @@ public class HarassmentRepository {
 
     public void addWitnesses() {
         if (mSelectedUsersForWitnessOrAggressorReport.size() > 0) {
-            if (me.getValue().retail==1) {
+            if (me.getValue().retail == 1) {
                 ArrayList<RetailUser> retailUsers = new ArrayList<>();
                 for (User u : mSelectedUsersForWitnessOrAggressorReport) {
                     retailUsers.add(u.convertToRetail());
