@@ -188,6 +188,9 @@ class EditReportActivity : AppCompatActivity() {
             R.id.nav_report_summary -> {
                 R.id.nav_report_summary
             }
+            R.id.nav_report_profile_confirmation -> {
+                R.id.nav_report_profile_confirmation
+            }
             else -> {
                 R.id.nav_main_questions
             }

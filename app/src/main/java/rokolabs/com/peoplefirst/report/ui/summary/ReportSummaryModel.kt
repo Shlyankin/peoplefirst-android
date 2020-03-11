@@ -67,7 +67,13 @@ constructor(
             submitClick.subscribe {
                 if (checkRequired()) {
                     mRepository.currentReport.onNext(mRepository.currentReport.value!!)
-                    activity.finish()
+                    mRepository.me.subscribe {
+                        if(it.isFullyFilled){
+                            activity.finish()
+                        }else{
+                            activity.navigateTo(R.id.nav_report_profile_confirmation)
+                        }
+                    }
                 }
             },
             activity.onBackPressedObject.subscribe {

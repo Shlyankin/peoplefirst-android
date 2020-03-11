@@ -21,4 +21,9 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="profile_confirmation_title">
+        We need some additional information before you submit your report.
+        This will help ensure your report is resolved.
+        Please take a minute to complete your profile.
+        \n\nYou\'ll only need to do this once.</string>
 </resources>

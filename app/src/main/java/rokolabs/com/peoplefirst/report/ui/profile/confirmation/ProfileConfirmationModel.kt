@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
@@ -23,7 +24,9 @@ constructor(
     var submitClick: Subject<View> = PublishSubject.create()
     fun initDisposable() {
         mDisposable.addAll(
-
+            activity.onBackPressedObject.subscribe {
+                activity.navigateTo(R.id.nav_report_summary)
+            }
         )
     }
 

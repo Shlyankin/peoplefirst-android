@@ -51,4 +51,18 @@ public class User implements Serializable {
         return ru;
     }
 
+    public Boolean isFullyFilled() {
+        if (first_name == null || last_name == null || email == null ||
+                secondary_email == null || birthday == null || address == null ||
+                department == null || phone == null) return false;
+        return first_name.length() != 0 &&
+                last_name.length() != 0 &&
+                email.length() != 0 &&
+                secondary_email.length() != 0 &&
+                birthday.length() != 0 &&
+                address.length() != 0 &&
+                department.length() != 0 &&
+                phone.length() != 0;
+    }
+
 }
