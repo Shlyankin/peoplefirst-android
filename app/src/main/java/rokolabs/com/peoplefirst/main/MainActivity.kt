@@ -2,12 +2,9 @@ package rokolabs.com.peoplefirst.main
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.Navigation
@@ -46,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_reports,
-                R.id.nav_profile,
+                R.id.nav_home_profile,
                 R.id.nav_resources
             ), drawerLayout
         )

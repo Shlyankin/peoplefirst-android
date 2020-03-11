@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_reports" />
 
     <fragment
-        android:id="@+id/nav_profile"
-        android:name="rokolabs.com.peoplefirst.main.ui.profile.ProfileFragment"
+        android:id="@+id/nav_home_profile"
+        android:name="rokolabs.com.peoplefirst.main.ui.profile.HomeProfileFragment"
         android:label=""
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_home_profile" />
 
     <fragment
         android:id="@+id/nav_resources"

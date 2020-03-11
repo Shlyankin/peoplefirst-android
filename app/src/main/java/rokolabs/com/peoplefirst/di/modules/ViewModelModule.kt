@@ -6,9 +6,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
-import rokolabs.com.peoplefirst.main.ui.profile.ProfileViewModel
+import rokolabs.com.peoplefirst.main.ui.profile.HomeProfileViewModel
 import rokolabs.com.peoplefirst.main.ui.reports.ReportsModel
 import rokolabs.com.peoplefirst.main.ui.resources.ResourcesViewModel
+import rokolabs.com.peoplefirst.profile.ProfileModel
 import rokolabs.com.peoplefirst.report.ui.agressor.WhoAgressorWasModel
 import rokolabs.com.peoplefirst.report.ui.date.DateTimeSelectionViewModel
 import rokolabs.com.peoplefirst.report.ui.details.happened.before.HappenedBeforeModel
@@ -17,6 +18,7 @@ import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsMo
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
 import rokolabs.com.peoplefirst.report.ui.place.PlaceModel
+import rokolabs.com.peoplefirst.report.ui.profile.confirmation.ProfileConfirmationModel
 import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedModel
 import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
@@ -74,8 +76,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ProfileViewModel::class)
-    internal abstract fun profileViewModel(profileViewModel: ProfileViewModel): ViewModel
+    @ViewModelKey(HomeProfileViewModel::class)
+    internal abstract fun profileViewModel(profileViewModel: HomeProfileViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -116,6 +118,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ReportSummaryModel::class)
     internal abstract fun reportSummaryModel(reportSummaryModel: ReportSummaryModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileModel::class)
+    internal abstract fun profileModel(profileModel: ProfileModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileConfirmationModel::class)
+    internal abstract fun profileConfirmationModel(profileConfirmationModel: ProfileConfirmationModel): ViewModel
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(OrderViewModel::class)
