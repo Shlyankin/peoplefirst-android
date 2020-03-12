@@ -17,6 +17,7 @@ import rokolabs.com.peoplefirst.report.ui.details.what.happened.WhatHappenedMode
 import rokolabs.com.peoplefirst.report.ui.harassment.reasons.HarassmentReasonsModel
 import rokolabs.com.peoplefirst.report.ui.harassment.type.HarassmentTypeModel
 import rokolabs.com.peoplefirst.report.ui.home.MainQuestionsModel
+import rokolabs.com.peoplefirst.report.ui.notification.result.ResultNotificationModel
 import rokolabs.com.peoplefirst.report.ui.place.PlaceModel
 import rokolabs.com.peoplefirst.report.ui.profile.confirmation.ProfileConfirmationModel
 import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedModel
@@ -128,6 +129,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileConfirmationModel::class)
     internal abstract fun profileConfirmationModel(profileConfirmationModel: ProfileConfirmationModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResultNotificationModel::class)
+    internal abstract fun resultNotificationModel(resultNotificationModel: ResultNotificationModel): ViewModel
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(OrderViewModel::class)

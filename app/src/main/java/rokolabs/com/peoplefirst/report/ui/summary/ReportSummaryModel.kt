@@ -1,6 +1,7 @@
 package rokolabs.com.peoplefirst.report.ui.summary
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.ObservableField
@@ -16,6 +17,7 @@ import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.Report
 import rokolabs.com.peoplefirst.model.responses.UploadedFilesResponse
 import rokolabs.com.peoplefirst.report.EditReportActivity
+import rokolabs.com.peoplefirst.report.ui.notification.result.ResultNotificationActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.Utils
 import javax.inject.Inject
@@ -68,9 +70,15 @@ constructor(
                 if (checkRequired()) {
                     mRepository.currentReport.onNext(mRepository.currentReport.value!!)
                     mRepository.me.subscribe {
-                        if(it.isFullyFilled){
+                        if (it.isFullyFilled) {
+                            activity.startActivity(
+                                Intent(
+                                    activity,
+                                    ResultNotificationActivity::class.java
+                                )
+                            )
                             activity.finish()
-                        }else{
+                        } else {
                             activity.navigateTo(R.id.nav_report_profile_confirmation)
                         }
                     }

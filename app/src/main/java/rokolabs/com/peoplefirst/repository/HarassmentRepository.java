@@ -87,31 +87,37 @@ public class HarassmentRepository {
         };
         currentReport.subscribe(report -> {
             if (!report.status.contains("created"))
-                me.subscribe(user -> {
-                    if (user.email.equals(report.victim.email)) {
-                        named = VICTIM;
-                        return;
-                    }
-                    for (User agressor : report.aggressors) {
-                        if (agressor.email.equals(user.email)) {
-                            named = AGGRESSOR;
-                            return;
-                        }
-                    }
-
-                    for (User witness : report.witnesses) {
-                        if (witness.email.equals(user.email)) {
-                            named = WITNESS;
-                            return;
-                        }
-                    }
-
-                });
+                defineName(report);
 
         });
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, new IntentFilter("REPORT_ADDED"));
     }
 
+    public Integer defineName(Report report) {
+        if (me.hasValue()) {
+            User user = me.getValue();
+            if (user.email.equals(report.victim.email)) {
+                named = VICTIM;
+                return named;
+
+            }
+            for (User agressor : report.aggressors) {
+                if (agressor.email.equals(user.email)) {
+                    named = AGGRESSOR;
+                    return named;
+                }
+            }
+
+            for (User witness : report.witnesses) {
+                if (witness.email.equals(user.email)) {
+                    named = WITNESS;
+                    return named;
+                }
+            }
+            return named;
+        }
+        return EMPTY;
+    }
 
     public void addReport(Report report) {
         if (me.getValue().retail == 1) {

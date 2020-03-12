@@ -1,5 +1,6 @@
 package rokolabs.com.peoplefirst.report.ui.profile.confirmation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,13 @@ import androidx.lifecycle.ViewModelProviders
 import io.reactivex.disposables.CompositeDisposable
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.databinding.FragmentProfileConfirmationBinding
-import rokolabs.com.peoplefirst.databinding.FragmentReportSummaryBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.profile.ProfileFragment
-import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryModel
+import rokolabs.com.peoplefirst.report.ui.notification.result.ResultNotificationActivity
 import javax.inject.Inject
 
-class ProfileConfirmationFragment :Fragment(){
+class ProfileConfirmationFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: ProfileConfirmationModel
@@ -29,7 +29,8 @@ class ProfileConfirmationFragment :Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         ComponentManager.getInstance().getFragmentComponent(this).inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ProfileConfirmationModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ProfileConfirmationModel::class.java)
         var binder = DataBindingUtil.inflate<FragmentProfileConfirmationBinding>(
             inflater,
             R.layout.fragment_profile_confirmation,
@@ -45,9 +46,11 @@ class ProfileConfirmationFragment :Fragment(){
         viewModel.initDisposable()
         mDisposable.addAll(
             viewModel.submitClick.subscribe {
-                var fragment=childFragmentManager.findFragmentById(R.id.profileFragment) as ProfileFragment
+                var fragment =
+                    childFragmentManager.findFragmentById(R.id.profileFragment) as ProfileFragment
+                goResultNotification()
                 fragment.saveUser {
-                    activity?.finish()
+                    goResultNotification()
                 }
             }
         )
@@ -58,5 +61,15 @@ class ProfileConfirmationFragment :Fragment(){
         super.onPause()
         viewModel.dispose()
         mDisposable.clear()
+    }
+
+    fun goResultNotification() {
+        activity?.startActivity(
+            Intent(
+                activity,
+                ResultNotificationActivity::class.java
+            )
+        )
+        activity?.finish()
     }
 }

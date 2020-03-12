@@ -55,11 +55,11 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.WelcomeRetailActivity" />
         <activity android:name=".auth.password.reset.update.SetNewPasswordActivity" />
         <activity android:name=".auth.password.reset.send.request.ResetPasswordActivity" />
         <activity android:name=".auth.registration.CreateAccountRetailActivity" />
         <activity android:name=".auth.login.LoginActivity" />
+        <activity android:name=".report.ui.notification.result.ResultNotificationActivity" />
 
         <service
             android:name=".services.FetchAddressIntentService"

@@ -76,4 +76,5 @@
         android:name="rokolabs.com.peoplefirst.report.ui.profile.confirmation.ProfileConfirmationFragment"
         android:label=""
         tools:layout="@layout/fragment_profile_confirmation" />
+
 </navigation>
