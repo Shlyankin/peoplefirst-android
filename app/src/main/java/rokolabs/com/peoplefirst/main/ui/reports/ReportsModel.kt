@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
@@ -13,8 +11,10 @@ import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.main.MainActivity
 import rokolabs.com.peoplefirst.model.Report
+import rokolabs.com.peoplefirst.model.WitnessTestimony
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionActivity
 import javax.inject.Inject
 
 class ReportsModel @Inject constructor(
@@ -51,7 +51,9 @@ class ReportsModel @Inject constructor(
             },
             activeAdapter.detailsClicks.subscribe {
                 mRepository.currentReport.onNext(it);
-                activity.startActivity(Intent(context, EditReportActivity::class.java))
+//                activity.startActivity(Intent(context, EditReportActivity::class.java))
+                loadReport()
+//                testLoad()
             },
             addReportSubject.subscribe {
                 mRepository.currentReport.onNext(Report())
@@ -64,5 +66,91 @@ class ReportsModel @Inject constructor(
 
     fun dispose() {
         mDisposable.clear()
+    }
+
+    fun showVictimAfterHRResolved() {
+        val intent = Intent(activity, ConfirmResolutionActivity::class.java)
+        activity.startActivity(intent)
+    }
+
+    fun testLoad() {
+        showVictimAfterHRResolved()
+    }
+
+    fun loadReport() {
+        mDisposable.addAll(
+            mRepository.currentReport.subscribe { report: Report ->
+                if (report !== Report.EMPTY) {
+                    var isWitness = false
+                    var isAggressor = false
+                    for (aggressor in report.aggressors) {
+                        if (aggressor.email == mRepository.me.value!!.email) {
+                            isAggressor = true
+                            break
+                        }
+                    }
+                    for (witness in report.witnesses) {
+                        if (witness.email != null && witness.email == mRepository.me.value!!.email) {
+                            isWitness = true
+                            break
+                        }
+                    }
+                    if (isAggressor) {
+                        mRepository.getTransgressorReport()
+                        mRepository.named = HarassmentRepository.AGGRESSOR
+                        val reportAggressor =
+                            report.aggressors[report.aggressors.indexOf(mRepository.me.value)]
+                        if ("new" == reportAggressor.report_aggressor_status) {
+//                            getViewState().showNamedAggressor()
+                        } else {
+//                            getViewState().showAggressorReport()
+                        }
+                    } else if (isWitness) {
+                        mRepository.currentWitnessTestimony.onNext(WitnessTestimony())
+                        mRepository.named = HarassmentRepository.WITNESS
+                        val reportWitness =
+                            report.witnesses[report.witnesses.indexOf(mRepository.me.value)]
+                        if (report.author_id != mRepository.me.value!!.id) {
+                            if ("new" == reportWitness.report_witness_status) {
+//                                getViewState().showNamedWitness()
+                            } else {
+//                                getViewState().showWitnessReport()
+                            }
+                        } else {
+//                            getViewState().showVictimRreportDetails(false)
+                        }
+                    } else if ("hr" == mRepository.me.value!!.role) {
+                        if ("resolved" == report.status) {
+//                            getViewState().showHRAfterVictimAccepted()
+                        } else if ("submitted" == report.status && report.resolutions_offered > 0) {
+//                            getViewState().showHRAfterVictimRejected()
+                        } else if ("submitted" == report.status && report.resolutions_offered == 0) {
+//                            getViewState().showHrReportDetails()
+                        } else if ("resolution pending" == report.status) {
+//                            getViewState().showHrReportDetails()
+                        } else if ("resolved" != report.status) {
+//                            getViewState().showHRReportNoResolution()
+                        } else {
+//                            getViewState().showHrReportDetails()
+                        }
+                    } else if (report.victim.id === mRepository.me.value!!.id && "resolution pending" == report.status) {
+                        showVictimAfterHRResolved()
+                    } else if (report.victim.id === mRepository.me.value!!.id && report.author_id != mRepository.me.value!!.id) {
+                        if ("created" == report.status) {
+//                            getViewState().showVictimAfterWtiness()
+                        } else if ("resolved" == report.status) {
+//                            getViewState().showVictimNamedResolved()
+                        } else {
+//                            getViewState().showVictimRreportDetails(false)
+                        }
+                    } else if (report.author_id == mRepository.me.value!!.id) {
+//                        getViewState().showVictimRreportDetails(
+//                            "open" == report.status || "created" == report.status
+//                        )
+                    }
+//                    if (currentDisposable != null) currentDisposable.dispose()
+                }
+            }
+        )
     }
 }

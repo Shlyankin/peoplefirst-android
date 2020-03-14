@@ -60,6 +60,9 @@
         <activity android:name=".auth.registration.CreateAccountRetailActivity" />
         <activity android:name=".auth.login.LoginActivity" />
         <activity android:name=".report.ui.notification.result.ResultNotificationActivity" />
+        <activity android:name=".resolution.confirm.ConfirmResolutionActivity" />
+        <activity android:name=".resolution.result.ResolutionStatusActivity" />
+        <activity android:name=".report.ui.summary.ReportSummaryActivity" />
 
         <service
             android:name=".services.FetchAddressIntentService"

@@ -14,6 +14,8 @@ import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
+import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionModel
+import rokolabs.com.peoplefirst.resolution.result.ResolutionStatusModel
 
 @Module
 abstract class ActivityViewModelModule {
@@ -51,4 +53,14 @@ abstract class ActivityViewModelModule {
     @IntoMap
     @ViewModelKey(AddressLookupModel::class)
     internal abstract fun addressLookupModel(addressLookupModel: AddressLookupModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResolutionStatusModel::class)
+    internal abstract fun resolutionStatusModel(resolutionStatusModel: ResolutionStatusModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConfirmResolutionModel::class)
+    internal abstract fun confirmResolutionModel(confirmResolutionModel: ConfirmResolutionModel): ViewModel
 }

@@ -1,118 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AttentionActivity"
-    android:orientation="vertical"
-    android:background="@drawable/main_gradient">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/toolbar_with_logo"/>
+    <data>
 
-    <TextView
-        android:id="@+id/caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resolution accepted"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="72dp" />
+        <import type="android.view.View" />
 
+        <variable
+            name="viewModel"
+            type="rokolabs.com.peoplefirst.resolution.result.ResolutionStatusModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/daysRemained"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0 days remaining to reach a resolution"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"
-        android:visibility="gone"/>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/drawable_rounded_bkg_white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="30dp"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_gradient"
+            android:orientation="vertical"
+            tools:context=".resolution.result.ResolutionStatusActivity">
+
+            <include layout="@layout/toolbar_with_logo" />
+
+            <TextView
+                android:id="@+id/caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
+                android:text="Resolution accepted"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+
+            <TextView
+                android:id="@+id/daysRemained"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="37dp"
+                android:text="0 days remaining to reach a resolution"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text">
+
+                <include layout="@layout/listitem_report" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="24dp"
+                android:text="Resolution of this report has been accepted. It will be closed and no further action is required."
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textRejected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="24dp"
+                android:text="Resolution of this report has been rejected."
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textRejectedDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="24dp"
+                android:text="If no action is taken in 29 days this report will be escalated."
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/exceeded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="24dp"
+                android:text="Inaction related to this report has exceeded the 30 days as set by local law"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginRight="24dp"
+                android:text="This is a notification that a  summary of this report will be reported publicly"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
         <TextView
-            android:id="@+id/locationTime"
+            android:id="@+id/my_reports"
+            reactiveClick="@{viewModel.goToReportsClick}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="17dp"
-            android:text="Company Corp.
-Main Conference Room
-02/06/18  02:30PM "/>
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="30dp"
-            android:text="SEE DETAILS"
-            android:textColor="#00406F" />
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resolution of this report has been accepted. It will be closed and no further action is required."
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"/>
-
-    <TextView
-        android:id="@+id/textRejected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resolution of this report has been rejected."
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textRejectedDeadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="If no action is taken in 29 days this report will be escalated."
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/exceeded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inaction related to this report has exceeded the 30 days as set by local law"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is a notification that a  summary of this report will be reported publicly"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="26dp"
-        android:visibility="gone"
-        />
-
-
-</LinearLayout>
+            android:layout_margin="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:gravity="center"
+            android:text="My Reports"
+            android:textColor="#006F6B"
+            android:textSize="8pt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

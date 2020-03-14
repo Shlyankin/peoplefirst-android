@@ -86,7 +86,7 @@ public class HarassmentRepository {
             }
         };
         currentReport.subscribe(report -> {
-            if (!report.status.contains("created"))
+            if (report.status!=null&&!report.status.contains("created"))
                 defineName(report);
 
         });

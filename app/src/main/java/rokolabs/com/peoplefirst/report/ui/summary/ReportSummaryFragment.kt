@@ -16,7 +16,7 @@ import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedModel
 import javax.inject.Inject
 
-class ReportSummaryFragment :Fragment() {
+class ReportSummaryFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: ReportSummaryModel
@@ -28,7 +28,8 @@ class ReportSummaryFragment :Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         ComponentManager.getInstance().getFragmentComponent(this).inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ReportSummaryModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, viewModelFactory).get(ReportSummaryModel::class.java)
         var binder = DataBindingUtil.inflate<FragmentReportSummaryBinding>(
             inflater,
             R.layout.fragment_report_summary,
@@ -43,6 +44,13 @@ class ReportSummaryFragment :Fragment() {
         super.onResume()
         viewModel.initDisposable()
 
+    }
+
+    fun showReadOnly(boolean: Boolean) {
+        viewModel.dispose()
+        viewModel.readOnly.set(boolean)
+        viewModel.doneVisibility.set(if (boolean) View.GONE else View.VISIBLE)
+        viewModel.initDisposable()
     }
 
     override fun onPause() {

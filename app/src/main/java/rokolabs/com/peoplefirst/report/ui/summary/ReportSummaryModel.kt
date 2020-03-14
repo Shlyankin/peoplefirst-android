@@ -28,7 +28,7 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    private var activity: EditReportActivity = context as EditReportActivity
+    private lateinit var activity: EditReportActivity
     private var mDisposable = CompositeDisposable()
 
     var submitClick: Subject<View> = PublishSubject.create()
@@ -47,16 +47,21 @@ constructor(
     var dateTime: ObservableField<String> = ObservableField()
     var howResolved: ObservableField<String> = ObservableField()
     var title: ObservableField<String> = ObservableField()
+    var readOnly: ObservableField<Boolean> = ObservableField()
 
     var anonymousCheckedVisibility: ObservableField<Int> = ObservableField()
     var doneVisibility: ObservableField<Int> = ObservableField()
     var tapAnyQuestionVisibility: ObservableField<Int> = ObservableField()
 
     init {
+        if (context is EditReportActivity) {
+            activity = context
+        }
         anonymousCheckedVisibility.set(View.VISIBLE)
         doneVisibility.set(View.VISIBLE)
         tapAnyQuestionVisibility.set(View.VISIBLE)
         title.set("Your Report")
+        readOnly.set(false)
     }
 
     private val mMode = EDIT_MODE
@@ -65,35 +70,41 @@ constructor(
     }
 
     fun initDisposable() {
-        mDisposable.addAll(
-            submitClick.subscribe {
-                if (checkRequired()) {
-                    mRepository.currentReport.onNext(mRepository.currentReport.value!!)
-                    mRepository.me.subscribe {
-                        if (it.isFullyFilled) {
-                            activity.startActivity(
-                                Intent(
-                                    activity,
-                                    ResultNotificationActivity::class.java
-                                )
-                            )
-                            activity.finish()
-                        } else {
-                            activity.navigateTo(R.id.nav_report_profile_confirmation)
-                        }
-                    }
-                }
-            },
-            activity.onBackPressedObject.subscribe {
-                previous()
-            },
-            editClick.subscribe {
+        mDisposable.addAll(editClick.subscribe {
+            if (!readOnly.get()!!) {
                 activity.navigateTo(it)
-            },
+            }
+        },
             mRepository.currentReport.subscribe {
                 showReport(it)
             }
         )
+        if (!readOnly.get()!!) {
+            mDisposable.addAll(
+                submitClick.subscribe {
+                    if (readOnly.get()!! && checkRequired()) {
+                        mRepository.currentReport.onNext(mRepository.currentReport.value!!)
+                        mRepository.me.subscribe {
+                            if (it.isFullyFilled) {
+                                activity.startActivity(
+                                    Intent(
+                                        activity,
+                                        ResultNotificationActivity::class.java
+                                    )
+                                )
+                                activity.finish()
+                            } else {
+                                activity.navigateTo(R.id.nav_report_profile_confirmation)
+                            }
+                        }
+                    }
+                },
+                activity.onBackPressedObject.subscribe {
+                    previous()
+                }
+
+            )
+        }
     }
 
     fun showReport(report: Report) {

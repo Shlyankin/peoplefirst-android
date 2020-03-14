@@ -19,6 +19,8 @@ import rokolabs.com.peoplefirst.report.EditReportActivity;
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
 import rokolabs.com.peoplefirst.repository.HarassmentRepository;
+import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionActivity;
+import rokolabs.com.peoplefirst.resolution.result.ResolutionStatusActivity;
 
 /**
  * Created by S on 17.05.2018.
@@ -52,6 +54,9 @@ public interface ActivityComponent {
     void inject(AddressLookupActivity activity);
 
     void inject(MainActivity activity);
+    void inject(ConfirmResolutionActivity activity);
+
+    void inject(ResolutionStatusActivity activity);
 
     //
 //    void inject(HarassmentTypeActivity activity);
