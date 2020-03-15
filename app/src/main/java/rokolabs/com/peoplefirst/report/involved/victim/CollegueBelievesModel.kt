@@ -12,6 +12,7 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.responses.BaseResponse
+import rokolabs.com.peoplefirst.report.involved.rights.AfterYouViewActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
 
@@ -28,9 +29,9 @@ constructor(
     fun initDisposabale() {
         mDisposable.addAll(
             continueSubject.subscribe {
-//                val intent = Intent(activity, AfteryouViewActivity::class.java)
-//                activity.startActivity(intent)
-//                activity.finish()
+                val intent = Intent(activity, AfterYouViewActivity::class.java)
+                activity.startActivity(intent)
+                activity.finish()
             },
             denySubject.subscribe {
                 mService.victimConfirmReport(mRepository.currentReport.value!!.id, "deny")

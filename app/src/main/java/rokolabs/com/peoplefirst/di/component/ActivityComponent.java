@@ -17,6 +17,7 @@ import rokolabs.com.peoplefirst.di.scopes.PerActivity;
 import rokolabs.com.peoplefirst.main.MainActivity;
 import rokolabs.com.peoplefirst.report.EditReportActivity;
 import rokolabs.com.peoplefirst.report.involved.named.NamedActivity;
+import rokolabs.com.peoplefirst.report.involved.rights.AfterYouViewActivity;
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesActivity;
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
@@ -65,5 +66,7 @@ public interface ActivityComponent {
     void inject(NamedActivity activity);
 
     void inject(SplashActivity activity);
+
+    void inject(AfterYouViewActivity activity);
 
 }

@@ -11,6 +11,7 @@ import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailViewModel
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
 import rokolabs.com.peoplefirst.report.involved.named.NamedModel
+import rokolabs.com.peoplefirst.report.involved.rights.AfterYouViewModel
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesModel
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
@@ -75,4 +76,9 @@ abstract class ActivityViewModelModule {
     @IntoMap
     @ViewModelKey(NamedModel::class)
     internal abstract fun namedModel(namedModel: NamedModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AfterYouViewModel::class)
+    internal abstract fun afterYouViewModel(afterYouViewModel: AfterYouViewModel): ViewModel
 }

@@ -1,6 +1,7 @@
 package rokolabs.com.peoplefirst.report
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -42,6 +43,11 @@ class EditReportActivity : AppCompatActivity() {
         val PERMISSION_REQUEST_CODE = 1
         val CHOOSE_FILE_CODE = 2
         val ADD_VICTIM_CODE = 3
+        fun showEdit(context: Context) {
+            val intent = Intent(context, EditReportActivity::class.java)
+            intent.putExtra("showSummary", true)
+            context.startActivity(intent)
+        }
     }
 
     @Inject
@@ -114,6 +120,10 @@ class EditReportActivity : AppCompatActivity() {
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
+        val mode = intent.extras?.get("showSummary") as Boolean?
+        if (mode != null && mode) {
+            navigateTo(R.id.nav_report_summary)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -277,4 +287,5 @@ class EditReportActivity : AppCompatActivity() {
         onBackPressedObject.onNext(0)
 
     }
+
 }

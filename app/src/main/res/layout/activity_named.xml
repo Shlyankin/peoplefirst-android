@@ -70,8 +70,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="If no action is taken, we will remind you in 5 days." />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/yesLayout"
+            reactiveClick="@{viewModel.continueSubject}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -107,6 +109,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/noLayout"
+            reactiveClick="@{viewModel.denySubject}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
