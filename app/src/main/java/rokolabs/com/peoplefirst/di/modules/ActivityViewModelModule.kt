@@ -12,6 +12,8 @@ import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
 import rokolabs.com.peoplefirst.report.involved.named.NamedModel
 import rokolabs.com.peoplefirst.report.involved.rights.AfterYouViewModel
+import rokolabs.com.peoplefirst.report.involved.verify.victim.VerifyVictimModel
+import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyModel
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesModel
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
@@ -81,4 +83,14 @@ abstract class ActivityViewModelModule {
     @IntoMap
     @ViewModelKey(AfterYouViewModel::class)
     internal abstract fun afterYouViewModel(afterYouViewModel: AfterYouViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VerifyModel::class)
+    internal abstract fun verifyModel(verifyModel: VerifyModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VerifyVictimModel::class)
+    internal abstract fun verifyVictimModel(verifyVictimModel: VerifyVictimModel): ViewModel
 }
