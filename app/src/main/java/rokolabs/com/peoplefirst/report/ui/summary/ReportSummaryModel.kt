@@ -98,12 +98,14 @@ constructor(
                             }
                         }
                     }
-                },
-                activity.onBackPressedObject.subscribe {
-                    previous()
                 }
 
             )
+        }
+        if (context is EditReportActivity) {
+            activity.onBackPressedObject.subscribe {
+                previous()
+            }
         }
     }
 

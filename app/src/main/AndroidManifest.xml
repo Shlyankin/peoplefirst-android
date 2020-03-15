@@ -63,6 +63,8 @@
         <activity android:name=".resolution.confirm.ConfirmResolutionActivity" />
         <activity android:name=".resolution.result.ResolutionStatusActivity" />
         <activity android:name=".report.ui.summary.ReportSummaryActivity" />
+        <activity android:name=".report.involved.victim.CollegueBelievesActivity" />
+        <activity android:name=".report.involved.named.NamedActivity" />
 
         <service
             android:name=".services.FetchAddressIntentService"

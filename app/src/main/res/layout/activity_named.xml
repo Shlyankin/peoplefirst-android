@@ -1,123 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".named.NamedActivity"
-    android:orientation="vertical"
-    android:background="@drawable/main_gradient">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/toolbar_with_logo"/>
+    <data>
 
-    <ScrollView
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="rokolabs.com.peoplefirst.report.involved.named.NamedModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@drawable/main_gradient"
+        android:orientation="vertical"
+        tools:context=".named.NamedActivity">
 
-        <LinearLayout
+
+        <include
+            android:id="@+id/include3"
+            layout="@layout/toolbar_with_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
+            android:lineSpacingMultiplier="1.3"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include3"
+            tools:text="A colleague believes you may have witnessed a harassment" />
 
-			<TextView
-				android:id="@+id/title"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginTop="60dp"
-				android:layout_marginRight="28dp"
-				android:lineSpacingMultiplier="1.3"
-				android:textColor="@android:color/white"
-				android:textSize="30sp"
-				tools:text="A colleague believes you may have witnessed a harassment"/>
+        <TextView
+            android:id="@+id/lightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="24dp"
+            android:lineSpacingMultiplier="1.5"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caption"
+            tools:text="Your identity can remain anonymous.\n\nPlease review their report. Their report will be submitted to Google on 2019-08-05 11:43:13." />
 
-			<TextView
-				android:id="@+id/lightText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginTop="40dp"
-				android:layout_marginRight="28dp"
-				android:lineSpacingMultiplier="1.5"
-				android:textColor="@android:color/white"
-				android:textSize="15sp"
-				tools:text="Your identity can remain anonymous.\n\nPlease review their report. Their report will be submitted to Google on 2019-08-05 11:43:13."/>
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="64dp"
+            android:textColor="#C8C7C7"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@+id/noLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="If no action is taken, we will remind you in 5 days." />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/yesLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/noLayout">
 
-			<TextView
-				android:id="@+id/text"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginTop="40dp"
-				android:layout_marginRight="28dp"
-				android:textColor="#C8C7C7"
-				android:textSize="13sp"
-				tools:text="If no action is taken, we will remind you in 5 days."/>
-
-            <RelativeLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@id/yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <LinearLayout
-                    android:id="@+id/buttonsWrapper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+            <TextView
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="CONTINUE &gt;"
+                android:textColor="@android:color/white"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/yesLayout"
+            app:layout_constraintStart_toStartOf="parent">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/white"
-                            android:visibility="invisible"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                app:layout_constraintBottom_toTopOf="@id/no"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/white"/>
-                    </LinearLayout>
+            <TextView
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="NO"
+                android:textColor="@android:color/white"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/no"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="33dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="NO"
-                            android:textColor="@android:color/white"
-                            android:visibility="invisible"/>
-
-                        <TextView
-                            android:id="@+id/yes"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="33dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="CONTINUE &gt;"
-                            android:textColor="@android:color/white"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

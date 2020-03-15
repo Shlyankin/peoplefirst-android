@@ -134,15 +134,17 @@ action is required."
                         android:layout_height="wrap_content"
                         android:layout_marginTop="33dp"
                         android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textSize="19sp"
                         android:gravity="center"
                         android:text="REJECT"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
                 <LinearLayout
+                    reactiveClick="@{viewModel.acceptClick}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    reactiveClick="@{viewModel.acceptClick}"
                     android:layout_weight="1">
 
                     <TextView
@@ -152,6 +154,8 @@ action is required."
                         android:layout_marginTop="33dp"
                         android:layout_marginBottom="20dp"
                         android:layout_weight="1"
+                        android:textSize="19sp"
+                        android:fontFamily="@font/ubuntu_medium"
                         android:gravity="center"
                         android:text="ACCEPT"
                         android:textColor="@android:color/white" />

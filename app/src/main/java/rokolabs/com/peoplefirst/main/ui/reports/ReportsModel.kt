@@ -13,8 +13,12 @@ import rokolabs.com.peoplefirst.main.MainActivity
 import rokolabs.com.peoplefirst.model.Report
 import rokolabs.com.peoplefirst.model.WitnessTestimony
 import rokolabs.com.peoplefirst.report.EditReportActivity
+import rokolabs.com.peoplefirst.report.involved.named.NamedActivity
+import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesActivity
+import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionActivity
+import rokolabs.com.peoplefirst.resolution.result.ResolutionStatusActivity
 import javax.inject.Inject
 
 class ReportsModel @Inject constructor(
@@ -52,8 +56,8 @@ class ReportsModel @Inject constructor(
             activeAdapter.detailsClicks.subscribe {
                 mRepository.currentReport.onNext(it);
 //                activity.startActivity(Intent(context, EditReportActivity::class.java))
-                loadReport()
-//                testLoad()
+//                loadReport()
+                testLoad()
             },
             addReportSubject.subscribe {
                 mRepository.currentReport.onNext(Report())
@@ -73,8 +77,57 @@ class ReportsModel @Inject constructor(
         activity.startActivity(intent)
     }
 
+    fun showNamedWitness() {
+        NamedActivity.showForWitness(activity)
+    }
+
+    fun showNamedAggressor() {
+        NamedActivity.showForTransgressor(activity)
+    }
+
+    fun showWitnessReport() {
+//        ConfirmActivity.showReadonly(this)
+    }
+
+    fun showAggressorReport() {
+//        ConfirmActivity.showReadonly(this)
+    }
+
+    fun showVictimRreportDetails(edit: Boolean) {
+//        ReportSummaryActivity.showEdit(activity)
+    }
+
+    fun showHRReportNoResolution() {
+        ResolutionStatusActivity.showNpResolution(activity)
+    }
+
+    fun showHrReportDetails() {
+//        val intent = Intent(this, ReportDetailsActivity::class.java)
+//        startActivity(intent)
+    }
+
+    fun showVictimAfterWtiness() {
+        mRepository.named = HarassmentRepository.VICTIM
+        mRepository.currentReport.onNext(Report())
+        val intent = Intent(activity, CollegueBelievesActivity::class.java)
+        activity.startActivity(intent)
+    }
+
+    fun showHRAfterVictimAccepted() {
+        ResolutionStatusActivity.showAccepted(activity)
+    }
+
+    fun showHRAfterVictimRejected() {
+        ResolutionStatusActivity.showRejected(activity)
+    }
+
+    fun showVictimNamedResolved() {
+        val intent = Intent(activity, ResolutionStatusActivity::class.java)
+        activity.startActivity(intent)
+    }
+
     fun testLoad() {
-        showVictimAfterHRResolved()
+        showNamedAggressor()
     }
 
     fun loadReport() {
@@ -101,9 +154,9 @@ class ReportsModel @Inject constructor(
                         val reportAggressor =
                             report.aggressors[report.aggressors.indexOf(mRepository.me.value)]
                         if ("new" == reportAggressor.report_aggressor_status) {
-//                            getViewState().showNamedAggressor()
+                            showNamedAggressor()
                         } else {
-//                            getViewState().showAggressorReport()
+                            showAggressorReport()
                         }
                     } else if (isWitness) {
                         mRepository.currentWitnessTestimony.onNext(WitnessTestimony())
@@ -112,41 +165,41 @@ class ReportsModel @Inject constructor(
                             report.witnesses[report.witnesses.indexOf(mRepository.me.value)]
                         if (report.author_id != mRepository.me.value!!.id) {
                             if ("new" == reportWitness.report_witness_status) {
-//                                getViewState().showNamedWitness()
+                                showNamedWitness()
                             } else {
-//                                getViewState().showWitnessReport()
+                                showWitnessReport()
                             }
                         } else {
-//                            getViewState().showVictimRreportDetails(false)
+                            showVictimRreportDetails(false)
                         }
                     } else if ("hr" == mRepository.me.value!!.role) {
                         if ("resolved" == report.status) {
-//                            getViewState().showHRAfterVictimAccepted()
+                            showHRAfterVictimAccepted()
                         } else if ("submitted" == report.status && report.resolutions_offered > 0) {
-//                            getViewState().showHRAfterVictimRejected()
+                            showHRAfterVictimRejected()
                         } else if ("submitted" == report.status && report.resolutions_offered == 0) {
-//                            getViewState().showHrReportDetails()
+                            showHrReportDetails()
                         } else if ("resolution pending" == report.status) {
-//                            getViewState().showHrReportDetails()
+                            showHrReportDetails()
                         } else if ("resolved" != report.status) {
-//                            getViewState().showHRReportNoResolution()
+                            showHRReportNoResolution()
                         } else {
-//                            getViewState().showHrReportDetails()
+                            showHrReportDetails()
                         }
                     } else if (report.victim.id === mRepository.me.value!!.id && "resolution pending" == report.status) {
                         showVictimAfterHRResolved()
                     } else if (report.victim.id === mRepository.me.value!!.id && report.author_id != mRepository.me.value!!.id) {
                         if ("created" == report.status) {
-//                            getViewState().showVictimAfterWtiness()
+                            showVictimAfterWtiness()
                         } else if ("resolved" == report.status) {
-//                            getViewState().showVictimNamedResolved()
+                            showVictimNamedResolved()
                         } else {
-//                            getViewState().showVictimRreportDetails(false)
+                            showVictimRreportDetails(false)
                         }
                     } else if (report.author_id == mRepository.me.value!!.id) {
-//                        getViewState().showVictimRreportDetails(
-//                            "open" == report.status || "created" == report.status
-//                        )
+                        showVictimRreportDetails(
+                            "open" == report.status || "created" == report.status
+                        )
                     }
 //                    if (currentDisposable != null) currentDisposable.dispose()
                 }

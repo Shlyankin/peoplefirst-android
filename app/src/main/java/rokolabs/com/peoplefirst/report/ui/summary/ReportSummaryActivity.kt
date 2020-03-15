@@ -19,6 +19,11 @@ class ReportSummaryActivity : AppCompatActivity() {
     }
 
     companion object {
+//        fun showEdit(context: Context) {
+//            val intent = Intent(context, ReportSummaryActivity::class.java)
+////            intent.putExtra("readOnly", true)
+//            context.startActivity(intent)
+//        }
         fun showReadOnly(context: Context) {
             val intent = Intent(context, ReportSummaryActivity::class.java)
             intent.putExtra("readOnly", true)

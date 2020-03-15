@@ -16,6 +16,8 @@ import rokolabs.com.peoplefirst.di.modules.BaseUrl;
 import rokolabs.com.peoplefirst.di.scopes.PerActivity;
 import rokolabs.com.peoplefirst.main.MainActivity;
 import rokolabs.com.peoplefirst.report.EditReportActivity;
+import rokolabs.com.peoplefirst.report.involved.named.NamedActivity;
+import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesActivity;
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity;
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersActivity;
 import rokolabs.com.peoplefirst.repository.HarassmentRepository;
@@ -42,7 +44,6 @@ public interface ActivityComponent {
 
     void inject(CreateAccountRetailActivity activity);
 
-    //    void inject(ReportsActivity activity);
     void inject(SetNewPasswordActivity activity);
 
     void inject(LoginActivity activity);
@@ -54,84 +55,15 @@ public interface ActivityComponent {
     void inject(AddressLookupActivity activity);
 
     void inject(MainActivity activity);
+
     void inject(ConfirmResolutionActivity activity);
 
     void inject(ResolutionStatusActivity activity);
 
-    //
-//    void inject(HarassmentTypeActivity activity);
-//
-//    void inject(ReportSummaryActivity activity);
-//
-//    void inject(WhoBeingHarassedActivity activity);
-//
-//    void inject(WhoAgressorActivity activity);
-//
-//    void inject(PlaceActivity activity);
-//
-//    void inject(WhatHappenedActivity activity);
-//
-//    void inject(DateTimeActivity activity);
-//
-//    void inject(WitnessActivity activity);
-//
-//    void inject(NamedActivity activity);
-//
-//    void inject(ProfileActivity activity);
-//
-//    void inject(UsersActivity activity);
-//
-//    void inject(WitnessYesNoActivity activity);
-//
-//    void inject(HowResolvedActivity activity);
-//
-//    void inject(HarassmentReasonActivity activity);
-//
-//    void inject(VerifyActivity activity);
-//
-//    void inject(ConfirmActivity activity);
-//
-//    void inject(ReportDetailsActivity activity);
-//
-//    void inject(ConfirmResolutionActivity activity);
-//
-//    void inject(ResolutionStatusActivity activity);
-//
-//    void inject(EscalationLevelsActivity activity);
-//
-//    void inject(SubmittedReportActivity activity);
-//
-//    void inject(TransparentProcessActivity activity);
-//
-//    void inject(EscalationPathActivity activity);
-//
-//    void inject(PublishingActivity activity);
-//
-//    void inject(InfoActivity activity);
-//
-//    void inject(UserActivationActivity activity);
-//
-//    void inject(CollegueBelievesActivity activity);
-//
-//    void inject(HappenedBeforeActivity activity);
-//
-//    void inject(UpdatedReportActivity activity);
-//
-//    void inject(ResetPasswordActivity activity);
-//
-//    void inject(VerifyVictimActivity activity);
-//
-//    void inject(RejectedReportActivity activity);
-//
-//    void inject(WelcomeRetailActivity activity);
-//
-//    void inject(EmailCodeRetailActivity activity);
-//
-//    void inject(CreateAccountRetailActivity activity);
-//
-//    void inject(HelpSubmitActivity activity);
-//
-//    void inject(RetailEscalationActivity activity);
+    void inject(CollegueBelievesActivity activity);
+
+    void inject(NamedActivity activity);
+
     void inject(SplashActivity activity);
 
 }

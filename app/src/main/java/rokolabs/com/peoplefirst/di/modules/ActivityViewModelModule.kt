@@ -10,6 +10,8 @@ import rokolabs.com.peoplefirst.auth.password.reset.update.SetNewPasswordViewMod
 import rokolabs.com.peoplefirst.auth.registration.CreateAccountRetailViewModel
 import rokolabs.com.peoplefirst.di.qualifier.ViewModelKey
 import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
+import rokolabs.com.peoplefirst.report.involved.named.NamedModel
+import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesModel
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
@@ -63,4 +65,14 @@ abstract class ActivityViewModelModule {
     @IntoMap
     @ViewModelKey(ConfirmResolutionModel::class)
     internal abstract fun confirmResolutionModel(confirmResolutionModel: ConfirmResolutionModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CollegueBelievesModel::class)
+    internal abstract fun collegueBelievesModel(collegueBelievesModel: CollegueBelievesModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NamedModel::class)
+    internal abstract fun namedModel(namedModel: NamedModel): ViewModel
 }
