@@ -38,41 +38,10 @@ constructor(
                 }
             },
             whereChecked.addOnPropertyChanged {
-                if (it.get() == R.id.whereWhenYes)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.location_confirmation = true
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.location_confirmation = true
 
-                if (it.get() == R.id.whereWhenNo)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.location_confirmation = false
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.location_confirmation = false
-                if (it.get() == R.id.whereWhenSkip)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.location_confirmation = null
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.location_confirmation = null
             },
             witnessChecked.addOnPropertyChanged {
-                if (it.get() == R.id.interactYes)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.documentation_experienced = true
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.interact_confirmation = true
-                if (it.get() == R.id.interactNo)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.documentation_experienced =
-                            false
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.interact_confirmation = false
 
-                if (it.get() == R.id.interactSkip)
-                    if (mRepository.named == HarassmentRepository.WITNESS)
-                        mRepository.currentWitnessTestimony.value!!.documentation_experienced = null
-                    else if (mRepository.named == HarassmentRepository.AGGRESSOR)
-                        mRepository.currentTransgressorReport.value!!.interact_confirmation = null
             }
         )
     }

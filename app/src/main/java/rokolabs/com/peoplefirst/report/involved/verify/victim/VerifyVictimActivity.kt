@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.activity_verify_victim.*
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.databinding.ActivityVerifyBinding
 import rokolabs.com.peoplefirst.databinding.ActivityVerifyVictimBinding

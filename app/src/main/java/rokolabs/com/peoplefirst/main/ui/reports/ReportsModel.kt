@@ -56,8 +56,8 @@ class ReportsModel @Inject constructor(
             activeAdapter.detailsClicks.subscribe {
                 mRepository.currentReport.onNext(it);
 //                activity.startActivity(Intent(context, EditReportActivity::class.java))
-                loadReport()
-//                testLoad()
+//                loadReport()
+                testLoad()
             },
             addReportSubject.subscribe {
                 mRepository.currentReport.onNext(Report())

@@ -12,45 +12,67 @@
             type="rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@drawable/ic_background"
         android:orientation="vertical"
         tools:context=".VerifyActivity">
 
-        <include layout="@layout/toolbar_with_logo_green" />
+        <include
+            android:id="@+id/include5"
+            layout="@layout/toolbar_with_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="51dp"
-            android:layout_marginRight="17dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/drawable_white_rounded_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include5">
 
             <TextView
+                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Report Details"
                 android:textColor="@android:color/black"
-                android:textSize="33sp" />
+                android:textSize="33sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/whereWhen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             <RadioGroup
                 android:id="@+id/whereWhenRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:checkedButton="@{viewModel.whereChecked}"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whereWhen">
 
                 <RadioButton
                     android:id="@+id/whereWhenYes"
@@ -73,64 +95,31 @@
                     android:text="SKIP" />
             </RadioGroup>
 
-            <LinearLayout
-                android:id="@+id/witnessedWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/witnessed"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="While you were there, do you believe you witnessed a colleague experience harassment?" />
-
-                <RadioGroup
-                    android:id="@+id/witnessedRadio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:checkedButton="@{viewModel.witnessChecked}"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/witnessedYes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="YES" />
-
-                    <RadioButton
-                        android:id="@+id/witnessedNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="NO" />
-
-                    <RadioButton
-                        android:id="@+id/witnessedSkip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="SKIP" />
-                </RadioGroup>
-            </LinearLayout>
-
-
             <TextView
                 android:id="@+id/interact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Would you like to document what happened?" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Would you like to document what happened?"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/whereWhenRadio" />
 
             <RadioGroup
                 android:id="@+id/interactRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/interact">
 
                 <RadioButton
                     android:id="@+id/interactYes"
@@ -152,69 +141,10 @@
                     android:layout_marginLeft="20dp"
                     android:text="SKIP" />
             </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="51dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:id="@+id/previousLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:background="#006F6B"
-                    android:visibility="invisible" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:background="#006F6B" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/previous"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="33dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="&lt; PREVIOUS"
-                    android:textColor="#006F6B"
-                    android:visibility="invisible" />
-
-                <TextView
-                    android:id="@+id/next"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="33dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="CONTINUE &gt;"
-                    android:textColor="#006F6B" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

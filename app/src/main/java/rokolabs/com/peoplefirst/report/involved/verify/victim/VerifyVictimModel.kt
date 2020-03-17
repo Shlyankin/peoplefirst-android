@@ -27,20 +27,29 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    private var activity = context as VerifyActivity
+    private var activity = context as VerifyVictimActivity
     private var mDisposable = CompositeDisposable()
 
     var continueSubject: Subject<View> = PublishSubject.create()
-    var prevClick: Subject<View> = PublishSubject.create()
+    var rejectSubject: Subject<View> = PublishSubject.create()
+
     var whereChecked: ObservableField<Int> = ObservableField()
     var harassmentChecked: ObservableField<Int> = ObservableField()
     var documentChecked: ObservableField<Int> = ObservableField()
     var whereWhen: ObservableField<String> = ObservableField()
 
+    var rejectButtonColor: ObservableField<Boolean> = ObservableField()
+    var continueButtonColor: ObservableField<Boolean> = ObservableField()
+
+    init {
+        rejectButtonColor.set(false)
+        continueButtonColor.set(false)
+    }
+
     fun initDisposable() {
         mDisposable.addAll(
             continueSubject.subscribe {
-                if (!rejectOnNo()) {
+                if (continueButtonColor.get()!!) {
 //                    val intent = Intent(this, HarassmentTypeActivity::class.java)
                     val intent = Intent(context, EditReportActivity::class.java)
                     activity.startActivity(intent)
@@ -48,45 +57,17 @@ constructor(
                     activity.finish()
                 }
             },
-            prevClick.subscribe {
-                reject()
+            rejectSubject.subscribe {
+                rejectOnNo()
             },
             whereChecked.addOnPropertyChanged {
-                if (it.get() == R.id.whereWhenYes)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.location_confirmation = true
-
-                if (it.get() == R.id.whereWhenNo)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.location_confirmation = false
-
-                if (it.get() == R.id.whereWhenSkip)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.location_confirmation = null
+                manageButtons()
             },
             harassmentChecked.addOnPropertyChanged {
-                if (it.get() == R.id.harrassementYes)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.harassment_confirmation = true
-                if (it.get() == R.id.harrassementNo)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.harassment_confirmation = false
-
-                if (it.get() == R.id.harrassementSkip)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.harassment_confirmation = null
+                manageButtons()
             },
             documentChecked.addOnPropertyChanged {
-                if (it.get() == R.id.documentYes)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.documentation_experienced = true
-                if (it.get() == R.id.documentNo)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.documentation_experienced = false
-
-                if (it.get() == R.id.documentSkip)
-                    if (mRepository.named == HarassmentRepository.VICTIM)
-                        mRepository.currentVictimTestimony.value!!.documentation_experienced = null
+                manageButtons()
             },
             mRepository.currentReport.subscribe { report ->
                 if (report !== Report.EMPTY) {
@@ -122,19 +103,23 @@ constructor(
                 })
     }
 
+
+    fun manageButtons() {
+        var second = whereChecked.get() == R.id.whereWhenYes
+                && harassmentChecked.get() == R.id.harrassementYes
+                && documentChecked.get() == R.id.documentYes
+        var first = whereChecked.get() == R.id.whereWhenNo
+                && harassmentChecked.get() == R.id.harrassementNo
+                && documentChecked.get() == R.id.documentNo
+        rejectButtonColor.set(first)
+        continueButtonColor.set(second)
+    }
+
     fun rejectOnNo(): Boolean {
-        if (mRepository.currentVictimTestimony.value!!.location_confirmation != null
-            && mRepository.currentVictimTestimony.value!!.harassment_confirmation != null
-            && mRepository.currentVictimTestimony.value!!.documentation_experienced != null
-        ) {
-            if (!mRepository.currentVictimTestimony.value!!.location_confirmation
-                && !mRepository.currentVictimTestimony.value!!.harassment_confirmation
-                && !mRepository.currentVictimTestimony.value!!.documentation_experienced
-            ) {
-                //на все ответил отрицательно значит отказался
-                reject()
-                return true
-            }
+        if (rejectButtonColor.get()!!) {
+            //на все ответил отрицательно значит отказался
+            reject()
+            return true
         }
         return false
     }
