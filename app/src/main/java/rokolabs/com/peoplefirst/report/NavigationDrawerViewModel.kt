@@ -10,6 +10,7 @@ import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
 import javax.inject.Inject
 
 class NavigationDrawerViewModel @Inject
@@ -33,12 +34,15 @@ constructor(
     var dateTimeDone: ObservableField<Boolean> = ObservableField()
     var happenedBeforeDone: ObservableField<Boolean> = ObservableField()
 
+    var mode: ObservableField<Int> = ObservableField()
+
     init {
         currentPos.set(R.id.nav_main_questions)
         initDisposable()
     }
 
     fun initDisposable() {
+        mode.set(mActivity.mode.get())
         mDisposable = CompositeDisposable()
         mDisposable.addAll(
             menuItemClick.subscribe {
@@ -57,6 +61,9 @@ constructor(
                 )
                 dateTimeDone.set(report.datetime != null)
                 happenedBeforeDone.set(report.happened_before != null)
+            },
+            mActivity.mode.addOnPropertyChanged {
+                mode.set(it.get())
             }
         )
     }

@@ -60,7 +60,11 @@ constructor(
     }
 
     fun previos() {
-        activity.navigateTo(R.id.nav_report_who_being_harassed)
+        if (activity.mode.get() == EditReportActivity.MODE_VERIFY_VICTIM) {
+            activity.navigateTo(R.id.nav_report_who_being_harassed)
+        } else {
+            activity.navigateTo(R.id.nav_report_who_being_harassed)
+        }
     }
 
     fun dispose() {

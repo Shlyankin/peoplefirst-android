@@ -28,22 +28,44 @@ constructor(
     var whereChecked: ObservableField<Int> = ObservableField()
     var witnessChecked: ObservableField<Int> = ObservableField()
 
+    var rejectButtonColor: ObservableField<Boolean> = ObservableField()
+    var continueButtonColor: ObservableField<Boolean> = ObservableField()
+
+    init {
+        rejectButtonColor.set(false)
+        continueButtonColor.set(false)
+    }
+
     fun initDisposable() {
         mDisposable.addAll(
             continueSubject.subscribe {
-                if (mRepository.named == HarassmentRepository.WITNESS) {
-                    gotoHarType()
-                } else if (mRepository.named == HarassmentRepository.AGGRESSOR) {
-                    gotoWhatHappened()
+                if (continueButtonColor.get()!!) {
+//                    EditReportActivity.showVerifyAggressor(activity)
+                    if (mRepository.named == HarassmentRepository.WITNESS) {
+                        EditReportActivity.showVerifyWitness(activity)
+                        activity.finish()
+                    } else if (mRepository.named == HarassmentRepository.AGGRESSOR) {
+                        EditReportActivity.showVerifyAggressor(activity)
+                        activity.finish()
+                    }
                 }
             },
             whereChecked.addOnPropertyChanged {
-
+                manageButtons()
             },
             witnessChecked.addOnPropertyChanged {
-
+                manageButtons()
             }
         )
+    }
+
+    fun manageButtons() {
+        var second = whereChecked.get() == R.id.whereWhenYes
+                && witnessChecked.get() == R.id.interactYes
+        var first = whereChecked.get() == R.id.whereWhenNo
+                && witnessChecked.get() == R.id.interactNo
+        rejectButtonColor.set(first)
+        continueButtonColor.set(second)
     }
 
     fun gotoHarType() {

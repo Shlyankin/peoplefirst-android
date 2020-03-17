@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="rokolabs.com.peoplefirst.report.ui.summary.confirm.ConfirmModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:background="@drawable/ic_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_rounded_bkg_white"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="32dp"
+            android:paddingRight="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/done"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Report"
+                android:textColor="@android:color/black"
+                android:textSize="33sp" />
+
+            <CheckBox
+                android:id="@+id/anonym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="I wish to report this anonymously"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/locationTimeWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/locationTimeCaption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@{viewModel.MLocationTimeCaption}"
+                    android:textColor="#006F6B"
+                    android:textSize="24sp"
+                    tools:text="You were at:" />
+
+                <TextView
+                    android:id="@+id/locationTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="29dp"
+                    android:text="Yes"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/witnessedIntrationsWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/witnessedInteractionsCaption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="You believe you witnessed a colleague experience harassment:"
+                    android:textColor="#006F6B"
+                    android:textSize="24sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/witnessedInteractions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="29dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    tools:text="Miller smith" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detailsWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Describe what happened:"
+                    android:textColor="#006F6B"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="29dp"
+                    android:text="@{viewModel.whatHappened}"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="Happened" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/additionalWitnessesWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Were there any witnesses?"
+                    android:textColor="#006F6B"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/additionalWitnesses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="29dp"
+                    android:text="@{viewModel.witnesses}"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="No" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/done"
+            reactiveClick="@{viewModel.doneSubject}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/drawable_rounded_bkg_lioght_green"
+            android:gravity="center"
+            android:text="Submit your report"
+            android:textColor="#006F6B"
+            android:visibility="@{viewModel.readOnly ? View.GONE :View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+</layout>

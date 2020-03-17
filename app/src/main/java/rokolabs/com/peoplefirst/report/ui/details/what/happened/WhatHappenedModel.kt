@@ -40,7 +40,14 @@ constructor(
 //        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
-                activity.navigateTo(R.id.nav_report_who_being_harassed)
+                var mode = activity.mode.get()
+                if (mode == EditReportActivity.MODE_VERIFY_AGGRESSOR) {
+                    activity.navigateTo(R.id.nav_report_were_any_witnesses)
+                } else if (mode == EditReportActivity.MODE_CREATE_NEW || mode == EditReportActivity.MODE_VERIFY_WITNESS) {
+                    activity.navigateTo(R.id.nav_report_who_being_harassed)
+                } else if (mode == EditReportActivity.MODE_VERIFY_VICTIM) {
+                    activity.navigateTo(R.id.nav_report_who_agressor_was)
+                }
                 save()
             },
             prevClick.subscribe {
@@ -62,7 +69,10 @@ constructor(
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_happened_before)
+        if (activity.mode.get() == EditReportActivity.MODE_VERIFY_AGGRESSOR) {
+            activity.finish()
+        } else
+            activity.navigateTo(R.id.nav_report_happened_before)
     }
 
     fun dispose() {

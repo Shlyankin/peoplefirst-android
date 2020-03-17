@@ -78,7 +78,11 @@ constructor(
     }
 
     fun previous() {
-        acitivty.navigateTo(0)
+        if (acitivty.mode.get() == EditReportActivity.MODE_CREATE_NEW) {
+            acitivty.navigateTo(0)
+        } else {
+            acitivty.finish()
+        }
     }
 
     fun dispose() {

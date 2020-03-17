@@ -52,11 +52,25 @@ constructor(
     }
 
     fun next() {
-        activity.navigateTo(R.id.nav_report_place)
+        var mode = activity.mode.get()
+        if (mode == EditReportActivity.MODE_CREATE_NEW) {
+            activity.navigateTo(R.id.nav_report_place)
+        } else if (mode == EditReportActivity.MODE_VERIFY_AGGRESSOR) {
+            activity.navigateTo(R.id.nav_report_confirm)
+        } else if (mode == EditReportActivity.MODE_VERIFY_VICTIM) {
+            activity.navigateTo(R.id.nav_report_how_resolved)
+        } else if (mode == EditReportActivity.MODE_VERIFY_WITNESS) {
+            activity.navigateTo(R.id.nav_report_summary)
+        }
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_who_agressor_was)
+        var mode = activity.mode.get()
+        if (mode == EditReportActivity.MODE_VERIFY_AGGRESSOR) {
+            activity.navigateTo(R.id.nav_report_what_happened)
+        } else {
+            activity.navigateTo(R.id.nav_report_who_agressor_was)
+        }
     }
 
     fun dispose() {

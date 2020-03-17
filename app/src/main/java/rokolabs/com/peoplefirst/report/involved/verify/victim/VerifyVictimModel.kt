@@ -51,9 +51,7 @@ constructor(
             continueSubject.subscribe {
                 if (continueButtonColor.get()!!) {
 //                    val intent = Intent(this, HarassmentTypeActivity::class.java)
-                    val intent = Intent(context, EditReportActivity::class.java)
-                    activity.startActivity(intent)
-                    activity.overridePendingTransition(R.anim.enter, R.anim.exit)
+                    EditReportActivity.showVerifyVictim(activity)
                     activity.finish()
                 }
             },

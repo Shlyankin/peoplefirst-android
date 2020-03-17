@@ -14,6 +14,7 @@ import io.reactivex.subjects.Subject
 import retrofit2.Response
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.responses.BaseResponse
+import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyActivity
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import javax.inject.Inject
@@ -31,9 +32,9 @@ constructor(
     fun initDisposable() {
         mDisposable.addAll(
             continueSubject.subscribe {
-//                val intent = Intent(activity, VerifyActivity::class.java)
-//                activity.startActivity(intent)
-//                activity.finish()
+                val intent = Intent(activity, VerifyActivity::class.java)
+                activity.startActivity(intent)
+                activity.finish()
             }, denySubject.subscribe {
                 if (mRepository.named == HarassmentRepository.WITNESS) {
                     mService.rejectWitnessReport(mRepository.currentReport.value!!.id)
