@@ -51,10 +51,8 @@ class ConfirmFragment : Fragment() {
 
 //        if (getIntent().hasExtra("readOnly")) mDone.setVisibility(View.GONE)
 
-        if (mRepository.named == HarassmentRepository.WITNESS) {
-            if (mRepository.me.getValue() == mRepository.currentWitnessTestimony.getValue()?.victim) {
-                anonym.setVisibility(View.GONE)
-            }
+        if (mRepository.me.getValue() == mRepository.currentReport.getValue()?.victim) {
+            anonym.setVisibility(View.GONE)
         }
         viewModel.initDisposable()
 

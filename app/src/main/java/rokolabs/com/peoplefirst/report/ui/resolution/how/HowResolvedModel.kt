@@ -49,11 +49,7 @@ constructor(
     }
 
     fun save(): Boolean {
-        if (mRepository.named == HarassmentRepository.VICTIM) {
-            mRepository.currentVictimTestimony.value!!.victim_proposed_solution =
-                details.get().toString()
-            mRepository.currentVictimTestimony.onNext(mRepository.currentVictimTestimony.value!!)
-        } else if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
+       if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {
             mRepository.currentReport.value!!.victim_proposed_solution =
                 details.get().toString()
             mRepository.currentReport.onNext(mRepository.currentReport.value!!)
