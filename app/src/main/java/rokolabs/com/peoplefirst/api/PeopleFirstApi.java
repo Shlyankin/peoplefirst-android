@@ -82,7 +82,7 @@ public interface PeopleFirstApi {
     @GET("myOpenReports")
     Single<ReportsResponse> getReports();
 
-    @GET("reports/my/{status}")
+    @GET("reports/my/{status}?per-page=100&page=1")
     Single<ReportsResponse> getMyReports(@Path("status") String status);
 
     @POST("reports")
