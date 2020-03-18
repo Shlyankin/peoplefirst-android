@@ -66,7 +66,8 @@ constructor(
 
     private val mMode = EDIT_MODE
     fun previous() {
-        activity.navigateTo(R.id.nav_report_how_resolved)
+        // activity.navigateTo(R.id.nav_report_how_resolved)
+        activity.navigatePrev()
     }
 
     fun initDisposable() {
@@ -94,7 +95,8 @@ constructor(
                                 )
                                 activity.finish()
                             } else {
-                                activity.navigateTo(R.id.nav_report_profile_confirmation)
+                                // activity.navigateTo(R.id.nav_report_profile_confirmation)
+                                activity.navigateNext()
                             }
                         }
                     }

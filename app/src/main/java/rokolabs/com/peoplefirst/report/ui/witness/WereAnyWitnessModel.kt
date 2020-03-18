@@ -39,6 +39,7 @@ constructor(
                 previous()
             },
             yesClick.subscribe {
+                // отдельное отведение с witness через navigateTo
                 activity.navigateTo(R.id.nav_report_witness_information)
             },
             noClick.subscribe {
@@ -52,11 +53,13 @@ constructor(
     }
 
     fun next() {
-        activity.navigateTo(R.id.nav_report_place)
+        // activity.navigateTo(R.id.nav_report_place)
+        activity.navigateNext()
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_who_agressor_was)
+        // activity.navigateTo(R.id.nav_report_who_agressor_was)
+        activity.navigatePrev()
     }
 
     fun dispose() {

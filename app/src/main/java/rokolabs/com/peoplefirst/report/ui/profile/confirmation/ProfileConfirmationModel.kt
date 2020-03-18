@@ -25,7 +25,8 @@ constructor(
     fun initDisposable() {
         mDisposable.addAll(
             activity.onBackPressedObject.subscribe {
-                activity.navigateTo(R.id.nav_report_summary)
+                // activity.navigateTo(R.id.nav_report_summary)
+                activity.navigatePrev()
             }
         )
     }

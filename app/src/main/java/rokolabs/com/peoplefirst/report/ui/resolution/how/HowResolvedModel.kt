@@ -39,7 +39,8 @@ constructor(
             },
             nextClick.subscribe {
                 if (save()) {
-                    activity.navigateTo(R.id.nav_report_summary)
+                    // activity.navigateTo(R.id.nav_report_summary)
+                    activity.navigateNext()
                 }
             },
             mRepository.currentReport.subscribe {
@@ -62,7 +63,8 @@ constructor(
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_date_time)
+        // activity.navigateTo(R.id.nav_report_date_time)
+        activity.navigatePrev()
     }
 
     fun dispose() {

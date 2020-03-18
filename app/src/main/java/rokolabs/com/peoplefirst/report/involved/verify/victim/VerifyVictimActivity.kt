@@ -4,13 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_verify_victim.*
 import rokolabs.com.peoplefirst.R
-import rokolabs.com.peoplefirst.databinding.ActivityVerifyBinding
 import rokolabs.com.peoplefirst.databinding.ActivityVerifyVictimBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
-import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyModel
 import javax.inject.Inject
 
 class VerifyVictimActivity :AppCompatActivity() {

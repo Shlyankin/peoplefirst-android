@@ -40,7 +40,8 @@ constructor(
 //        mDisposable = CompositeDisposable()
         mDisposable.addAll(
             nextClick.subscribe {
-                activity.navigateTo(R.id.nav_report_who_being_harassed)
+                // activity.navigateTo(R.id.nav_report_who_being_harassed)
+                activity.navigateNext()
                 save()
             },
             prevClick.subscribe {
@@ -62,7 +63,8 @@ constructor(
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_happened_before)
+        // activity.navigateTo(R.id.nav_report_happened_before)
+        activity.navigatePrev()
     }
 
     fun dispose() {

@@ -43,7 +43,8 @@ constructor(
             nextClick.subscribe {
                 if (save()) {
                     var t = 0
-                    activity.navigateTo(R.id.nav_report_date_time)
+                    // activity.navigateTo(R.id.nav_report_date_time)
+                    activity.navigateNext()
                 }
             },
             prevClick.subscribe {
@@ -63,7 +64,8 @@ constructor(
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_were_any_witnesses)
+        // activity.navigateTo(R.id.nav_report_were_any_witnesses)
+        activity.navigatePrev()
     }
 
     fun dispose() {

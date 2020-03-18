@@ -62,10 +62,11 @@ constructor(
             nextClick.subscribe {
                 if (save()) {
                     var t = 0
-                    activity.navigateTo(R.id.nav_report_who_agressor_was)
-//                    val intent = Intent(this, WhoAgressorActivity::class.java)
-//                    startActivity(intent)
-//                    overridePendingTransition(R.anim.enter, R.anim.exit)
+                    //activity.navigateTo(R.id.nav_report_who_agressor_was)
+                    activity.navigateNext()
+//                  val intent = Intent(this, WhoAgressorActivity::class.java)
+//                  startActivity(intent)
+//                  overridePendingTransition(R.anim.enter, R.anim.exit)
                 }
             },
             prevClick.subscribe {
@@ -92,7 +93,8 @@ constructor(
 
     }
     fun previous(){
-        activity.navigateTo(R.id.nav_report_what_happened)
+        // activity.navigateTo(R.id.nav_report_what_happened)
+        activity.navigatePrev()
     }
     fun save(): Boolean {
         if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null) {

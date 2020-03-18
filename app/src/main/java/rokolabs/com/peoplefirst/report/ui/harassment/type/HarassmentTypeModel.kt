@@ -11,7 +11,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.HarassmentType
 import rokolabs.com.peoplefirst.model.Report
@@ -29,13 +28,13 @@ constructor(
     var selectedHarassments = ArrayList<HarassmentType>()
     var mAdapter: TypesAdapter? = null
     private var mDisposable = CompositeDisposable()
-    private var acitivty: EditReportActivity
+    private var activity: EditReportActivity
     var nextClick: PublishSubject<View> = PublishSubject.create()
     var prevClick: PublishSubject<View> = PublishSubject.create()
     var prevEnabled: ObservableField<Boolean> = ObservableField()
 
     init {
-        acitivty = context as EditReportActivity
+        activity = context as EditReportActivity
         mAdapter = TypesAdapter()
     }
 
@@ -44,13 +43,14 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
-                    acitivty.navigateTo(R.id.nav_harassment_reasons)
+                    // activity.navigateTo(R.id.nav_harassment_reasons)
+                    activity.navigateNext()
                 }
             },
             prevClick.subscribe {
                 previous()
             },
-            acitivty.onBackPressedObject.subscribe {
+            activity.onBackPressedObject.subscribe {
                 previous()
             },
             mAdapter?.typeClick?.subscribe {
@@ -78,7 +78,8 @@ constructor(
     }
 
     fun previous() {
-        acitivty.navigateTo(0)
+        // activity.navigateTo(0)
+        activity.navigatePrev()
     }
 
     fun dispose() {

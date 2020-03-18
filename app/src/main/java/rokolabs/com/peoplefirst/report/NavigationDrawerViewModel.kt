@@ -38,7 +38,8 @@ constructor(
         initDisposable()
     }
 
-    fun getPrevFragmentId(currentFragmentId: Int): Int {
+    fun getPrevFragmentId(): Int {
+        val currentFragmentId = currentPos.get()!!
         when(mRepository.named) {
             HarassmentRepository.VICTIM -> {
                 return getPrevFragmentIdVictim(currentFragmentId)
@@ -51,13 +52,16 @@ constructor(
                 return getPrevFragmentIdWitness(currentFragmentId)
             }
             else -> {
-                // TODO: надо подумать что по дефолту возвращать. Скорее всего просто "у вас нет доступа. попробуйте позже"
+                // TODO: надо подумать что по дефолту возвращать.
+                //  Скорее всего просто "у вас нет доступа. попробуйте позже".
+                //  Но сейчас во время создания репорта mRepository.named = -1, поэтому victim
                 return getPrevFragmentIdVictim(currentFragmentId)
             }
         }
     }
 
-    fun getNextFragmentId(currentFragmentId: Int): Int {
+    fun getNextFragmentId(): Int {
+        val currentFragmentId = currentPos.get()!!
         when(mRepository.named) {
             HarassmentRepository.VICTIM -> {
                 return getNextFragmentIdVictim(currentFragmentId)
@@ -70,7 +74,9 @@ constructor(
                 return getNextFragmentIdWitness(currentFragmentId)
             }
             else -> {
-                // TODO: надо подумать что по дефолту возвращать. Скорее всего просто "у вас нет доступа. попробуйте позже"
+                // TODO: надо подумать что по дефолту возвращать.
+                //  Скорее всего просто "у вас нет доступа. попробуйте позже".
+                //  Но сейчас во время создания репорта mRepository.named = -1, поэтому victim
                 return getNextFragmentIdVictim(currentFragmentId)
             }
         }
@@ -250,9 +256,6 @@ constructor(
                 return R.id.nav_report_how_resolved
             }
             R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_witness_information -> {
                 return R.id.nav_report_summary
             }
             R.id.nav_report_summary -> {

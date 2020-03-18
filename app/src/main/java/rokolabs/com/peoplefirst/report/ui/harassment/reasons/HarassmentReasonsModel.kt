@@ -26,7 +26,7 @@ constructor(
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    private var acitivity: EditReportActivity
+    private var activity: EditReportActivity
     private var mDisposable = CompositeDisposable()
 
     var mAdapter: ReasonsAdapter
@@ -37,7 +37,7 @@ constructor(
 
     init {
         mAdapter = ReasonsAdapter()
-        acitivity = context as EditReportActivity
+        activity = context as EditReportActivity
     }
 
     fun initDisposable() {
@@ -46,12 +46,14 @@ constructor(
             prevSubject.subscribe {
                 previous()
             },
-            acitivity.onBackPressedObject.subscribe {
+            activity.onBackPressedObject.subscribe {
                 previous()
             },
             nextSubject.subscribe {
-                if (save())
-                    acitivity.navigateTo(R.id.nav_report_happened_before)
+                if (save()) {
+                    // acitivity.navigateTo(R.id.nav_report_happened_before)
+                    activity.navigateNext()
+                }
             },
             mAdapter.typeClick.subscribe { harassmentReason ->
                 if (selectedReasons.indexOf(harassmentReason) >= 0)
@@ -77,7 +79,8 @@ constructor(
     }
 
     fun previous() {
-        acitivity.navigateTo(R.id.nav_harassment_type)
+        // activity.navigateTo(R.id.nav_harassment_type)
+        activity.navigatePrev()
     }
 
     private fun save(): Boolean {

@@ -160,12 +160,18 @@ class EditReportActivity : AppCompatActivity() {
         }
     }
 
-    fun navigatePrev(currentFragmentId: Int) {
-        val pos = navigationDrawerViewModel.getPrevFragmentId(currentFragmentId)
+    fun navigatePrev() {
+        val pos = navigationDrawerViewModel.getPrevFragmentId()
+        navController.navigate(pos)
+        navigationDrawerViewModel.currentPos.set(pos)
+        drawerLayout.closeDrawers()
     }
 
-    fun navigateNext(currentFragmentId: Int) {
-        val pos = navigationDrawerViewModel.getNextFragmentId(currentFragmentId)
+    fun navigateNext() {
+        val pos = navigationDrawerViewModel.getNextFragmentId()
+        navController.navigate(pos)
+        navigationDrawerViewModel.currentPos.set(pos)
+        drawerLayout.closeDrawers()
     }
 
     fun navigateTo(id: Int) {
