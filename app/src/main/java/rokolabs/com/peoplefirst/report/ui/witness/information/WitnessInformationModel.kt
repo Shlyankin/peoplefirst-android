@@ -43,8 +43,14 @@ constructor(
             },
             nextClick.subscribe {
                 if (save()) {
-                    var t = 0
-                    activity.navigateTo(R.id.nav_report_place)
+                    var mode = activity.mode.get()
+                    if (mode == EditReportActivity.MODE_CREATE_NEW) {
+                        activity.navigateTo(R.id.nav_report_place)
+                    } else if (mode == EditReportActivity.MODE_VERIFY_AGGRESSOR || mode == EditReportActivity.MODE_VERIFY_WITNESS) {
+                        activity.navigateTo(R.id.nav_report_summary)
+                    } else if (mode == EditReportActivity.MODE_VERIFY_VICTIM) {
+                        activity.navigateTo(R.id.nav_report_how_resolved)
+                    }
                 }
             },
             activity.onBackPressedObject.subscribe {

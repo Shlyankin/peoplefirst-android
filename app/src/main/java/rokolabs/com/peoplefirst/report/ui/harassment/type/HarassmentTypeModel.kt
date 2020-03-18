@@ -11,6 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.HarassmentType
 import rokolabs.com.peoplefirst.model.Report
@@ -43,14 +44,13 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
-                    // activity.navigateTo(R.id.nav_harassment_reasons)
-                    activity.navigateNext()
+                    acitivty.navigateTo(R.id.nav_harassment_reasons)
                 }
             },
             prevClick.subscribe {
                 previous()
             },
-            activity.onBackPressedObject.subscribe {
+            acitivty.onBackPressedObject.subscribe {
                 previous()
             },
             mAdapter?.typeClick?.subscribe {
@@ -78,8 +78,11 @@ constructor(
     }
 
     fun previous() {
-        // activity.navigateTo(0)
-        activity.navigatePrev()
+        if (acitivty.mode.get() == EditReportActivity.MODE_CREATE_NEW) {
+            activity.navigatePrev()
+        } else {
+            acitivty.finish()
+        }
     }
 
     fun dispose() {

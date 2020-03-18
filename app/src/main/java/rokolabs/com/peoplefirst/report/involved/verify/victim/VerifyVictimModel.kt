@@ -51,9 +51,7 @@ constructor(
             continueSubject.subscribe {
                 if (continueButtonColor.get()!!) {
 //                    val intent = Intent(this, HarassmentTypeActivity::class.java)
-                    val intent = Intent(context, EditReportActivity::class.java)
-                    activity.startActivity(intent)
-                    activity.overridePendingTransition(R.anim.enter, R.anim.exit)
+                    EditReportActivity.showVerifyVictim(activity)
                     activity.finish()
                 }
             },
@@ -82,25 +80,25 @@ constructor(
     }
 
     fun reject() {
-        mService.rejectTestimony(mRepository.currentReport.value!!.id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { reportResponse ->
-                    if (reportResponse.success) {
-                        mRepository.getMyReports()
-//                                val intent = Intent(context, RejectedReportActivity::class.java)
-//                                activity.startActivity(intent)
-//                                activity.finish()
-                    }
-                },
-                { throwable ->
-                    Toast.makeText(
-                        context,
-                        "Could not reject report",
-                        Toast.LENGTH_LONG
-                    ).show()
-                })
+//        mService.rejectTestimony(mRepository.currentReport.value!!.id)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(
+//                { reportResponse ->
+//                    if (reportResponse.success) {
+//                        mRepository.getMyReports()
+////                                val intent = Intent(context, RejectedReportActivity::class.java)
+////                                activity.startActivity(intent)
+////                                activity.finish()
+//                    }
+//                },
+//                { throwable ->
+//                    Toast.makeText(
+//                        context,
+//                        "Could not reject report",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                })
     }
 
 

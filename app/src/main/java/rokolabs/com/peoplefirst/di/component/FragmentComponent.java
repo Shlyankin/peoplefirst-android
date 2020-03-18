@@ -23,6 +23,7 @@ import rokolabs.com.peoplefirst.report.ui.place.PlaceFragment;
 import rokolabs.com.peoplefirst.report.ui.profile.confirmation.ProfileConfirmationFragment;
 import rokolabs.com.peoplefirst.report.ui.resolution.how.HowResolvedFragment;
 import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryFragment;
+import rokolabs.com.peoplefirst.report.ui.summary.confirm.ConfirmFragment;
 import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersFragment;
 import rokolabs.com.peoplefirst.report.ui.victim.WhoBeingHarassedFragment;
 import rokolabs.com.peoplefirst.report.ui.witness.WereAnyWitnessesFragment;
@@ -72,6 +73,7 @@ public interface FragmentComponent {
     void inject(ProfileFragment fragment);
 
     void inject(ResultNotificationFragment fragment);
+    void inject(ConfirmFragment fragment);
 
 }
 

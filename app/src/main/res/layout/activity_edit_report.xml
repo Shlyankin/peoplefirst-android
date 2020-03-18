@@ -2,12 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="drawerViewModel"
             type="rokolabs.com.peoplefirst.report.NavigationDrawerViewModel" />
+
+        <variable
+            name="companion"
+            type="rokolabs.com.peoplefirst.report.EditReportActivity.Companion" />
     </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -32,8 +40,9 @@
             android:fitsSystemWindows="true">
 
             <include
-                app:viewModel="@{drawerViewModel}"
-                layout="@layout/layout_edit_profile_drawer" />
+                layout="@layout/layout_edit_profile_drawer"
+                app:additionalInfo="@{companion}"
+                app:viewModel="@{drawerViewModel}" />
         </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>

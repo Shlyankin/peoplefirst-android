@@ -16,6 +16,7 @@ import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.involved.named.NamedActivity
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesActivity
 import rokolabs.com.peoplefirst.report.ui.summary.ReportSummaryActivity
+import rokolabs.com.peoplefirst.report.ui.summary.confirm.ConfirmActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionActivity
 import rokolabs.com.peoplefirst.resolution.result.ResolutionStatusActivity
@@ -56,13 +57,12 @@ class ReportsModel @Inject constructor(
             activeAdapter.detailsClicks.subscribe {
                 mRepository.currentReport.onNext(it);
 //                activity.startActivity(Intent(context, EditReportActivity::class.java))
-//                loadReport()
-                testLoad()
+                loadReport()
+//                testLoad()
             },
             addReportSubject.subscribe {
                 mRepository.currentReport.onNext(Report())
-//                mRepository.named = HarassmentRepository.EMPTY
-                activity.startActivity(Intent(context, EditReportActivity::class.java))
+                EditReportActivity.show(activity)
             }
         )
         mRepository.getMyReports()
@@ -86,11 +86,12 @@ class ReportsModel @Inject constructor(
     }
 
     fun showWitnessReport() {
-//        ConfirmActivity.showReadonly(this)
+        ConfirmActivity.showReadOnly(activity)
     }
 
+
     fun showAggressorReport() {
-//        ConfirmActivity.showReadonly(this)
+        ConfirmActivity.showReadOnly(activity)
     }
 
     fun showVictimRreportDetails(edit: Boolean) {
@@ -128,7 +129,7 @@ class ReportsModel @Inject constructor(
     }
 
     fun testLoad() {
-        showVictimAfterWtiness()
+        showWitnessReport()
     }
 
     fun loadReport() {

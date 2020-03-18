@@ -1,6 +1,7 @@
 package rokolabs.com.peoplefirst.report
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -21,6 +22,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import io.reactivex.disposables.CompositeDisposable
@@ -43,13 +45,47 @@ class EditReportActivity : AppCompatActivity() {
         val PERMISSION_REQUEST_CODE = 1
         val CHOOSE_FILE_CODE = 2
         val ADD_VICTIM_CODE = 3
-        fun showEdit(context: Context) {
+
+        val MODE_VERIFY_VICTIM = 1
+        val MODE_VERIFY_AGGRESSOR = 2
+        val MODE_VERIFY_WITNESS = 3
+        val MODE_CREATE_NEW = -1
+        fun showEdit(context: Activity) {
             val intent = Intent(context, EditReportActivity::class.java)
             intent.putExtra("showSummary", true)
+            context.overridePendingTransition(R.anim.enter, R.anim.exit)
+            context.startActivity(intent)
+        }
+
+        fun show(context: Activity) {
+            val intent = Intent(context, EditReportActivity::class.java)
+            context.overridePendingTransition(R.anim.enter, R.anim.exit)
+            context.startActivity(intent)
+        }
+
+        fun showVerifyVictim(context: Activity) {
+            val intent = Intent(context, EditReportActivity::class.java)
+            intent.putExtra("mode", MODE_VERIFY_VICTIM)
+            context.overridePendingTransition(R.anim.enter, R.anim.exit)
+            context.startActivity(intent)
+        }
+
+        fun showVerifyWitness(context: Activity) {
+            val intent = Intent(context, EditReportActivity::class.java)
+            intent.putExtra("mode", MODE_VERIFY_WITNESS)
+            context.overridePendingTransition(R.anim.enter, R.anim.exit)
+            context.startActivity(intent)
+        }
+
+        fun showVerifyAggressor(context: Activity) {
+            val intent = Intent(context, EditReportActivity::class.java)
+            intent.putExtra("mode", MODE_VERIFY_AGGRESSOR)
+            context.overridePendingTransition(R.anim.enter, R.anim.exit)
             context.startActivity(intent)
         }
     }
 
+    var mode = ObservableField<Int>(MODE_CREATE_NEW)
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
@@ -72,6 +108,7 @@ class EditReportActivity : AppCompatActivity() {
             this,
             R.layout.activity_edit_report
         )
+        binder.companion = EditReportActivity.Companion
         binder.drawerViewModel = navigationDrawerViewModel
         setSupportActionBar(toolbar)
         title = findViewById(R.id.toolbar_title)
@@ -120,10 +157,20 @@ class EditReportActivity : AppCompatActivity() {
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.navbar_mobile)
-        val mode = intent.extras?.get("showSummary") as Boolean?
-        if (mode != null && mode) {
+        val showSummary = intent.extras?.get("showSummary") as Boolean?
+        if (showSummary != null && showSummary) {
             navigateTo(R.id.nav_report_summary)
         }
+        val mod = intent.extras?.get("mode") as Int?
+        if (mod != null) {
+            mode.set(mod)
+            if (mod == MODE_VERIFY_AGGRESSOR) {
+                navigateTo(R.id.nav_report_what_happened)
+            } else {
+                navigateTo(R.id.nav_harassment_type)
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -158,20 +205,6 @@ class EditReportActivity : AppCompatActivity() {
         } else {
             drawerLayout.openDrawer(nav_view)
         }
-    }
-
-    fun navigatePrev() {
-        val pos = navigationDrawerViewModel.getPrevFragmentId()
-        navController.navigate(pos)
-        navigationDrawerViewModel.currentPos.set(pos)
-        drawerLayout.closeDrawers()
-    }
-
-    fun navigateNext() {
-        val pos = navigationDrawerViewModel.getNextFragmentId()
-        navController.navigate(pos)
-        navigationDrawerViewModel.currentPos.set(pos)
-        drawerLayout.closeDrawers()
     }
 
     fun navigateTo(id: Int) {
@@ -214,6 +247,9 @@ class EditReportActivity : AppCompatActivity() {
             }
             R.id.nav_report_profile_confirmation -> {
                 R.id.nav_report_profile_confirmation
+            }
+            R.id.nav_report_confirm -> {
+                R.id.nav_report_confirm
             }
             else -> {
                 R.id.nav_main_questions

@@ -10,6 +10,7 @@ import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
 import javax.inject.Inject
 
 class NavigationDrawerViewModel @Inject
@@ -32,6 +33,8 @@ constructor(
     var locationCityDone: ObservableField<Boolean> = ObservableField()
     var dateTimeDone: ObservableField<Boolean> = ObservableField()
     var happenedBeforeDone: ObservableField<Boolean> = ObservableField()
+
+    var mode: ObservableField<Int> = ObservableField()
 
     init {
         currentPos.set(R.id.nav_main_questions)
@@ -363,6 +366,7 @@ constructor(
 
 
     fun initDisposable() {
+        mode.set(mActivity.mode.get())
         mDisposable = CompositeDisposable()
         mDisposable.addAll(
             menuItemClick.subscribe {
@@ -380,7 +384,10 @@ constructor(
                             (report.location_details != null && report.location_details.length > 0)
                 )
                 dateTimeDone.set(report.datetime != null)
-                happenedBeforeDone.set(report.happened_before != null) // TODO: всегда светится галочка. Надо поправить
+                happenedBeforeDone.set(report.happened_before != null)
+            },
+            mActivity.mode.addOnPropertyChanged {
+                mode.set(it.get())
             }
         )
     }

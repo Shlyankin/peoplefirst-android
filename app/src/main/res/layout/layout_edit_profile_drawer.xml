@@ -11,6 +11,10 @@
         <import type="rokolabs.com.peoplefirst.R" />
 
         <variable
+            name="additionalInfo"
+            type="rokolabs.com.peoplefirst.report.EditReportActivity.Companion" />
+
+        <variable
             name="viewModel"
             type="rokolabs.com.peoplefirst.report.NavigationDrawerViewModel" />
     </data>
@@ -82,6 +86,7 @@
                     android:id="@+id/nav_harassment_type"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
+                    android:visibility="@{viewModel.mode != additionalInfo.MODE_VERIFY_AGGRESSOR ? View.VISIBLE : View.GONE}"
                     android:layout_height="wrap_content">
 
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
@@ -99,6 +104,7 @@
                     android:id="@+id/nav_harassment_reasons"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
+                    android:visibility="@{viewModel.mode != additionalInfo.MODE_VERIFY_AGGRESSOR ? View.VISIBLE : View.GONE}"
                     android:layout_height="wrap_content">
 
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
@@ -118,6 +124,7 @@
                     android:id="@+id/nav_report_happened_before"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
+                    android:visibility="@{viewModel.mode != additionalInfo.MODE_VERIFY_AGGRESSOR ? View.VISIBLE : View.GONE}"
                     android:layout_height="wrap_content">
 
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
@@ -176,7 +183,8 @@
                     android:id="@+id/nav_report_who_being_harassed"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.mode == additionalInfo.MODE_CREATE_NEW || viewModel.mode == additionalInfo.MODE_VERIFY_WITNESS ? View.VISIBLE : View.GONE}">
 
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
@@ -192,7 +200,8 @@
                     android:id="@+id/nav_report_who_agressor_was"
                     reactiveClick="@{viewModel.menuItemClick}"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.mode != additionalInfo.MODE_VERIFY_AGGRESSOR ? View.VISIBLE : View.GONE}">
 
                     <rokolabs.com.peoplefirst.report.ui.SubMenuItem
                         android:layout_width="wrap_content"
@@ -227,7 +236,8 @@
                 android:id="@+id/nav_report_place_title"
                 reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.mode == additionalInfo.MODE_CREATE_NEW ? View.VISIBLE : View.GONE}">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -244,7 +254,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="@{viewModel.mode == additionalInfo.MODE_CREATE_NEW ? View.VISIBLE : View.GONE}">
 
                 <LinearLayout
                     android:id="@+id/nav_report_place"
@@ -268,7 +279,8 @@
                 android:id="@+id/nav_report_date_time_title"
                 reactiveClick="@{viewModel.menuItemClick}"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.mode == additionalInfo.MODE_CREATE_NEW ? View.VISIBLE : View.GONE}">
 
                 <TextView
                     android:id="@+id/textView17"
@@ -283,7 +295,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.mode == additionalInfo.MODE_CREATE_NEW ? View.VISIBLE : View.GONE}">
 
                 <LinearLayout
                     android:id="@+id/nav_report_date_time"
