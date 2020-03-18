@@ -44,13 +44,13 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 if (save()) {
-                    acitivty.navigateTo(R.id.nav_harassment_reasons)
+                    activity.navigateTo(R.id.nav_harassment_reasons)
                 }
             },
             prevClick.subscribe {
                 previous()
             },
-            acitivty.onBackPressedObject.subscribe {
+            activity.onBackPressedObject.subscribe {
                 previous()
             },
             mAdapter?.typeClick?.subscribe {
@@ -78,10 +78,10 @@ constructor(
     }
 
     fun previous() {
-        if (acitivty.mode.get() == EditReportActivity.MODE_CREATE_NEW) {
+        if (activity.mode.get() == EditReportActivity.MODE_CREATE_NEW) {
             activity.navigatePrev()
         } else {
-            acitivty.finish()
+            activity.finish()
         }
     }
 

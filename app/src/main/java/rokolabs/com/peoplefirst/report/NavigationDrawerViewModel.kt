@@ -43,326 +43,48 @@ constructor(
 
     fun getPrevFragmentId(): Int {
         val currentFragmentId = currentPos.get()!!
-        when(mRepository.named) {
-            HarassmentRepository.VICTIM -> {
-                return getPrevFragmentIdVictim(currentFragmentId)
+        when(mode.get()) {
+            EditReportActivity.MODE_CREATE_NEW -> {
+                return Navigation.getPrevFragmentIdVictimCreateReport(currentFragmentId)
             }
-            HarassmentRepository.AGGRESSOR -> {
-                return getPrevFragmentIdAggressor(currentFragmentId)
+            EditReportActivity.MODE_VERIFY_AGGRESSOR -> {
+                return Navigation.getPrevFragmentIdVerifyAggressor(currentFragmentId)
 
             }
-            HarassmentRepository.WITNESS -> {
-                return getPrevFragmentIdWitness(currentFragmentId)
+            EditReportActivity.MODE_VERIFY_WITNESS -> {
+                return Navigation.getPrevFragmentIdVerifyWitness(currentFragmentId)
+            }
+            EditReportActivity.MODE_VERIFY_VICTIM -> {
+                return Navigation.getPrevFragmentIdVerifyVictim(currentFragmentId)
             }
             else -> {
-                // TODO: надо подумать что по дефолту возвращать.
-                //  Скорее всего просто "у вас нет доступа. попробуйте позже".
-                //  Но сейчас во время создания репорта mRepository.named = -1, поэтому victim
-                return getPrevFragmentIdVictim(currentFragmentId)
+                return Navigation.getPrevFragmentIdVictimCreateReport(currentFragmentId)
             }
         }
     }
 
     fun getNextFragmentId(): Int {
         val currentFragmentId = currentPos.get()!!
-        when(mRepository.named) {
-            HarassmentRepository.VICTIM -> {
-                return getNextFragmentIdVictim(currentFragmentId)
+        when(mode.get()) {
+            EditReportActivity.MODE_CREATE_NEW -> {
+                return Navigation.getNextFragmentIdVictimCreateReport(currentFragmentId)
             }
-            HarassmentRepository.AGGRESSOR -> {
-                return getNextFragmentIdAggressor(currentFragmentId)
+            EditReportActivity.MODE_VERIFY_AGGRESSOR -> {
+                return Navigation.getNextFragmentIdVerifyAggressor(currentFragmentId)
 
             }
-            HarassmentRepository.WITNESS -> {
-                return getNextFragmentIdWitness(currentFragmentId)
+            EditReportActivity.MODE_VERIFY_WITNESS -> {
+                return Navigation.getNextFragmentIdVerifyWitness(currentFragmentId)
+            }
+            EditReportActivity.MODE_VERIFY_VICTIM -> {
+                return Navigation.getNextFragmentIdVerifyVictim(currentFragmentId)
             }
             else -> {
-                // TODO: надо подумать что по дефолту возвращать.
-                //  Скорее всего просто "у вас нет доступа. попробуйте позже".
-                //  Но сейчас во время создания репорта mRepository.named = -1, поэтому victim
-                return getNextFragmentIdVictim(currentFragmentId)
+                return Navigation.getNextFragmentIdVictimCreateReport(currentFragmentId)
             }
         }
     }
 
-    private fun getPrevFragmentIdVictim(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_harassment_type -> {
-                return R.id.nav_main_questions
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_who_being_harassed -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_place -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_date_time -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_witness_information -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_profile_confirmation -> {
-                return R.id.nav_report_summary
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
-
-    private fun getPrevFragmentIdAggressor(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_main_questions -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_harassment_type -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_who_being_harassed -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_place -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_date_time -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_witness_information -> {
-                return R.id.nav_report_summary
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_profile_confirmation
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
-
-    private fun getPrevFragmentIdWitness(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_place, R.id.nav_report_place_title -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_date_time, R.id.nav_report_date_time_title -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_witness_information -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_summary
-            }
-            R.id.nav_report_profile_confirmation -> {
-                return R.id.nav_report_profile_confirmation
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
-
-    private fun getNextFragmentIdVictim(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_main_questions, R.id.nav_harassment_type_title -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_harassment_type -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_who_being_harassed -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_place -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_date_time -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_summary
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_profile_confirmation
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
-
-    private fun getNextFragmentIdAggressor(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_main_questions -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_harassment_type -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_who_being_harassed -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_place -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_date_time -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_witness_information -> {
-                return R.id.nav_report_summary
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_profile_confirmation
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
-
-    private fun getNextFragmentIdWitness(currentFragmentId: Int): Int {
-        when(currentFragmentId) {
-            R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
-                return R.id.nav_harassment_type
-            }
-            R.id.nav_harassment_reasons -> {
-                return R.id.nav_harassment_reasons
-            }
-            R.id.nav_report_happened_before -> {
-                return R.id.nav_report_happened_before
-            }
-            R.id.nav_report_what_happened -> {
-                return R.id.nav_report_what_happened
-            }
-            R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
-                return R.id.nav_report_who_being_harassed
-            }
-            R.id.nav_report_who_agressor_was -> {
-                return R.id.nav_report_who_agressor_was
-            }
-            R.id.nav_report_were_any_witnesses -> {
-                return R.id.nav_report_were_any_witnesses
-            }
-            R.id.nav_report_place, R.id.nav_report_place_title -> {
-                return R.id.nav_report_place
-            }
-            R.id.nav_report_date_time, R.id.nav_report_date_time_title -> {
-                return R.id.nav_report_date_time
-            }
-            R.id.nav_report_how_resolved -> {
-                return R.id.nav_report_how_resolved
-            }
-            R.id.nav_report_witness_information -> {
-                return R.id.nav_report_witness_information
-            }
-            R.id.nav_report_summary -> {
-                return R.id.nav_report_summary
-            }
-            R.id.nav_report_profile_confirmation -> {
-                return R.id.nav_report_profile_confirmation
-            }
-            else -> {
-                return R.id.nav_main_questions
-            }
-        }
-    }
 
 
     fun initDisposable() {

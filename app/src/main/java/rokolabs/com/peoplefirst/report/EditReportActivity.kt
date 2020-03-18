@@ -207,6 +207,20 @@ class EditReportActivity : AppCompatActivity() {
         }
     }
 
+    fun navigatePrev() {
+        val pos = navigationDrawerViewModel.getPrevFragmentId()
+        navController.navigate(pos)
+        navigationDrawerViewModel.currentPos.set(pos)
+        drawerLayout.closeDrawers()
+    }
+
+    fun navigateNext() {
+        val pos = navigationDrawerViewModel.getNextFragmentId()
+        navController.navigate(pos)
+        navigationDrawerViewModel.currentPos.set(pos)
+        drawerLayout.closeDrawers()
+    }
+
     fun navigateTo(id: Int) {
         var pos = when (id) {
             R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
