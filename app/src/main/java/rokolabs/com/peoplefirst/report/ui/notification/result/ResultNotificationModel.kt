@@ -28,6 +28,7 @@ constructor(
     fun initDisposable() {
         mDisposable.addAll(
             mRepository.currentReport.subscribe {
+                if (it.status.contains("submitted"))
                 when (mRepository.defineName(it)) {
                     HarassmentRepository.AGGRESSOR -> {
                         showAggressorText()
@@ -50,7 +51,7 @@ constructor(
     }
 
     fun dispose() {
-
+        mDisposable.clear()
     }
 
     private fun showVictimText() {

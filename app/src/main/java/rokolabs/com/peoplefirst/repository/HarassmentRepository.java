@@ -96,7 +96,7 @@ public class HarassmentRepository {
     public Integer defineName(Report report) {
         if (me.hasValue()) {
             User user = me.getValue();
-            if (user.email.equals(report.victim.email)) {
+            if (report.victim != null && user.email.equals(report.victim.email)) {
                 named = VICTIM;
                 return named;
 
