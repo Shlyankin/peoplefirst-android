@@ -150,62 +150,66 @@ class ReportsModel @Inject constructor(
                             break
                         }
                     }
-                    if (isAggressor) {
-                        mRepository.getTransgressorReport()
-                        mRepository.named = HarassmentRepository.AGGRESSOR
-                        val reportAggressor =
-                            report.aggressors[report.aggressors.indexOf(mRepository.me.value)]
-                        if ("new" == reportAggressor.report_aggressor_status) {
-                            showNamedAggressor()
-                        } else {
-                            // TODO: show editing screens
-                            showAggressorReport()
-                        }
-                    } else if (isWitness) {
-                        mRepository.currentWitnessTestimony.onNext(WitnessTestimony())
-                        mRepository.named = HarassmentRepository.WITNESS
-                        val reportWitness =
-                            report.witnesses[report.witnesses.indexOf(mRepository.me.value)]
-                        if (report.author_id != mRepository.me.value!!.id) {
-                            if ("new" == reportWitness.report_witness_status) {
-                                showNamedWitness()
+                    mRepository.me.value?.let {me ->
+                        if (me.id.equals(report.author_id) && report.status.contains("created")) {
+                            EditReportActivity.show(activity)
+                        } else if (isAggressor) {
+                            mRepository.getTransgressorReport()
+                            mRepository.named = HarassmentRepository.AGGRESSOR
+                            val reportAggressor =
+                                report.aggressors[report.aggressors.indexOf(mRepository.me.value)]
+                            if ("new" == reportAggressor.report_aggressor_status) {
+                                showNamedAggressor()
                             } else {
-                                showWitnessReport()
+                                // TODO: show editing screens
+                                showAggressorReport()
                             }
-                        } else {
-                            // TODO: show editing screens
-                            showVictimRreportDetails(false)
+                        } else if (isWitness) {
+                            mRepository.currentWitnessTestimony.onNext(WitnessTestimony())
+                            mRepository.named = HarassmentRepository.WITNESS
+                            val reportWitness =
+                                report.witnesses[report.witnesses.indexOf(mRepository.me.value)]
+                            if (report.author_id != mRepository.me.value!!.id) {
+                                if ("new" == reportWitness.report_witness_status) {
+                                    showNamedWitness()
+                                } else {
+                                    showWitnessReport()
+                                }
+                            } else {
+                                // TODO: show editing screens
+                                showVictimRreportDetails(false)
+                            }
+                        } else if ("hr" == mRepository.me.value!!.role) {
+                            if ("resolved" == report.status) {
+                                showHRAfterVictimAccepted()
+                            } else if ("submitted" == report.status && report.resolutions_offered > 0) {
+                                showHRAfterVictimRejected()
+                            } else if ("submitted" == report.status && report.resolutions_offered == 0) {
+                                showHrReportDetails()
+                            } else if ("resolution pending" == report.status) {
+                                showHrReportDetails()
+                            } else if ("resolved" != report.status) {
+                                showHRReportNoResolution()
+                            } else {
+                                showHrReportDetails()
+                            }
+                        } else if (report.victim.id === mRepository.me.value!!.id && "resolution pending" == report.status) {
+                            showVictimAfterHRResolved()
+                        } else if (report.victim.id === mRepository.me.value!!.id && report.author_id != mRepository.me.value!!.id) {
+                            if ("created" == report.status) {
+                                showVictimAfterWtiness()
+                            } else if ("resolved" == report.status) {
+                                showVictimNamedResolved()
+                            } else {
+                                showVictimRreportDetails(false)
+                            }
+                        } else if (report.author_id == mRepository.me.value!!.id) {
+                            showVictimRreportDetails(
+                                "open" == report.status || "created" == report.status
+                            )
                         }
-                    } else if ("hr" == mRepository.me.value!!.role) {
-                        if ("resolved" == report.status) {
-                            showHRAfterVictimAccepted()
-                        } else if ("submitted" == report.status && report.resolutions_offered > 0) {
-                            showHRAfterVictimRejected()
-                        } else if ("submitted" == report.status && report.resolutions_offered == 0) {
-                            showHrReportDetails()
-                        } else if ("resolution pending" == report.status) {
-                            showHrReportDetails()
-                        } else if ("resolved" != report.status) {
-                            showHRReportNoResolution()
-                        } else {
-                            showHrReportDetails()
-                        }
-                    } else if (report.victim.id === mRepository.me.value!!.id && "resolution pending" == report.status) {
-                        showVictimAfterHRResolved()
-                    } else if (report.victim.id === mRepository.me.value!!.id && report.author_id != mRepository.me.value!!.id) {
-                        if ("created" == report.status) {
-                            showVictimAfterWtiness()
-                        } else if ("resolved" == report.status) {
-                            showVictimNamedResolved()
-                        } else {
-                            showVictimRreportDetails(false)
-                        }
-                    } else if (report.author_id == mRepository.me.value!!.id) {
-                        showVictimRreportDetails(
-                            "open" == report.status || "created" == report.status
-                        )
-                    }
 //                    if (currentDisposable != null) currentDisposable.dispose()
+                    }
                 }
             }
         )

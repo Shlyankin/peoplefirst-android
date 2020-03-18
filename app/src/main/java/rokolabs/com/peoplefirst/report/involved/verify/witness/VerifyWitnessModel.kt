@@ -53,7 +53,6 @@ constructor(
                         val witnessReport = Report()
                         witnessReport.parent_id = mRepository.currentReport.value!!.id
                         witnessReport.status = "created"
-                        witnessReport.author_id = mRepository.me.value!!.id// set authorKey
                         mRepository.addReport(witnessReport)
 
                         EditReportActivity.showVerifyWitness(activity)
