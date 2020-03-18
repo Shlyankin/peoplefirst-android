@@ -66,8 +66,12 @@ constructor(
 
     private val mMode = EDIT_MODE
     fun previous() {
-        // activity.navigateTo(R.id.nav_report_how_resolved)
-        activity.navigatePrev()
+        var mode = activity.mode.get()
+        if (mode == EditReportActivity.MODE_VERIFY_VICTIM || mode == EditReportActivity.MODE_CREATE_NEW) {
+            activity.navigateTo(R.id.nav_report_how_resolved)
+        } else {
+            activity.navigateTo(R.id.nav_report_were_any_witnesses)
+        }
     }
 
     fun initDisposable() {
@@ -98,8 +102,7 @@ constructor(
                                 )
                                 activity.finish()
                             } else {
-                                // activity.navigateTo(R.id.nav_report_profile_confirmation)
-                                activity.navigateNext()
+                                activity.navigateTo(R.id.nav_report_profile_confirmation)
                             }
                         }
                     }
