@@ -83,7 +83,10 @@ constructor(
         if (!readOnly.get()!!) {
             mDisposable.addAll(
                 submitClick.subscribe {
-                    if (readOnly.get()!! && checkRequired()) {
+                    if (!readOnly.get()!! && checkRequired()) {
+                        mRepository.currentReport.value?.let {
+                            it.status = "submitted"
+                        }
                         mRepository.currentReport.onNext(mRepository.currentReport.value!!)
                         mRepository.me.subscribe {
                             if (it.isFullyFilled) {

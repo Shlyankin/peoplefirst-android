@@ -1,21 +1,16 @@
 package rokolabs.com.peoplefirst.report.involved.verify.victim
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.Report
 import rokolabs.com.peoplefirst.report.EditReportActivity
-import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.Utils
 import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
@@ -50,6 +45,7 @@ constructor(
         mDisposable.addAll(
             continueSubject.subscribe {
                 if (continueButtonColor.get()!!) {
+                    //TODO: CREATE NEW REPORT?
 //                    val intent = Intent(this, HarassmentTypeActivity::class.java)
                     EditReportActivity.showVerifyVictim(activity)
                     activity.finish()

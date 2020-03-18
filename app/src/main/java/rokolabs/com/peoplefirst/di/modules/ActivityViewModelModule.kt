@@ -13,12 +13,11 @@ import rokolabs.com.peoplefirst.report.NavigationDrawerViewModel
 import rokolabs.com.peoplefirst.report.involved.named.NamedModel
 import rokolabs.com.peoplefirst.report.involved.rights.AfterYouViewModel
 import rokolabs.com.peoplefirst.report.involved.verify.victim.VerifyVictimModel
-import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyModel
+import rokolabs.com.peoplefirst.report.involved.verify.agressor.VerifyAggressorModel
+import rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyWitnessModel
 import rokolabs.com.peoplefirst.report.involved.victim.CollegueBelievesModel
-import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupActivity
 import rokolabs.com.peoplefirst.report.ui.place.search.AddressLookupModel
 import rokolabs.com.peoplefirst.report.ui.users.activity.UsersModel
-import rokolabs.com.peoplefirst.report.ui.users.selected.SelectedUsersModel
 import rokolabs.com.peoplefirst.resolution.confirm.ConfirmResolutionModel
 import rokolabs.com.peoplefirst.resolution.result.ResolutionStatusModel
 
@@ -86,8 +85,13 @@ abstract class ActivityViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(VerifyModel::class)
-    internal abstract fun verifyModel(verifyModel: VerifyModel): ViewModel
+    @ViewModelKey(VerifyAggressorModel::class)
+    internal abstract fun verifyAggressorModel(verifyAggressorModel: VerifyAggressorModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VerifyWitnessModel::class)
+    internal abstract fun verifyWitnessModel(verifyWitnessModel: VerifyWitnessModel): ViewModel
 
     @Binds
     @IntoMap

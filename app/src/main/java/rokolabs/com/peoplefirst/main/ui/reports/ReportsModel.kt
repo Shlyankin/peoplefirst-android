@@ -158,6 +158,7 @@ class ReportsModel @Inject constructor(
                         if ("new" == reportAggressor.report_aggressor_status) {
                             showNamedAggressor()
                         } else {
+                            // TODO: show editing screens
                             showAggressorReport()
                         }
                     } else if (isWitness) {
@@ -172,6 +173,7 @@ class ReportsModel @Inject constructor(
                                 showWitnessReport()
                             }
                         } else {
+                            // TODO: show editing screens
                             showVictimRreportDetails(false)
                         }
                     } else if ("hr" == mRepository.me.value!!.role) {

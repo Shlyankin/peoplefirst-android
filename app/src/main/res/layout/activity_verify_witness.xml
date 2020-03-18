@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="rokolabs.com.peoplefirst.report.involved.verify.victim.VerifyVictimModel" />
+            type="rokolabs.com.peoplefirst.report.involved.verify.witness.VerifyWitnessModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,10 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_background"
         android:orientation="vertical"
-        tools:context=".VerifyActivity">
+        tools:context=".VerifyWitnessActivity">
 
         <include
-            android:id="@+id/include4"
+            android:id="@+id/include5"
             layout="@layout/toolbar_with_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,15 +33,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include4">
+            app:layout_constraintTop_toBottomOf="@+id/include5">
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="Report details"
+                android:layout_marginTop="32dp"
+                android:text="Report Details"
                 android:textColor="@android:color/black"
                 android:textSize="33sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,23 +54,24 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{viewModel.whereWhen}"
+                android:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18"
-                tools:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?" />
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
             <RadioGroup
                 android:id="@+id/whereWhenRadio"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:checkedButton="@={viewModel.whereChecked}"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/whereWhen"
-                app:layout_constraintStart_toStartOf="@+id/whereWhen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/whereWhen">
 
                 <RadioButton
@@ -85,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:text="NO" />
-
             </RadioGroup>
 
             <TextView
@@ -127,41 +127,40 @@
             </RadioGroup>
 
             <TextView
-                android:id="@+id/document"
+                android:id="@+id/interact"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Would you like to document what you experienced?"
+                android:text="Would you like to document what happened?"
                 android:textColor="@android:color/black"
-                android:textSize="19sp"
-                app:layout_constraintEnd_toEndOf="@+id/whereWhen"
-                app:layout_constraintStart_toStartOf="@+id/whereWhen"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="@+id/harrassement"
+                app:layout_constraintStart_toStartOf="@+id/harrassement"
                 app:layout_constraintTop_toBottomOf="@+id/harrassementRadio" />
 
             <RadioGroup
-                android:id="@+id/documentRadio"
+                android:id="@+id/interactRadio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:checkedButton="@={viewModel.documentChecked}"
+                android:checkedButton="@={viewModel.witnessChecked}"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/whereWhen"
-                app:layout_constraintStart_toStartOf="@+id/whereWhen"
-                app:layout_constraintTop_toBottomOf="@+id/document">
+                app:layout_constraintEnd_toEndOf="@+id/harrassement"
+                app:layout_constraintStart_toStartOf="@+id/harrassement"
+                app:layout_constraintTop_toBottomOf="@+id/interact">
 
                 <RadioButton
-                    android:id="@+id/documentYes"
+                    android:id="@+id/interactYes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="YES" />
 
                 <RadioButton
-                    android:id="@+id/documentNo"
+                    android:id="@+id/interactNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:text="NO" />
-
             </RadioGroup>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -238,5 +237,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

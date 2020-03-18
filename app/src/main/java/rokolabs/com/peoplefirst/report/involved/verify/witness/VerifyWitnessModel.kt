@@ -13,18 +13,19 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.R
 import rokolabs.com.peoplefirst.api.PeopleFirstService
+import rokolabs.com.peoplefirst.model.Report
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
 import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
 import javax.inject.Inject
 
-class VerifyModel @Inject
+class VerifyWitnessModel @Inject
 constructor(
     private val context: Context,
     private val mService: PeopleFirstService,
     private val mRepository: HarassmentRepository
 ) : ViewModel() {
-    private var activity = context as VerifyActivity
+    private var activity = context as VerifyWitnessActivity
     private var mDisposable = CompositeDisposable()
 
     var continueSubject: Subject<View> = PublishSubject.create()
@@ -32,6 +33,7 @@ constructor(
 
     var whereChecked: ObservableField<Int> = ObservableField()
     var witnessChecked: ObservableField<Int> = ObservableField()
+    var harassmentChecked: ObservableField<Int> = ObservableField()
 
     var rejectButtonColor: ObservableField<Boolean> = ObservableField()
     var continueButtonColor: ObservableField<Boolean> = ObservableField()
@@ -45,12 +47,16 @@ constructor(
         mDisposable.addAll(
             continueSubject.subscribe {
                 if (continueButtonColor.get()!!) {
-//                    EditReportActivity.showVerifyAggressor(activity)
                     if (mRepository.named == HarassmentRepository.WITNESS) {
+                        // TODO: POST create report
+                        // TODO: refactor to null safe this
+                        val witnessReport = Report()
+                        witnessReport.parent_id = mRepository.currentReport.value!!.id
+                        witnessReport.status = "created"
+                        witnessReport.author_id = mRepository.me.value!!.id// set authorKey
+                        mRepository.addReport(witnessReport)
+
                         EditReportActivity.showVerifyWitness(activity)
-                        activity.finish()
-                    } else if (mRepository.named == HarassmentRepository.AGGRESSOR) {
-                        EditReportActivity.showVerifyAggressor(activity)
                         activity.finish()
                     }
                 }
@@ -63,15 +69,20 @@ constructor(
             },
             witnessChecked.addOnPropertyChanged {
                 manageButtons()
+            },
+            harassmentChecked.addOnPropertyChanged {
+                manageButtons()
             }
         )
     }
 
     fun manageButtons() {
-        var second = whereChecked.get() == R.id.whereWhenYes
+        val second = whereChecked.get() == R.id.whereWhenYes
                 && witnessChecked.get() == R.id.interactYes
-        var first = whereChecked.get() == R.id.whereWhenNo
+                && harassmentChecked.get() == R.id.harrassementYes
+        val first = whereChecked.get() == R.id.whereWhenNo
                 && witnessChecked.get() == R.id.interactNo
+                && harassmentChecked.get() == R.id.harrassementNo
         rejectButtonColor.set(first)
         continueButtonColor.set(second)
     }
@@ -95,19 +106,16 @@ constructor(
     }
 
     fun reject() {
-        mService.rejectTestimony(mRepository.currentReport.value!!.id)
+        // TODO: Right reject?
+        mService.rejectWitnessReport(mRepository.currentReport.value!!.id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { reportResponse ->
-                    if (reportResponse.success) {
-                        mRepository.getMyReports()
-//                                val intent = Intent(context, RejectedReportActivity::class.java)
-//                                activity.startActivity(intent)
-//                                activity.finish()
-                    }
+                {
+                    //TODO: rejected
+                    activity.finish()
                 },
-                { throwable ->
+                {
                     Toast.makeText(
                         context,
                         "Could not reject report",

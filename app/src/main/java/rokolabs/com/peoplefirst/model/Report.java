@@ -13,6 +13,7 @@ public class Report {
     public String updated_at;
     public String submitted_at;
     public Integer id=null;
+    public Integer parent_id=null;
     public int author_id;
     public User victim;
     public ArrayList<User> aggressors = new ArrayList<>();
@@ -40,6 +41,7 @@ public class Report {
         rr.created_at = created_at;
         rr.updated_at = updated_at;
         rr.submitted_at = submitted_at;
+        rr.parent_id = parent_id;
         rr.id = id;
         rr.author_id = author_id;
         if (victim != null)

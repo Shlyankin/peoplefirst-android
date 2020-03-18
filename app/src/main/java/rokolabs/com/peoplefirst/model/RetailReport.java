@@ -13,6 +13,7 @@ public class RetailReport {
     public String updated_at;
     public String submitted_at;
     public Integer id;
+    public Integer parent_id;
     public int author_id;
     public RetailUser victim;
     public ArrayList<RetailUser> aggressors = new ArrayList<>();
