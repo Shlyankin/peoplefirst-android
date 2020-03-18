@@ -38,6 +38,327 @@ constructor(
         initDisposable()
     }
 
+    fun getPrevFragmentId(currentFragmentId: Int): Int {
+        when(mRepository.named) {
+            HarassmentRepository.VICTIM -> {
+                return getPrevFragmentIdVictim(currentFragmentId)
+            }
+            HarassmentRepository.AGGRESSOR -> {
+                return getPrevFragmentIdAggressor(currentFragmentId)
+
+            }
+            HarassmentRepository.WITNESS -> {
+                return getPrevFragmentIdWitness(currentFragmentId)
+            }
+            else -> {
+                // TODO: надо подумать что по дефолту возвращать. Скорее всего просто "у вас нет доступа. попробуйте позже"
+                return getPrevFragmentIdVictim(currentFragmentId)
+            }
+        }
+    }
+
+    fun getNextFragmentId(currentFragmentId: Int): Int {
+        when(mRepository.named) {
+            HarassmentRepository.VICTIM -> {
+                return getNextFragmentIdVictim(currentFragmentId)
+            }
+            HarassmentRepository.AGGRESSOR -> {
+                return getNextFragmentIdAggressor(currentFragmentId)
+
+            }
+            HarassmentRepository.WITNESS -> {
+                return getNextFragmentIdWitness(currentFragmentId)
+            }
+            else -> {
+                // TODO: надо подумать что по дефолту возвращать. Скорее всего просто "у вас нет доступа. попробуйте позже"
+                return getNextFragmentIdVictim(currentFragmentId)
+            }
+        }
+    }
+
+    private fun getPrevFragmentIdVictim(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_harassment_type -> {
+                return R.id.nav_main_questions
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_who_being_harassed -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_place -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_date_time -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_profile_confirmation -> {
+                return R.id.nav_report_summary
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+    private fun getPrevFragmentIdAggressor(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_main_questions -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_harassment_type -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_who_being_harassed -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_place -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_date_time -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_summary
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_profile_confirmation
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+    private fun getPrevFragmentIdWitness(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_place, R.id.nav_report_place_title -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_date_time, R.id.nav_report_date_time_title -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_summary
+            }
+            R.id.nav_report_profile_confirmation -> {
+                return R.id.nav_report_profile_confirmation
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+    private fun getNextFragmentIdVictim(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_main_questions, R.id.nav_harassment_type_title -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_harassment_type -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_who_being_harassed -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_place -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_date_time -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_summary
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_profile_confirmation
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+    private fun getNextFragmentIdAggressor(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_main_questions -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_harassment_type -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_who_being_harassed -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_place -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_date_time -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_summary
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_profile_confirmation
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+    private fun getNextFragmentIdWitness(currentFragmentId: Int): Int {
+        when(currentFragmentId) {
+            R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
+                return R.id.nav_harassment_type
+            }
+            R.id.nav_harassment_reasons -> {
+                return R.id.nav_harassment_reasons
+            }
+            R.id.nav_report_happened_before -> {
+                return R.id.nav_report_happened_before
+            }
+            R.id.nav_report_what_happened -> {
+                return R.id.nav_report_what_happened
+            }
+            R.id.nav_report_who_being_harassed, R.id.nav_report_who_being_harassed_title -> {
+                return R.id.nav_report_who_being_harassed
+            }
+            R.id.nav_report_who_agressor_was -> {
+                return R.id.nav_report_who_agressor_was
+            }
+            R.id.nav_report_were_any_witnesses -> {
+                return R.id.nav_report_were_any_witnesses
+            }
+            R.id.nav_report_place, R.id.nav_report_place_title -> {
+                return R.id.nav_report_place
+            }
+            R.id.nav_report_date_time, R.id.nav_report_date_time_title -> {
+                return R.id.nav_report_date_time
+            }
+            R.id.nav_report_how_resolved -> {
+                return R.id.nav_report_how_resolved
+            }
+            R.id.nav_report_witness_information -> {
+                return R.id.nav_report_witness_information
+            }
+            R.id.nav_report_summary -> {
+                return R.id.nav_report_summary
+            }
+            R.id.nav_report_profile_confirmation -> {
+                return R.id.nav_report_profile_confirmation
+            }
+            else -> {
+                return R.id.nav_main_questions
+            }
+        }
+    }
+
+
     fun initDisposable() {
         mDisposable = CompositeDisposable()
         mDisposable.addAll(
@@ -56,7 +377,7 @@ constructor(
                             (report.location_details != null && report.location_details.length > 0)
                 )
                 dateTimeDone.set(report.datetime != null)
-                happenedBeforeDone.set(report.happened_before != null)
+                happenedBeforeDone.set(report.happened_before != null) // TODO: всегда светится галочка. Надо поправить
             }
         )
     }

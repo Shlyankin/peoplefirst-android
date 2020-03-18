@@ -160,6 +160,14 @@ class EditReportActivity : AppCompatActivity() {
         }
     }
 
+    fun navigatePrev(currentFragmentId: Int) {
+        val pos = navigationDrawerViewModel.getPrevFragmentId(currentFragmentId)
+    }
+
+    fun navigateNext(currentFragmentId: Int) {
+        val pos = navigationDrawerViewModel.getNextFragmentId(currentFragmentId)
+    }
+
     fun navigateTo(id: Int) {
         var pos = when (id) {
             R.id.nav_harassment_type, R.id.nav_harassment_type_title -> {
