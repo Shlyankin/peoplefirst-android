@@ -70,12 +70,38 @@
                         android:visibility="@{viewModel.anonymousCheckedVisibility}" />
 
                     <LinearLayout
+                        android:id="@+id/you_were"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="19dp"
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.youWereVisibility}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.youWere}"
+                            android:textColor="#006F6B"
+                            android:textSize="24sp"
+                            tools:text="You were at [location] on [date] at around [time]"/>
+
+                        <TextView
+                            android:id="@+id/you_were_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Yes"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/nav_harassment_typer"
                         reactiveClick="@{viewModel.editClick}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.harassmentTypeVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,7 +126,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.harassmentBasisVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,7 +152,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.happenedBeforeVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -150,7 +178,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.whatHappenedVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -175,7 +204,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.whoHarassedVisibility}">
 
 
                         <TextView
@@ -202,7 +232,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.whoAggressorVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -227,7 +258,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.wereWitnessesVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -253,7 +285,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.placeVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -279,7 +312,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.dateTimeVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -305,7 +339,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="19dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.howResolvedVisibility}">
 
                         <TextView
                             android:layout_width="wrap_content"

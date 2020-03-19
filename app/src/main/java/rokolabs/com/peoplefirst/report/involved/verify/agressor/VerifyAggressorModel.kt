@@ -16,6 +16,7 @@ import rokolabs.com.peoplefirst.api.PeopleFirstService
 import rokolabs.com.peoplefirst.model.Report
 import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.repository.HarassmentRepository
+import rokolabs.com.peoplefirst.utils.Utils
 import rokolabs.com.peoplefirst.utils.addOnPropertyChanged
 import javax.inject.Inject
 
@@ -31,6 +32,7 @@ constructor(
     var continueSubject: Subject<View> = PublishSubject.create()
     var rejectSubject: Subject<View> = PublishSubject.create()
 
+    var whereWhenField: ObservableField<String> = ObservableField()
     var whereChecked: ObservableField<Int> = ObservableField()
     var witnessChecked: ObservableField<Int> = ObservableField()
 
@@ -52,7 +54,11 @@ constructor(
                         val aggressorReport = Report()
                         aggressorReport.parent_id = mRepository.currentReport.value!!.id
                         aggressorReport.status = "created"
-                        aggressorReport.author_id = mRepository.me.value!!.id// set authorKey
+                        aggressorReport.location_confirmation = true
+                        aggressorReport.document_confirmation = true
+                        aggressorReport.datetime = mRepository.currentReport.value!!.datetime
+                        aggressorReport.location_city = mRepository.currentReport.value!!.location_city
+                        aggressorReport.location_details = mRepository.currentReport.value!!.location_details
                         mRepository.addReport(aggressorReport)
 
                         EditReportActivity.showVerifyAggressor(activity)
@@ -68,6 +74,13 @@ constructor(
             },
             witnessChecked.addOnPropertyChanged {
                 manageButtons()
+            },
+            mRepository.currentReport.subscribe {report ->
+                whereWhenField.set(
+                    "Were you at " + report.location_city + " " + report.location_details + " on " + Utils.newDateFormat(
+                        report.datetime
+                    ) + " at or around " + Utils.newTimeFormat(report.datetime) + "?"
+                )
             }
         )
     }

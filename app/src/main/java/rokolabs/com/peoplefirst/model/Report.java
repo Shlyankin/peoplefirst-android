@@ -8,6 +8,10 @@ public class Report {
     public final static Report EMPTY = new Report();
 
 
+    public boolean location_confirmation;
+    public boolean document_confirmation;
+    public boolean harassment_confirmation;
+
     public String datetime;
     public String created_at;
     public String updated_at;

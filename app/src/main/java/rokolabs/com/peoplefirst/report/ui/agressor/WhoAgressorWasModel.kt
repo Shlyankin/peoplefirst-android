@@ -39,7 +39,7 @@ constructor(
         mDisposable.addAll(
             nextClick.subscribe {
                 save()
-                activity.navigateTo(R.id.nav_report_were_any_witnesses)
+                activity.navigateNext()
             },
             prevClick.subscribe {
                 previos()
@@ -60,7 +60,7 @@ constructor(
     }
 
     fun previos() {
-        activity.navigateTo(R.id.nav_report_who_being_harassed)
+        activity.navigatePrev()
     }
 
     fun dispose() {
@@ -68,35 +68,33 @@ constructor(
     }
 
     fun save(): Boolean {
-        if (mRepository.named == HarassmentRepository.EMPTY) {
-            if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null && mSelectedUsers.checkConditions()) {
-                if (mSelectedUsers.getUsers().contains(mRepository.me.value)) {
-                    Toast.makeText(
-                        context,
-                        "Current user can not be named and aggressor",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
-                if (mSelectedUsers.getUsers().contains(mRepository.currentReport.value?.victim)) {
-                    Toast.makeText(
-                        context,
-                        "One and the same user can not be victim and aggressor simultaneously",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
-                if (mRepository.me.value?.retail == 1 && !mSelectedUsers.viewModel.conformsToDomain()) {
-                    Toast.makeText(
-                        context,
-                        "People included in your report must have the same email domain as yours",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return false
-                }
-                mRepository.currentReport.value?.aggressors = mSelectedUsers.getUsers()
-                mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
+        if (mRepository.currentReport.value !== Report.EMPTY && mRepository.currentReport.value != null && mSelectedUsers.checkConditions()) {
+            if (mSelectedUsers.getUsers().contains(mRepository.me.value)) {
+                Toast.makeText(
+                    context,
+                    "Current user can not be named and aggressor",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
             }
+            if (mSelectedUsers.getUsers().contains(mRepository.currentReport.value?.victim)) {
+                Toast.makeText(
+                    context,
+                    "One and the same user can not be victim and aggressor simultaneously",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+            if (mRepository.me.value?.retail == 1 && !mSelectedUsers.viewModel.conformsToDomain()) {
+                Toast.makeText(
+                    context,
+                    "People included in your report must have the same email domain as yours",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+            mRepository.currentReport.value?.aggressors = mSelectedUsers.getUsers()
+            mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
         }
         return true
     }

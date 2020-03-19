@@ -3,9 +3,12 @@ package rokolabs.com.peoplefirst.main.ui.reports
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import rokolabs.com.peoplefirst.api.PeopleFirstService
@@ -132,28 +135,52 @@ class ReportsModel @Inject constructor(
         showWitnessReport()
     }
 
+    fun isWitness(report: Report): Boolean {
+        for (witness in report.witnesses) {
+            if (witness.email != null && witness.email == mRepository.me.value!!.email) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun isAggressor(report: Report): Boolean {
+        for (aggressor in report.aggressors) {
+            if (aggressor.email == mRepository.me.value!!.email) {
+                return true
+            }
+        }
+        return false
+    }
+
     fun loadReport() {
         mDisposable.addAll(
             mRepository.currentReport.subscribe { report: Report ->
                 if (report !== Report.EMPTY) {
-                    var isWitness = false
-                    var isAggressor = false
-                    for (aggressor in report.aggressors) {
-                        if (aggressor.email == mRepository.me.value!!.email) {
-                            isAggressor = true
-                            break
-                        }
-                    }
-                    for (witness in report.witnesses) {
-                        if (witness.email != null && witness.email == mRepository.me.value!!.email) {
-                            isWitness = true
-                            break
-                        }
-                    }
                     mRepository.me.value?.let {me ->
                         if (me.id.equals(report.author_id) && report.status.contains("created")) {
-                            EditReportActivity.show(activity)
-                        } else if (isAggressor) {
+                            if (report.parent_id != null) {
+                                // check parent report
+                                mService.getReport(report.parent_id)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe({
+                                        val parentReport = it.data
+                                        when {
+                                            isWitness(parentReport) -> EditReportActivity.showVerifyWitness(activity)
+                                            isAggressor(parentReport) -> EditReportActivity.showVerifyAggressor(activity)
+                                            else -> EditReportActivity.showVerifyVictim(activity)
+                                        }
+                                    }, {
+                                        Toast.makeText(
+                                            activity,
+                                            "Parent report not Found",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    })
+                            } else
+                                EditReportActivity.show(activity)
+                        } else if (isAggressor(report)) {
                             mRepository.getTransgressorReport()
                             mRepository.named = HarassmentRepository.AGGRESSOR
                             val reportAggressor =
@@ -164,7 +191,7 @@ class ReportsModel @Inject constructor(
                                 // TODO: show editing screens
                                 showAggressorReport()
                             }
-                        } else if (isWitness) {
+                        } else if (isWitness(report)) {
                             mRepository.currentWitnessTestimony.onNext(WitnessTestimony())
                             mRepository.named = HarassmentRepository.WITNESS
                             val reportWitness =
@@ -207,7 +234,7 @@ class ReportsModel @Inject constructor(
                             showVictimRreportDetails(
                                 "open" == report.status || "created" == report.status
                             )
-                        }
+                        } else return@let
 //                    if (currentDisposable != null) currentDisposable.dispose()
                     }
                 }

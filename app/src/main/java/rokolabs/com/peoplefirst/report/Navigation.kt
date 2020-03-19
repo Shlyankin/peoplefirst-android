@@ -28,6 +28,9 @@ class Navigation {
                 R.id.nav_report_were_any_witnesses -> {
                     return R.id.nav_report_who_agressor_was
                 }
+                R.id.nav_report_witness_information -> {
+                    return R.id.nav_report_who_agressor_was
+                }
                 R.id.nav_report_place -> {
                     return R.id.nav_report_were_any_witnesses
                 }
@@ -36,9 +39,6 @@ class Navigation {
                 }
                 R.id.nav_report_how_resolved -> {
                     return R.id.nav_report_date_time
-                }
-                R.id.nav_report_witness_information -> {
-                    return R.id.nav_report_how_resolved
                 }
                 R.id.nav_report_summary -> {
                     return R.id.nav_report_how_resolved
@@ -70,6 +70,9 @@ class Navigation {
                 R.id.nav_report_were_any_witnesses -> {
                     return R.id.nav_report_who_agressor_was
                 }
+                R.id.nav_report_witness_information -> {
+                    return R.id.nav_report_who_agressor_was
+                }
                 R.id.nav_report_how_resolved -> {
                     return R.id.nav_report_were_any_witnesses
                 }
@@ -88,6 +91,9 @@ class Navigation {
         public fun getPrevFragmentIdVerifyAggressor(currentFragmentId: Int): Int {
             when(currentFragmentId) {
                 R.id.nav_report_were_any_witnesses -> {
+                    return R.id.nav_report_what_happened
+                }
+                R.id.nav_report_witness_information -> {
                     return R.id.nav_report_what_happened
                 }
                 R.id.nav_report_summary -> {
@@ -117,6 +123,9 @@ class Navigation {
                     return R.id.nav_report_what_happened
                 }
                 R.id.nav_report_were_any_witnesses -> {
+                    return R.id.nav_report_who_agressor_was
+                }
+                R.id.nav_report_witness_information -> {
                     return R.id.nav_report_who_agressor_was
                 }
                 R.id.nav_report_summary -> {
@@ -158,6 +167,9 @@ class Navigation {
                 R.id.nav_report_were_any_witnesses -> {
                     return R.id.nav_report_place
                 }
+                R.id.nav_report_witness_information -> {
+                    return R.id.nav_report_place
+                }
                 R.id.nav_report_place -> {
                     return R.id.nav_report_date_time
                 }
@@ -197,6 +209,9 @@ class Navigation {
                 R.id.nav_report_were_any_witnesses -> {
                     return R.id.nav_report_how_resolved
                 }
+                R.id.nav_report_witness_information -> {
+                    return R.id.nav_report_how_resolved
+                }
                 R.id.nav_report_how_resolved -> {
                     return R.id.nav_report_summary
                 }
@@ -215,6 +230,9 @@ class Navigation {
                     return R.id.nav_report_were_any_witnesses
                 }
                 R.id.nav_report_were_any_witnesses -> {
+                    return R.id.nav_report_summary
+                }
+                R.id.nav_report_witness_information -> {
                     return R.id.nav_report_summary
                 }
                 R.id.nav_report_summary -> {

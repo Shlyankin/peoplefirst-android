@@ -54,12 +54,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?"
+                android:text="@{viewModel.whereWhenField}"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                tools:text="Were you at Company Corp. Main Conference Room on 02/06/18 at or around 02:30 PM?"/>
 
             <RadioGroup
                 android:id="@+id/whereWhenRadio"

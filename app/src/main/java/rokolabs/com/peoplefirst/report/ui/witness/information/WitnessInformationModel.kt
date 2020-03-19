@@ -43,14 +43,7 @@ constructor(
             },
             nextClick.subscribe {
                 if (save()) {
-                    var mode = activity.mode.get()
-                    if (mode == EditReportActivity.MODE_CREATE_NEW) {
-                        activity.navigateTo(R.id.nav_report_place)
-                    } else if (mode == EditReportActivity.MODE_VERIFY_AGGRESSOR || mode == EditReportActivity.MODE_VERIFY_WITNESS) {
-                        activity.navigateTo(R.id.nav_report_summary)
-                    } else if (mode == EditReportActivity.MODE_VERIFY_VICTIM) {
-                        activity.navigateTo(R.id.nav_report_how_resolved)
-                    }
+                    activity.navigateNext()
                 }
             },
             activity.onBackPressedObject.subscribe {
@@ -67,7 +60,7 @@ constructor(
     }
 
     fun previous() {
-        activity.navigateTo(R.id.nav_report_were_any_witnesses)
+        activity.navigatePrev()
     }
 
     fun dispose() {
@@ -86,7 +79,7 @@ constructor(
                     return false
                 }
                 mRepository.currentReport.value?.witnesses = mSelectedUsers.getUsers()
-                mRepository.currentReport.onNext(mRepository.currentReport.getValue()!!)
+                mRepository.currentReport.onNext(mRepository.currentReport.value!!)
             } else {
                 mRepository.mSelectedUsersForWitnessOrAggressorReport = mSelectedUsers.getUsers()
             }

@@ -164,11 +164,12 @@ class EditReportActivity : AppCompatActivity() {
         val mod = intent.extras?.get("mode") as Int?
         if (mod != null) {
             mode.set(mod)
-            if (mod == MODE_VERIFY_AGGRESSOR) {
+            navigateNext()
+            /*if (mod == MODE_VERIFY_AGGRESSOR) {
                 navigateTo(R.id.nav_report_what_happened)
             } else {
                 navigateTo(R.id.nav_harassment_type)
-            }
+            }*/
         }
 
     }
@@ -183,7 +184,7 @@ class EditReportActivity : AppCompatActivity() {
         mDisposable = CompositeDisposable()
         mDisposable.add(
             mRepository.currentReport.subscribe {
-                if (it.status == null) {
+                if(it.id == null) {
                     mRepository.addReport(it)
                 } else {
                     mRepository.updateCurrentReport()

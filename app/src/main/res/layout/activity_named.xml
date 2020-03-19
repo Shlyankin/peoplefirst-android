@@ -63,12 +63,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="64dp"
             android:textColor="#C8C7C7"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/noLayout"
+            app:layout_constraintBottom_toTopOf="@+id/yesLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lightText"
             tools:text="If no action is taken, we will remind you in 5 days." />
 
         <androidx.constraintlayout.widget.ConstraintLayout

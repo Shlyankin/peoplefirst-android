@@ -14,6 +14,7 @@ import rokolabs.com.peoplefirst.databinding.FragmentProfileConfirmationBinding
 import rokolabs.com.peoplefirst.di.ComponentManager
 import rokolabs.com.peoplefirst.di.factory.ViewModelFactory
 import rokolabs.com.peoplefirst.profile.ProfileFragment
+import rokolabs.com.peoplefirst.report.EditReportActivity
 import rokolabs.com.peoplefirst.report.ui.notification.result.ResultNotificationActivity
 import javax.inject.Inject
 
@@ -68,7 +69,9 @@ class ProfileConfirmationFragment : Fragment() {
             Intent(
                 activity,
                 ResultNotificationActivity::class.java
-            )
+            ).apply {
+                this.putExtra("mode", (activity as EditReportActivity).mode.get())
+            }
         )
         activity?.finish()
     }

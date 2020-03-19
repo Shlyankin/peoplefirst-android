@@ -21,28 +21,34 @@ constructor(
 ) : ViewModel() {
     private var activity: ResultNotificationActivity = context as ResultNotificationActivity
     private var mDisposable = CompositeDisposable()
+    var mode: ObservableField<Int> = ObservableField()
 
     public var goToReportsClick: Subject<View> = PublishSubject.create()
     public var title: ObservableField<String> = ObservableField()
     public var body: ObservableField<String> = ObservableField()
+
+    fun init() {
+        mode.set(EditReportActivity.MODE_CREATE_NEW)
+    }
+
     fun initDisposable() {
         mDisposable.addAll(
             mRepository.currentReport.subscribe {
                 if (it.status.contains("submitted"))
-                when (mRepository.defineName(it)) {
-                    HarassmentRepository.AGGRESSOR -> {
-                        showAggressorText()
+                    when(mode.get()) {
+                        EditReportActivity.MODE_CREATE_NEW -> {
+                            showVictimText()
+                        }
+                        EditReportActivity.MODE_VERIFY_AGGRESSOR -> {
+                            showAggressorText()
+                        }
+                        EditReportActivity.MODE_VERIFY_WITNESS -> {
+                            showWitnessText()
+                        }
+                        EditReportActivity.MODE_VERIFY_VICTIM -> {
+                            showVictimText()
+                        }
                     }
-                    HarassmentRepository.EMPTY -> {
-
-                    }
-                    HarassmentRepository.VICTIM -> {
-                        showVictimText()
-                    }
-                    HarassmentRepository.WITNESS -> {
-                        showWitnessText()
-                    }
-                }
             },
             goToReportsClick.subscribe {
                 activity.finish()

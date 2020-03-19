@@ -47,8 +47,12 @@ constructor(
             },
             activity.onBackPressedObject.subscribe {
                 previous()
+            },
+            mRepository.currentReport.subscribe {
+                // если есть свидетели, то перекидываем на фрагмент с ними
+                if(it.witnesses.isNotEmpty())
+                    activity.navigateTo(R.id.nav_report_witness_information)
             }
-
         )
     }
 

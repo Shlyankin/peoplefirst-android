@@ -34,6 +34,9 @@ class ResultNotificationFragment : Fragment() {
             R.layout.fragment_report_notification_result, container, false
         )
         binder.viewModel = resultNotificationModel
+
+        val mod = activity?.intent?.extras?.get("mode") as Int?
+        resultNotificationModel.mode.set(mod)
         return binder.root
     }
 
